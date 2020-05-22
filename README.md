@@ -1,5 +1,5 @@
 # are you a robot
-Used in this proyect:</br>
+Used in this project:</br>
   * Kotlin</br>
   * Firebase Cloud Functions</br> 
   * Google Cloud Firestore</br>
