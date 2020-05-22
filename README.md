@@ -1,5 +1,7 @@
 # are you a robot
- *Kotlin
- *Firebase Cloud Functions
- *Google Cloud Firestore
- *MVVM
+Used in this proyect:
+ -Kotlin</br>
+ -Firebase Cloud Functions</br> 
+ -Google Cloud Firestore</br>
+ -MVVM
+
