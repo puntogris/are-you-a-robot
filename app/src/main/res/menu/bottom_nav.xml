@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/welcomeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_white_24dp"
+        android:title="Menu"/>
+    <item
+        android:id="@+id/rankingFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_public_white_24dp"
+        android:title="Ranking"/>
+    <item
+        android:id="@+id/findMatchFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_group_white_24dp"
+        android:title="@string/multiplayer"/>
+</menu>

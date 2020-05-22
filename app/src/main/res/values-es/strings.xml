@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Eres un robot?</string>
+    <string name="message_incentive_to_play">Solo hay una forma de saberlo..</string>
+    <string name="prove_it">Demostralo</string>
+    <string name="multiplayer">Multijugador</string>
+    <string name="code">codigo</string>
+    <string name="score">puntaje</string>
+    <string name="timer">tiempo</string>
+    <string name="try_again">intentar de nuevo</string>
+    <string name="you_lost">Perdiste</string>
+    <string name="try_again_robot">Buen intento robot..</string>
+</resources>
