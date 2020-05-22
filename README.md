@@ -6,6 +6,6 @@ Used in this project:</br>
   * Android Dynamic Delivery
   * MVVM
   
-[![N|Solid](https://puntogris.com/images/apps/eres-un-robot-1.webp)]
-[![N|Solid](https://puntogris.com/images/apps/eres-un-robot-2.webp)]
-[![N|Solid](https://puntogris.com/images/apps/eres-un-robot-3.webp)]
+![N|Sol2id](https://puntogris.com/images/apps/eres-un-robot-1.webp)
+![N|Sol4id](https://puntogris.com/images/apps/eres-un-robot-2.webp)
+![N|So44lid](https://puntogris.com/images/apps/eres-un-robot-3.webp)
