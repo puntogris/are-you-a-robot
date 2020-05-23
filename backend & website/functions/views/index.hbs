@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Are you a robot?</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body>
+        <header>
+            <h1>Rankings</h1>
+        </header>
+        <div class="table-responsive">    
+          </table>          
+            <table class="table table-borderless table-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Score</th>
+              </tr>
+            </thead>
+            <tbody>
+                {{#each rankings}}
+              <tr>
+                <th scope="row">{{@index}}</th>
+                <td>{{username}}</td>
+                <td>{{score}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+          </div>
+        <footer>
+            <a href="https://github.com/puntogris/are-you-a-robot"target="_blank" title="Github"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/puntogris"target="_blank" title="Google Play"><i class="fab fa-google-play"></i></a>
+            <a href="mailto:puntogrisdev@gmail.com" title="Email"><i class="fas fa-envelope"></i></a></br>
+            <a href="https://puntogris.com">&copy; puntogris.</a>
+        </footer>
+    <script src="https://kit.fontawesome.com/9f70a663d8.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+<!DOCTYPE html>
+
