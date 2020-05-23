@@ -5,7 +5,6 @@ const exphbs  = require('express-handlebars');
 const helpers = require('handlebars-helpers')('math')
 
 const app = express();
-
 app.engine('hbs', exphbs({
   extname: 'hbs',
   defaultLayout:false,
@@ -76,11 +75,11 @@ exports.unsubscribeToMatch = functions.https.onCall(async (data, context) => {
   }
 })
 
-//Website
+//website
 app.get('/',async(request:any,response:any)=>{
   try {
     const rankings:any = []
-    //response.set('Cache-Control','public, max-age = 300, s-maxage = 600')
+    response.set('Cache-Control','public, max-age = 300, s-maxage = 600')
     const querysnap = await getRankings()
     querysnap.forEach(doc =>{
       rankings.push(doc.data())
@@ -99,7 +98,7 @@ function getRankings(){
   return ref.get().then(snap => snap.docs)
 }
 
-//Needs blaze plan to work
+//needs blaze plan to work
 //TODO: convert to async
 // exports.cleanOldMatches = functions.pubsub.schedule('every 1 minute').onRun((context) => {
 //   const actualTimestamp = admin.firestore.Timestamp.now()
