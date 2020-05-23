@@ -1,11 +1,17 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-const express = require('express')
-const engines = require('consolidate')
-const app = express()
-app.engine('hbs',engines.handlebars)
-app.set('views','./views')
-app.set('view engine','hbs')
+const express = require('express');
+const exphbs  = require('express-handlebars');
+const helpers = require('handlebars-helpers')('math')
+
+const app = express();
+
+app.engine('hbs', exphbs({
+  extname: 'hbs',
+  defaultLayout:false,
+  helpers: helpers
+}));
+app.set('view engine', 'hbs');
 
 admin.initializeApp()
 
@@ -35,7 +41,7 @@ exports.startMatchmaking = functions.https.onCall(async (data, context) => {
       return docId
     }
     else {
-      //creates a new match            
+      //creates a new match
       playerOne.name = playerName
       const match = {
         timestamp: timestamp,
@@ -49,7 +55,7 @@ exports.startMatchmaking = functions.https.onCall(async (data, context) => {
     }
   }
   catch (error) {
-    return "error"
+    return error
   } 
 })
 
@@ -70,29 +76,31 @@ exports.unsubscribeToMatch = functions.https.onCall(async (data, context) => {
   }
 })
 
-app.get('/',(request:any,response:any)=>{
-  const rankings:any = []
-  response.set('Cache-Control','public, max-age = 300, s-maxage = 600')
-  getRankings().then(snap=>{
-   snap.forEach(doc=>{
-     rankings.push(doc.data())
-   })
-   response.render('index',{rankings})
-  }).catch(error=>{
-    response.send('error')
-  })   
-  
+//Website
+app.get('/',async(request:any,response:any)=>{
+  try {
+    const rankings:any = []
+    //response.set('Cache-Control','public, max-age = 300, s-maxage = 600')
+    const querysnap = await getRankings()
+    querysnap.forEach(doc =>{
+      rankings.push(doc.data())
+    })
+    response.render('index',{rankings})  
+  } 
+  catch {
+    response.send("Error getting the data")
+  }
 })
 
 exports.app = functions.https.onRequest(app)
 
 function getRankings(){
-  const ref = admin.firestore().collection("ranking").limit(15)
-  return ref.get().then(snap=> snap.docs)
+  const ref = admin.firestore().collection("ranking").orderBy("score","desc").limit(14)
+  return ref.get().then(snap => snap.docs)
 }
 
-
-//necesita que esta activado el plan Blaze por la facturacioon
+//Needs blaze plan to work
+//TODO: convert to async
 // exports.cleanOldMatches = functions.pubsub.schedule('every 1 minute').onRun((context) => {
 //   const actualTimestamp = admin.firestore.Timestamp.now()
 //   const time = new admin.firestore.Timestamp(actualTimestamp.seconds-3600,actualTimestamp.nanoseconds)

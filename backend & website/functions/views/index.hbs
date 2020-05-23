@@ -3,6 +3,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>Are you a robot?</title>
+        <link rel="shortcut icon" type="image/ico" href="logo.ico" >
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
@@ -25,7 +26,7 @@
             <tbody>
                 {{#each rankings}}
               <tr>
-                <th scope="row">{{@index}}</th>
+                <th scope="row">{{add @index 1}}</th>
                 <td>{{username}}</td>
                 <td>{{score}}</td>
               </tr>
