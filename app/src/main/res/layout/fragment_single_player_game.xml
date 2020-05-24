@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
 
+        <variable
+            name="gameViewModel"
+            type="com.puntogris.areyouarobot.ui.GameViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,11 +17,13 @@
         android:layout_height="match_parent"
         tools:context=".ui.SinglePlayerGameFragment">
 
+
         <TextView
             android:id="@+id/lettersTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
+            android:text="@{String.valueOf(gameViewModel.currentLetters)}"
             android:textSize="40sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -69,6 +75,7 @@
             android:id="@+id/scoreTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{String.valueOf(gameViewModel.score)}"
             android:layout_marginStart="8dp"
             android:textColor="@android:color/white"
             android:textSize="19sp"
@@ -81,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:text="@{String.valueOf(gameViewModel.globalTime)}"
             android:textColor="@android:color/white"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
@@ -94,7 +102,8 @@
             android:layout_height="0dp"
             android:max="100"
             android:scaleY="2"
-            android:visibility="gone"
+            android:progress="@{Integer.valueOf(gameViewModel.progressBarStatus)}"
+            android:visibility="@{gameViewModel.isTimeToGuess ? View.VISIBLE : View.GONE, default=gone}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -1,5 +1,6 @@
 package com.puntogris.multiplayer.data
 
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.ktx.Firebase
@@ -31,6 +32,10 @@ class MatchRepository :IMatchRepository{
     override fun getMatchDataFirstore(matchId: String): FirestoreDocumentLiveData {
         val ref = firestore.collection("matches").document(matchId)
         return FirestoreDocumentLiveData(ref)
+    }
+
+    override fun incrementScorePlayerFirestore(playerPos: String,matchId: String) {
+        firestore.collection("matches").document(matchId).update("$playerPos.score",FieldValue.increment(1))
     }
 
 

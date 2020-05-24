@@ -17,6 +17,7 @@
     <string name="scored_savec_successfully">Score saved Successfully</string>
     <string name="save">save</string>
     <string name="cancel">cancel</string>
+    <string name="save_score">save score in the ranking</string>
 
 
 </resources>

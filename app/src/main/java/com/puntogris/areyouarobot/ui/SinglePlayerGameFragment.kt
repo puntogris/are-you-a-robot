@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentSinglePlayerGameBinding
+import com.puntogris.areyouarobot.utils.Utils
 
 class SinglePlayerGameFragment : Fragment() {
 
@@ -24,33 +25,21 @@ class SinglePlayerGameFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_single_player_game,container,false)
 
-        viewModel.initializeGame()
-        listenToTextChanged()
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.gameViewModel = viewModel
 
         viewModel.apply {
-            currentLetters.observe(viewLifecycleOwner, Observer {
-                binding.lettersTextView.text = it
-            })
-            isTimeToGuess.observe(viewLifecycleOwner, Observer {
-                if (it) {
+            initializeGame()
+            listenToTextChanged()
+            isTimeToGuess.observe(viewLifecycleOwner, Observer { guessTime ->
+                if (guessTime) {
                     guessTime()
-                    showSoftKeyboard(binding.guessEditText)} else showLetters()
+                    Utils.showSoftKeyboard(binding.guessEditText, requireActivity())} else showLetters()
             })
-            didPlayerLose.observe(viewLifecycleOwner, Observer {
-                if (it) navigateToPostGameFragment()
+            didPlayerLose.observe(viewLifecycleOwner, Observer { playerLost ->
+                if (playerLost) navigateToPostGameFragment()
             })
-            score.observe(viewLifecycleOwner, Observer {
-                binding.scoreTextView.text = it.toString()
-            })
-            globalTime.observe(viewLifecycleOwner, Observer {
-                binding.timerTextView.text = it.toString()
-            })
-            progressBarStatus.observe(viewLifecycleOwner, Observer {
-                binding.progressBar.progress = it
-            })
-
         }
-
 
         // Inflate the layout for this fragment
         return binding.root
@@ -65,27 +54,23 @@ class SinglePlayerGameFragment : Fragment() {
     }
 
     private fun guessTime(){
-        binding.guessEditText.setText("")
-        binding.progressBar.visibility = View.VISIBLE
-        binding.lettersTextView.visibility = View.GONE
-        binding.guessEditText.visibility = View.VISIBLE
+        binding.apply {
+            guessEditText.setText("")
+            lettersTextView.visibility = View.GONE
+            guessEditText.visibility = View.VISIBLE
+        }
     }
 
     private fun showLetters(){
-        binding.progressBar.visibility = View.GONE
-        binding.lettersTextView.visibility = View.VISIBLE
-        binding.guessEditText.visibility = View.GONE
-    }
-
-    private fun navigateToPostGameFragment(){
-        findNavController().navigate(R.id.action_singlePlayerGameFragment_to_postGameFragment)
-    }
-
-    private fun showSoftKeyboard(view: View) {
-        if (view.requestFocus()) {
-            val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        binding.apply {
+            lettersTextView.visibility = View.VISIBLE
+            guessEditText.visibility = View.GONE
         }
+    }
+
+    private fun navigateToPostGameFragment() {
+        viewModel.playerLost()
+        findNavController().navigate(R.id.action_singlePlayerGameFragment_to_postGameFragment)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,5 +83,8 @@ class SinglePlayerGameFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-
+    override fun onDestroy() {
+        viewModel.playerLost()
+        super.onDestroy()
+    }
 }

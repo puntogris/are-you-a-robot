@@ -18,11 +18,11 @@ class RankingRecyclerViewAdapter:
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, position)
+        holder.bind(item)
     }
 
     class ViewHolder private constructor(private val binding:RankingEntryBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(item: QueryItem<RankingEntry>, position: Int){
+        fun bind(item: QueryItem<RankingEntry>){
             binding.entry = item.item
             binding.entryNumberIndex = item.id.toInt() +1
         }

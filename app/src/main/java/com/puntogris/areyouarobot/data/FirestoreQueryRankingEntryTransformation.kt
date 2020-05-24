@@ -11,17 +11,17 @@ object FirestoreQueryRankingEntryTransformation {
 
     fun transform(liveData: FirestoreQueryLiveData): LiveData<List<QueryItem<RankingEntry>>>  {
         return Transformations.map(liveData) { snap: List<DocumentSnapshot?> ->
-            snap.map { product ->
+            snap.map { entry ->
                 val data =
                     RankingEntryDeserializer.deserialize(
-                        product
+                        entry
                     )
                 object :
                     QueryItem<RankingEntry> {
                     override val item: RankingEntry
                         get() = data
                     override val id: String
-                        get() = snap.indexOf(product).toString()
+                        get() = snap.indexOf(entry).toString()
                 }
             }
         }

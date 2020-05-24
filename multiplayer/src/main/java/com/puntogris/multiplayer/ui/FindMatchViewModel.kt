@@ -2,16 +2,9 @@ package com.puntogris.multiplayer.ui
 
 import androidx.lifecycle.*
 import com.puntogris.multiplayer.data.MatchRepository
-import com.puntogris.multiplayer.livedata.FirestoreDocumentLiveData
-import com.puntogris.multiplayer.model.MatchModel
-import com.puntogris.multiplayer.model.MatchRoom
+import com.puntogris.multiplayer.model.JoinedMatchInfo
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.flow.collect
 import java.lang.Exception
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 class FindMatchViewModel:ViewModel(){
     private val repo = MatchRepository()
@@ -21,12 +14,15 @@ class FindMatchViewModel:ViewModel(){
         playerName = name
     }
 
-     suspend fun startMatchmaking(): LiveData<MatchRoom>{
+     suspend fun startMatchmaking(): LiveData<JoinedMatchInfo>{
         val data = repo.getMatchFirestore(playerName)
         return Transformations.map(data){
             val matchId = it?.id.toString()
             val full = it?.get("full").toString().toBoolean()
-            MatchRoom(matchId,full)
+            val playerOne = it?.get("playerOne") as? HashMap<*, *>
+            val playerPos = getPlayerPosition(playerOne?.get("name").toString())
+            JoinedMatchInfo(matchId, full, playerPos)
+
         }
     }
 
@@ -38,6 +34,12 @@ class FindMatchViewModel:ViewModel(){
                 //manage error
             }
         }
+    }
+
+    private fun getPlayerPosition(player:String):String{
+        return if (player == playerName){
+            "playerOne"
+        }else "playerTwo"
     }
 
 }

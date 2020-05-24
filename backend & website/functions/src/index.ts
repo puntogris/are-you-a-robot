@@ -94,7 +94,7 @@ app.get('/',async(request:any,response:any)=>{
 exports.app = functions.https.onRequest(app)
 
 function getRankings(){
-  const ref = admin.firestore().collection("ranking").orderBy("score","desc").limit(14)
+  const ref = admin.firestore().collection("rankings").orderBy("score","desc").limit(14)
   return ref.get().then(snap => snap.docs)
 }
 

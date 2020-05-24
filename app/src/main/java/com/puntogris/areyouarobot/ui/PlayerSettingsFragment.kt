@@ -25,16 +25,16 @@ class PlayerSettingsFragment : Fragment() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val defaultPlayerName = Utils.createDefaultRandomName()
         val playerName = sharedPref!!.getString("player_name",defaultPlayerName)
-        binding.editText.setText(playerName)
+        binding.playerNameSettings.setText(playerName)
 
-        binding.button2.setOnClickListener {
-            var input = binding.editText.text.toString()
+        binding.saveSettings.setOnClickListener {
+            var input = binding.playerNameSettings.text.toString()
             if (input.isEmpty()) input = defaultPlayerName
             with (sharedPref.edit()) {
                 putString("player_name",input)
                 apply()}
             findNavController().navigate(R.id.action_playerSettings_to_welcomeFragment)
-            }
+        }
 
         // Inflate the layout for this fragment
         return binding.root

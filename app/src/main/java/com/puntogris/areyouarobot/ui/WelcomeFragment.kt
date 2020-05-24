@@ -16,9 +16,7 @@ class WelcomeFragment : Fragment() {
     ): View? {
         val binding:FragmentWelcomeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_welcome,container,false)
 
-        binding.button.setOnClickListener {
-            findNavController().navigate(R.id.action_welcomeFragment_to_singlePlayerGameFragment)
-        }
+        binding.welcomeFragment = this
 
         // Inflate the layout for this fragment
         return binding.root
@@ -34,5 +32,8 @@ class WelcomeFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    fun navigateToGame(){
+        findNavController().navigate(R.id.action_welcomeFragment_to_singlePlayerGameFragment)
+    }
 
 }

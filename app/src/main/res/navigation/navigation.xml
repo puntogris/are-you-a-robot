@@ -5,39 +5,6 @@
     android:id="@+id/navigation"
     app:startDestination="@id/welcomeFragment">
 
-<!--    <fragment-->
-<!--        app:moduleName="multiplayer"-->
-<!--        android:id="@+id/matchFragment"-->
-<!--        android:label=" "-->
-<!--        android:name="com.puntogris.multiplayer.ui.MatchFragment" >-->
-<!--    </fragment>-->
-
-<!--    <navigation-->
-<!--        android:id="@+id/multiplayerGraph"-->
-<!--        app:moduleName="multiplayer"-->
-<!--        app:startDestination="@+id/findMatchFragment">-->
-<!--        <fragment-->
-<!--            app:moduleName="multiplayer"-->
-<!--            android:id="@+id/findMatchFragment"-->
-<!--            android:label=" "-->
-<!--            android:name="com.puntogris.multiplayer.ui.FindMatchFragment" >-->
-<!--            <action-->
-<!--                android:id="@+id/action_findMatchFragment_to_matchFragment"-->
-<!--                app:destination="@id/matchFragment" />-->
-<!--        </fragment>-->
-<!--        <fragment-->
-<!--            app:moduleName="multiplayer"-->
-<!--            android:id="@+id/matchFragment"-->
-<!--            android:label=" "-->
-<!--            android:name="com.puntogris.multiplayer.ui.MatchFragment" />-->
-<!--    </navigation>-->
-
-<!--    <include-dynamic-->
-<!--        android:id="@+id/multiplayerNav"-->
-<!--        app:moduleName="multiplayer"-->
-<!--        app:graphResName="multiplayer_navigation"-->
-<!--        app:graphPackage="com.puntogris.areyouarobot.multiplayer" />-->
-
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.puntogris.areyouarobot.ui.WelcomeFragment"
@@ -110,5 +77,29 @@
         <argument
             android:name="matchId"
             app:argType="string" />
+        <argument
+            android:name="playerPos"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_matchFragment_to_postMultiplayerMatchFragment"
+            app:destination="@id/postMultiplayerMatchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postMultiplayerMatchFragment"
+        android:name="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragment"
+        app:moduleName="multiplayer"
+        android:label=" " >
+        <argument
+            android:name="playerOneName"
+            app:argType="string" />
+        <argument
+            android:name="playerTwoName"
+            app:argType="string" />
+        <argument
+            android:name="playerOneScore"
+            app:argType="integer" />
+        <argument
+            android:name="playerTwoScore"
+            app:argType="integer" />
     </fragment>
 </navigation>

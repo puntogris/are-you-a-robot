@@ -37,7 +37,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.welcomeFragment,
                 R.id.rankingFragment,
                 R.id.singlePlayerGameFragment,
-                R.id.findMatchFragment
+                R.id.findMatchFragment,
+                R.id.matchFragment,
+                R.id.postMultiplayerMatchFragment
             )
         )
 

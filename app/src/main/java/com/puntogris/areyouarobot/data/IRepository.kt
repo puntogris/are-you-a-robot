@@ -6,5 +6,4 @@ import com.puntogris.areyouarobot.model.RankingEntry
 interface IRepository {
     fun saveScoreFirestore(rankingEntry: RankingEntry)
     fun getRankingFirestore():FirestoreQueryLiveData
-
 }

@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+    <variable
+        name="match"
+        type="com.puntogris.multiplayer.model.MatchModel" />
+    <variable
+        name="matchViewModel"
+        type="com.puntogris.multiplayer.ui.MatchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +23,7 @@
             android:id="@+id/matchTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="@{String.valueOf(matchViewModel.globalTime)}"
             android:textColor="@android:color/white"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="TextView"
+            android:text="@{match.playerOneName}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:text="TextView"
+            android:text="@{match.playerTwoName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,11 +58,11 @@
             android:id="@+id/playerScore"
             android:textColor="@android:color/white"
             android:textSize="18sp"
+            android:text="@{String.valueOf(match.playerOneScore)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/playerName" />
 
@@ -65,11 +70,11 @@
             android:id="@+id/opponentPlayerScore"
             android:textColor="@android:color/white"
             android:textSize="18sp"
+            android:text="@{String.valueOf(match.playerTwoScore)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/opponentPlayerName" />
 
@@ -89,11 +94,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/lettersTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="@{String.valueOf(matchViewModel.currentLetters)}"
+            android:textSize="40sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:progress="@{Integer.valueOf(matchViewModel.progressBarStatus)}"
             android:max="100"
             android:scaleY="2"
             android:visibility="gone"

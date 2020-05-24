@@ -27,14 +27,11 @@ class FindMatchFragment : Fragment() {
          binding = DataBindingUtil.inflate(inflater,
              R.layout.fragment_find_match,container,false)
 
-
-
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val defaultPlayerName = Utils.createDefaultRandomName()
         val playerName = sharedPref!!.getString("player_name",defaultPlayerName)
 
         viewModel.setPlayerName(playerName!!)
-
         searchButtonListener()
         cancelSearchButtonListener()
         // Inflate the layout for this fragment
@@ -47,7 +44,7 @@ class FindMatchFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.startMatchmaking().observe(viewLifecycleOwner, Observer { matchRoom ->
                     if (matchRoom.full){
-                        val action = FindMatchFragmentDirections.actionFindMatchFragmentToMatchFragment(matchRoom.id)
+                        val action = FindMatchFragmentDirections.actionFindMatchFragmentToMatchFragment(matchRoom.id,matchRoom.playerPos)
                         findNavController().navigate(action)}
                 })
             }

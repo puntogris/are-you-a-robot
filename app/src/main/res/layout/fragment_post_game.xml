@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="gameFragment"
+            type="com.puntogris.areyouarobot.ui.PostGameFragment" />
+        <variable
+            name="gameViewModel"
+            type="com.puntogris.areyouarobot.ui.GameViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +24,8 @@
             android:layout_marginBottom="32dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/try_again"
-            app:layout_constraintBottom_toTopOf="@+id/button3"
+            android:onClick="@{()->gameFragment.playAgain()}"
+            app:layout_constraintBottom_toTopOf="@+id/saveScore"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -79,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
+            android:text="@{String.valueOf(gameViewModel.score)}"
             android:textColor="@android:color/white"
             android:textSize="19sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
+            android:text="@{String.valueOf(gameViewModel.globalTime)}"
             android:textColor="@android:color/white"
             android:textSize="19sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -97,11 +108,12 @@
             app:layout_constraintTop_toBottomOf="@+id/scorePostGame" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/saveScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:text="save score in the ranking"
+            android:onClick="@{()->gameFragment.openSaveRankingDialog()}"
+            android:text="@string/save_score"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
