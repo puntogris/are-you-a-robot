@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="args"
             type="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragmentArgs" />
+
+        <variable
+            name="postMultiplayerFragment"
+            type="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,10 +20,10 @@
 
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/postMultiplayerGameTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I didn't expect this"
+            android:text="@string/postMultiplayerGameTitle"
             android:textColor="@color/colorPrimary"
             android:textSize="29sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +37,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="60dp"
             android:text="@{args.playerOneName}"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -45,7 +49,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@{String.valueOf(args.playerOneScore)}"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/playerOneName" />
@@ -57,7 +61,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@{String.valueOf(args.playerTwoScore)}"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/playerTwoName" />
@@ -68,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="@{String.valueOf(args.playerTwoName)}"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/playerOneName" />
@@ -77,77 +81,78 @@
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="Excelent job"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="120dp"
+            android:text="@string/the_human_is"
             android:textColor="@android:color/white"
             android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.163"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            app:layout_constraintTop_toBottomOf="@+id/postMultiplayerGameTitle" />
 
         <TextView
             android:id="@+id/playerWinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
+            android:layout_marginEnd="24dp"
             android:textColor="@color/colorAccent"
-            android:textSize="30sp"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView16"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="@+id/playerLosser"
+            app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+        <TextView
+            android:id="@+id/robotPlayerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="60dp"
+            android:text="@string/the_robot_is"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="you have proven yourself"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.194"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerWinner" />
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="72dp"
-            android:text="Not so bad for a robot"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.074"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
         <TextView
             android:id="@+id/playerLosser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:text="TextView"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/robotPlayerText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.722"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintTop_toTopOf="@+id/robotPlayerText" />
 
-        <TextView
-            android:id="@+id/textView21"
+
+        <Button
+            android:id="@+id/shareResults"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginTop="40dp"
-            android:text="Maybe next time.."
+            android:layout_marginBottom="92dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/share_the_results"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/playerOneName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/drawResult"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="center"
+            android:text="@string/draw_match_message"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/shareResults"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerLosser" />
+            app:layout_constraintTop_toBottomOf="@+id/postMultiplayerGameTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

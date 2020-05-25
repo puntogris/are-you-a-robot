@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Eres un robot?</string>
+    <string name="message_incentive_to_play">Solo hay una forma de averiguarlo..</string>
+    <string name="prove_it">Demostralo</string>
+    <string name="code">codigo</string>
+    <string name="score">puntaje</string>
+    <string name="timer">tiempo</string>
+    <string name="try_again">Intenta de nuevo</string>
+    <string name="you_lost">Perdiste</string>
+    <string name="try_again_robot">Buen intento robot..</string>
+    <string name="scored_savec_successfully">Puntaje guardado correctamente</string>
+    <string name="save">guardar</string>
+    <string name="cancel">cancelar</string>
+    <string name="save_score">guardar puntaje en el ranking</string>
+    <string name="dialog_nickname_hint">Tu apodo</string>
+    <string name="nickname">apodo</string>
+    <string name="settings">Configuracion</string>
+    <string name="rankings">Rankings</string>
+    <string name="title_multiplayer">Multijugador</string>
+    <string name="menu">Menu</string>
+    <string name="close">Cerrar</string>
+</resources>

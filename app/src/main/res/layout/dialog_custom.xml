@@ -19,5 +19,6 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="Your nickname" />
+        android:hint="@string/dialog_nickname_hint"
+        android:importantForAutofill="no"/>
 </LinearLayout>

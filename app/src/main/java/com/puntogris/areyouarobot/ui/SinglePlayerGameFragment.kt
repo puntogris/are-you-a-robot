@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentSinglePlayerGameBinding
@@ -17,7 +16,6 @@ class SinglePlayerGameFragment : Fragment() {
 
     private lateinit var binding: FragmentSinglePlayerGameBinding
     private val viewModel: GameViewModel by activityViewModels()
-  //  private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +26,6 @@ class SinglePlayerGameFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.gameViewModel = viewModel
 
-        //navController = findNavController()
         viewModel.apply {
             initializeGame()
             listenToTextChanged()

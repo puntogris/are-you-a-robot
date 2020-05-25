@@ -35,7 +35,6 @@ class MatchFragment : Fragment() {
                     guessTime()
                     Utils.showSoftKeyboard(binding.guessEditText,requireActivity())} else showLetters()
             })
-
         }
 
         viewModel.getMatchData(args.matchId).observe(viewLifecycleOwner, Observer {
@@ -55,16 +54,20 @@ class MatchFragment : Fragment() {
     }
 
     private fun guessTime(){
-        binding.guessEditText.setText("")
-        binding.lettersTextView.visibility = View.GONE
-        binding.progressBar.visibility = View.VISIBLE
-        binding.guessEditText.visibility = View.VISIBLE
+        binding.apply {
+            guessEditText.setText("")
+            lettersTextView.visibility = View.GONE
+            progressBar.visibility = View.VISIBLE
+            guessEditText.visibility = View.VISIBLE
+        }
     }
 
     private fun showLetters(){
-        binding.lettersTextView.visibility = View.VISIBLE
-        binding.progressBar.visibility = View.GONE
-        binding.guessEditText.visibility = View.GONE
+        binding.apply {
+            lettersTextView.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+            guessEditText.visibility = View.GONE
+        }
     }
 
     private fun navigateToPostGameFragment(){
@@ -75,7 +78,9 @@ class MatchFragment : Fragment() {
                 matchInfo!!.playerOneName,
                 matchInfo.playerTwoName,
                 matchInfo.playerOneScore,
-                matchInfo.playerTwoScore)
+                matchInfo.playerTwoScore,
+                args.playerPos
+            )
         findNavController().navigate(action)
     }
 

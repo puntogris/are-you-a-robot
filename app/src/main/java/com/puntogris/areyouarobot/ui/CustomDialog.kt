@@ -30,7 +30,7 @@ class CustomDialog(val score:Int) : DialogFragment() {
                     findNavController().navigate(R.id.welcomeFragment)
                     Toast.makeText(context,getString(R.string.scored_savec_successfully),Toast.LENGTH_SHORT).show()
                 }
-                .setNegativeButton(getString(R.string.cancel)
+                .setNegativeButton(getString(android.R.string.cancel)
                 ) { _, _ ->
                     dialog?.cancel()
                 }

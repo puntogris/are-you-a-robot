@@ -6,14 +6,14 @@
         android:id="@+id/welcomeFragment"
         android:icon="@drawable/ic_close_white_24dp"
         android:visible="false"
-        android:title="close"
+        android:title="@string/close"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/playerSettingsFragment"
         android:visible="false"
         android:icon="@drawable/ic_settings_white_24dp"
-        android:title="settings"
+        android:title="@string/settings"
         app:showAsAction="ifRoom"/>
 
 

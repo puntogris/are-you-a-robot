@@ -8,7 +8,7 @@ internal object MatchDeserializer: DocumentSnapshotDeserializer<MatchModel> {
 
     override fun deserialize(input: DocumentSnapshot?): MatchModel {
         val playerOne = input?.get("playerOne") as HashMap<*,*>
-        val playerTwo = input?.get("playerTwo") as HashMap<*,*>
+        val playerTwo = input.get("playerTwo") as HashMap<*,*>
         val playerOneName = playerOne["name"].toString()
         val playerTwoName = playerTwo["name"].toString()
         val playerOneScore = playerOne["score"].toString().toInt()

@@ -67,14 +67,15 @@ class MatchViewModel : ViewModel(){
     }
 
     fun initializeGame(matchId: String, playerPos:String){
+        _gamEnded.value = false
         this.matchId = matchId
         this.playerPos = playerPos
         globalTimer?.cancel()
-        globalTimer = startTimer()
-        globalTimer?.run()
         lettersDifficulty = DEFAULT_LETTER_DIFFICULTY
         _score.value = INITIAL_INT_VALUE
         _globalTime.value = INITIAL_INT_VALUE
+        globalTimer = startTimer()
+        globalTimer?.run()
         gameOn()
     }
 

@@ -61,7 +61,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/welcomeFragmentTitle"
-            app:layout_constraintTop_toTopOf="@+id/welcomeFragmentTitle" />
+            app:layout_constraintTop_toTopOf="@+id/welcomeFragmentTitle"
+            android:contentDescription="logo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

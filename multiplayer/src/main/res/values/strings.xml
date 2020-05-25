@@ -1,4 +1,12 @@
 <resources>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="draw_match_message">What a coincidence, seems like you are both impostors...</string>
+    <string name="share_the_results">Share the results</string>
+    <string name="the_robot_is">The robot is:</string>
+    <string name="the_human_is">The human is:</string>
+    <string name="postMultiplayerGameTitle">I didn\'t expect this</string>
+    <string name="multiplayer_message">Battle against another \'Human\' to prove which one is not an impostor</string>
+    <string name="search_oponent">search oponent</string>
+    <string name="cancel_search">cancel search</string>
 </resources>

@@ -21,6 +21,9 @@
         <argument
             android:name="playerTwoScore"
             app:argType="integer" />
+        <argument
+            android:name="playerPos"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/matchFragment"

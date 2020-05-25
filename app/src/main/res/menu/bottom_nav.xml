@@ -5,15 +5,15 @@
         android:id="@+id/welcomeFragment"
         android:enabled="true"
         android:icon="@drawable/ic_menu_white_24dp"
-        android:title="Menu"/>
+        android:title="@string/menu"/>
     <item
         android:id="@+id/rankingsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_public_white_24dp"
-        android:title="Ranking"/>
+        android:title="@string/rankings"/>
     <item
         android:id="@+id/findMatchFragment"
         android:enabled="true"
         android:icon="@drawable/ic_group_white_24dp"
-        android:title="@string/multiplayer"/>
+        android:title="@string/title_multiplayer"/>
 </menu>
