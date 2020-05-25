@@ -1,4 +1,4 @@
-package com.puntogris.areyouarobot
+package com.puntogris.multiplayer
 
 import org.junit.Test
 

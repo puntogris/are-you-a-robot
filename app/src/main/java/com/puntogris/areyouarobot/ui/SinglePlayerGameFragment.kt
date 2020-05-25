@@ -1,14 +1,13 @@
 package com.puntogris.areyouarobot.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
-import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentSinglePlayerGameBinding
@@ -18,6 +17,7 @@ class SinglePlayerGameFragment : Fragment() {
 
     private lateinit var binding: FragmentSinglePlayerGameBinding
     private val viewModel: GameViewModel by activityViewModels()
+  //  private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +28,7 @@ class SinglePlayerGameFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.gameViewModel = viewModel
 
+        //navController = findNavController()
         viewModel.apply {
             initializeGame()
             listenToTextChanged()
@@ -37,7 +38,7 @@ class SinglePlayerGameFragment : Fragment() {
                     Utils.showSoftKeyboard(binding.guessEditText, requireActivity())} else showLetters()
             })
             didPlayerLose.observe(viewLifecycleOwner, Observer { playerLost ->
-                if (playerLost) navigateToPostGameFragment()
+                if (playerLost) navigateToPostGame()
             })
         }
 
@@ -68,9 +69,9 @@ class SinglePlayerGameFragment : Fragment() {
         }
     }
 
-    private fun navigateToPostGameFragment() {
+    private fun navigateToPostGame() {
+        findNavController().navigate(R.id.postGameFragment)
         viewModel.playerLost()
-        findNavController().navigate(R.id.action_singlePlayerGameFragment_to_postGameFragment)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

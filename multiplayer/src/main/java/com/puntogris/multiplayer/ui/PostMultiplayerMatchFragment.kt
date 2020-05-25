@@ -2,21 +2,20 @@ package com.puntogris.multiplayer.ui
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentPostMultiplayerMatchBinding
 
-
 class PostMultiplayerMatchFragment : Fragment() {
-private val args:PostMultiplayerMatchFragmentArgs by navArgs()
+    private val args:PostMultiplayerMatchFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding:FragmentPostMultiplayerMatchBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_post_multiplayer_match, container,false)
+        val binding: FragmentPostMultiplayerMatchBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_post_multiplayer_match, container,false)
 
         binding.args = args
 

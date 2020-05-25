@@ -1,4 +1,4 @@
-package com.puntogris.herewego.diffcallback
+package com.puntogris.areyouarobot.diffcallback
 
 interface QueryItem<T> {
     val item: T

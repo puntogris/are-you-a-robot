@@ -5,7 +5,7 @@ import androidx.lifecycle.Transformations
 import com.google.firebase.firestore.DocumentSnapshot
 import com.puntogris.areyouarobot.livedata.FirestoreQueryLiveData
 import com.puntogris.areyouarobot.model.RankingEntry
-import com.puntogris.herewego.diffcallback.QueryItem
+import com.puntogris.areyouarobot.diffcallback.QueryItem
 
 object FirestoreQueryRankingEntryTransformation {
 

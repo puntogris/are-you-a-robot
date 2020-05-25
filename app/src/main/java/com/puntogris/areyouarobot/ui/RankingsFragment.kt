@@ -8,27 +8,22 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.puntogris.areyouarobot.R
-import com.puntogris.areyouarobot.databinding.FragmentRankingBinding
-import com.puntogris.areyouarobot.utils.Utils
+import com.puntogris.areyouarobot.databinding.FragmentRankingsBinding
 
-class RankingFragment : Fragment() {
+class RankingsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding:FragmentRankingBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_ranking,container, false)
-        val viewModel: RankingViewModel by activityViewModels()
+        val binding: FragmentRankingsBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_rankings,container, false)
+        val viewModel: RankingsViewModel by activityViewModels()
         //RecyclerView
         val manager = LinearLayoutManager(activity,  LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewRanking.layoutManager = manager
-        val adapter = RankingRecyclerViewAdapter()
+        val adapter = RankingsRecyclerViewAdapter()
         binding.recyclerViewRanking.adapter = adapter
         viewModel.getRanking().observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)

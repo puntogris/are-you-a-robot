@@ -5,41 +5,41 @@ import androidx.lifecycle.*
 import com.puntogris.multiplayer.data.MatchDeserializer
 import com.puntogris.multiplayer.data.MatchRepository
 import com.puntogris.multiplayer.model.MatchModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.scheduleAtFixedRate
-private const val INITIAL_INT_VALUE = 0
-private const val MAX_PERCENTAGE = 100
-private const val DEFAULT_LETTER_DIFFICULTY = 2
 
-class MatchViewModel :ViewModel(){
+class MatchViewModel : ViewModel(){
+
     private val repo = MatchRepository()
-    private var timerJob :Job? = null
-    private var globalTimer:TimerTask? = null
+    private var timerJob : Job? = null
+    private var globalTimer: TimerTask? = null
 
     private var matchId = ""
     private var playerPos = ""
 
     private var _currentLetters = MutableLiveData<String>()
-    val currentLetters:LiveData<String> = _currentLetters
+    val currentLetters: LiveData<String> = _currentLetters
 
     private var _isTimeToGuess = MutableLiveData<Boolean>()
-    val isTimeToGuess:LiveData<Boolean> = _isTimeToGuess
+    val isTimeToGuess: LiveData<Boolean> = _isTimeToGuess
 
     private var _matchInfo = MutableLiveData<MatchModel>()
-    val matchInfo:LiveData<MatchModel> = _matchInfo
+    val matchInfo: LiveData<MatchModel> = _matchInfo
 
     private var _score = MutableLiveData(INITIAL_INT_VALUE)
-    val score:LiveData<Int> = _score
+    val score: LiveData<Int> = _score
 
     private var _globalTime = MutableLiveData(INITIAL_INT_VALUE)
-    val globalTime:LiveData<Int> = _globalTime
+    val globalTime: LiveData<Int> = _globalTime
 
     private var _progressBarStatus = MutableLiveData<Int>()
-    val progressBarStatus:LiveData<Int> = _progressBarStatus
+    val progressBarStatus: LiveData<Int> = _progressBarStatus
 
     private var _gamEnded = MutableLiveData(false)
-    val gameEnded:LiveData<Boolean> = _gamEnded
+    val gameEnded: LiveData<Boolean> = _gamEnded
 
     private var timeDifficultyLetters = 1000L
     private var timeDifficultyGuess = 3000L
@@ -78,7 +78,7 @@ class MatchViewModel :ViewModel(){
         gameOn()
     }
 
-    private fun startTimer():TimerTask{
+    private fun startTimer(): TimerTask {
         return Timer().scheduleAtFixedRate(0,1000){
             val time = _globalTime.value!!.plus(1)
             if (time >= 10){
@@ -134,6 +134,12 @@ class MatchViewModel :ViewModel(){
         if (score.value!! == 5 && lettersDifficulty <3){lettersDifficulty++}
         else if (score.value!! == 10 && lettersDifficulty <4){lettersDifficulty++}
         else if (score.value!! == 15 && lettersDifficulty <5){lettersDifficulty++}
+    }
+
+    companion object{
+        private const val INITIAL_INT_VALUE = 0
+        private const val MAX_PERCENTAGE = 100
+        private const val DEFAULT_LETTER_DIFFICULTY = 2
     }
 
 }

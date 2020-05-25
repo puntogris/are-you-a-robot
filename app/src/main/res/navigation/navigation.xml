@@ -1,73 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/welcomeFragment">
 
     <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="com.puntogris.areyouarobot.ui.WelcomeFragment"
-        android:label=" "
-        tools:layout="@layout/fragment_welcome" >
-        <action
-            android:id="@+id/action_welcomeFragment_to_singlePlayerGameFragment"
-            app:destination="@id/singlePlayerGameFragment" />
-        <action
-            android:id="@+id/action_welcomeFragment_to_playerSettings"
-            app:destination="@id/playerSettingsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/singlePlayerGameFragment"
-        android:name="com.puntogris.areyouarobot.ui.SinglePlayerGameFragment"
-        android:label=" "
-        tools:layout="@layout/fragment_single_player_game" >
-        <action
-            android:id="@+id/action_singlePlayerGameFragment_to_postGameFragment"
-            app:destination="@id/postGameFragment" />
-        <action
-            android:id="@+id/action_singlePlayerGameFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/postGameFragment"
-        android:name="com.puntogris.areyouarobot.ui.PostGameFragment"
-        android:label=" "
-        tools:layout="@layout/fragment_post_game" >
-        <action
-            android:id="@+id/action_postGameFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
-        <action
-            android:id="@+id/action_postGameFragment_to_singlePlayerGameFragment"
-            app:destination="@id/singlePlayerGameFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/rankingFragment"
-        android:name="com.puntogris.areyouarobot.ui.RankingFragment"
-        android:label=" "
-        tools:layout="@layout/fragment_ranking"/>
-    <fragment
-        android:id="@+id/customDialog"
-        android:name="com.puntogris.areyouarobot.ui.CustomDialog"
-        android:label="CustomDialog"
-        tools:layout="@layout/dialog_custom"/>
-    <fragment
-        android:id="@+id/playerSettingsFragment"
-        android:name="com.puntogris.areyouarobot.ui.PlayerSettingsFragment"
-        android:label=" "
-        tools:layout="@layout/fragment_player_settings" >
-        <action
-            android:id="@+id/action_playerSettings_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/findMatchFragment"
-        android:name="com.puntogris.multiplayer.ui.FindMatchFragment"
+        android:id="@+id/postMultiplayerMatchFragment"
+        android:name="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragment"
         app:moduleName="multiplayer"
-        android:label=" " >
-        <action
-            android:id="@+id/action_findMatchFragment_to_matchFragment"
-            app:destination="@id/matchFragment" />
+        android:label=" ">
+        <argument
+            android:name="playerOneName"
+            app:argType="string" />
+        <argument
+            android:name="playerTwoName"
+            app:argType="string" />
+        <argument
+            android:name="playerOneScore"
+            app:argType="integer" />
+        <argument
+            android:name="playerTwoScore"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/matchFragment"
@@ -85,21 +38,36 @@
             app:destination="@id/postMultiplayerMatchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/postMultiplayerMatchFragment"
-        android:name="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragment"
+        android:id="@+id/findMatchFragment"
+        android:name="com.puntogris.multiplayer.ui.FindMatchFragment"
         app:moduleName="multiplayer"
         android:label=" " >
-        <argument
-            android:name="playerOneName"
-            app:argType="string" />
-        <argument
-            android:name="playerTwoName"
-            app:argType="string" />
-        <argument
-            android:name="playerOneScore"
-            app:argType="integer" />
-        <argument
-            android:name="playerTwoScore"
-            app:argType="integer" />
+        <action
+            android:id="@+id/action_findMatchFragment_to_matchFragment"
+            app:destination="@id/matchFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.puntogris.areyouarobot.ui.WelcomeFragment"
+        android:label=" " />
+    <fragment
+        android:id="@+id/rankingsFragment"
+        android:name="com.puntogris.areyouarobot.ui.RankingsFragment"
+        android:label=" " />
+    <fragment
+        android:id="@+id/singlePlayerGameFragment"
+        android:name="com.puntogris.areyouarobot.ui.SinglePlayerGameFragment"
+        android:label=" " />
+    <dialog
+        android:id="@+id/customDialog"
+        android:name="com.puntogris.areyouarobot.ui.CustomDialog"
+        android:label=" " />
+    <fragment
+        android:id="@+id/postGameFragment"
+        android:name="com.puntogris.areyouarobot.ui.PostGameFragment"
+        android:label=" " />
+    <fragment
+        android:id="@+id/playerSettingsFragment"
+        android:name="com.puntogris.areyouarobot.ui.PlayerSettingsFragment"
+        android:label=" " />
 </navigation>

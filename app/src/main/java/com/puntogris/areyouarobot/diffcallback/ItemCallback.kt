@@ -1,4 +1,4 @@
-package com.puntogris.herewego.diffcallback
+package com.puntogris.areyouarobot.diffcallback
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil

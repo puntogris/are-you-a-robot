@@ -1,10 +1,10 @@
 package com.puntogris.areyouarobot
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.welcomeFragment,
-                R.id.rankingFragment,
+                R.id.rankingsFragment,
                 R.id.singlePlayerGameFragment,
                 R.id.findMatchFragment,
                 R.id.matchFragment,
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         ) {
             main_toolbar.visibility = View.VISIBLE
             bottom_navigation.visibility = View.GONE
-        } else if (destination.id == R.id.rankingFragment ||
+        } else if (destination.id == R.id.rankingsFragment ||
             destination.id == R.id.postGameFragment
         ) {
             main_toolbar.visibility = View.GONE

@@ -8,9 +8,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.concurrent.scheduleAtFixedRate
-private const val INITIAL_INT_VALUE = 0
-private const val MAX_PERCENTAGE = 100
-private const val DEFAULT_LETTER_DIFFICULTY = 2
 
 class GameViewModel :ViewModel(){
     private var timerJob :Job? = null
@@ -46,7 +43,7 @@ class GameViewModel :ViewModel(){
                 _progressBarStatus.value = MAX_PERCENTAGE - (millisUntilFinished * MAX_PERCENTAGE / timeDifficultyGuess).toInt()
             }
             override fun onFinish() {
-                playerLost()
+                _didPlayerLose.postValue(true)
             }
         }
 
@@ -101,11 +98,9 @@ class GameViewModel :ViewModel(){
     }
 
     fun playerLost(){
-        _didPlayerLose.value = true
         _progressBarStatus.value = MAX_PERCENTAGE
         globalTimer?.cancel()
         timerJob?.cancel()
-
     }
 
     private fun updateDifficulty(){
@@ -114,5 +109,10 @@ class GameViewModel :ViewModel(){
             10 -> lettersDifficulty++
             15 -> lettersDifficulty++
         }
+    }
+    companion object{
+        private const val INITIAL_INT_VALUE = 0
+        private const val MAX_PERCENTAGE = 100
+        private const val DEFAULT_LETTER_DIFFICULTY = 2
     }
 }

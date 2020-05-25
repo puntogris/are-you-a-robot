@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_menu_white_24dp"
         android:title="Menu"/>
     <item
-        android:id="@+id/rankingFragment"
+        android:id="@+id/rankingsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_public_white_24dp"
         android:title="Ranking"/>

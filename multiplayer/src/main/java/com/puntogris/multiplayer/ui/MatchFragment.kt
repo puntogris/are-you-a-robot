@@ -3,16 +3,14 @@ package com.puntogris.multiplayer.ui
 import android.os.Bundle
 import android.view.*
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.puntogris.areyouarobot.utils.Utils
 import com.puntogris.multiplayer.R
-
-
 import com.puntogris.multiplayer.databinding.FragmentMatchBinding
 
 class MatchFragment : Fragment() {

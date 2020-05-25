@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentPostGameBinding
 
@@ -20,7 +19,7 @@ class PostGameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding:FragmentPostGameBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_post_game,container,false)
+        val binding: FragmentPostGameBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_post_game,container,false)
 
         binding.apply {
             gameFragment = this@PostGameFragment
@@ -37,6 +36,6 @@ class PostGameFragment : Fragment() {
     }
 
     fun playAgain(){
-        findNavController().navigate(R.id.action_postGameFragment_to_singlePlayerGameFragment)
+        findNavController().navigate(R.id.singlePlayerGameFragment)
     }
 }

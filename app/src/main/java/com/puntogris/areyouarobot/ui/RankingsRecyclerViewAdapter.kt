@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.puntogris.areyouarobot.databinding.RankingEntryBinding
 import com.puntogris.areyouarobot.model.RankingEntry
-import com.puntogris.herewego.diffcallback.ItemCallback
-import com.puntogris.herewego.diffcallback.QueryItem
+import com.puntogris.areyouarobot.diffcallback.ItemCallback
+import com.puntogris.areyouarobot.diffcallback.QueryItem
 
-class RankingRecyclerViewAdapter:
-    ListAdapter<QueryItem<RankingEntry>, RankingRecyclerViewAdapter.ViewHolder>(ItemCallback()) {
+class RankingsRecyclerViewAdapter:
+    ListAdapter<QueryItem<RankingEntry>, RankingsRecyclerViewAdapter.ViewHolder>(ItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)

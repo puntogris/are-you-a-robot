@@ -1,12 +1,15 @@
 package com.puntogris.multiplayer.ui
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.puntogris.multiplayer.data.MatchRepository
 import com.puntogris.multiplayer.model.JoinedMatchInfo
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class FindMatchViewModel:ViewModel(){
+class FindMatchViewModel: ViewModel(){
     private val repo = MatchRepository()
     private var playerName:String = ""
 
@@ -14,7 +17,7 @@ class FindMatchViewModel:ViewModel(){
         playerName = name
     }
 
-     suspend fun startMatchmaking(): LiveData<JoinedMatchInfo>{
+    suspend fun startMatchmaking(): LiveData<JoinedMatchInfo> {
         val data = repo.getMatchFirestore(playerName)
         return Transformations.map(data){
             val matchId = it?.id.toString()
@@ -30,7 +33,7 @@ class FindMatchViewModel:ViewModel(){
         viewModelScope.launch {
             try {
                 repo.unsubscribeToMatchFirestore(playerName)
-            }catch (e:Exception){
+            }catch (e: Exception){
                 //manage error
             }
         }

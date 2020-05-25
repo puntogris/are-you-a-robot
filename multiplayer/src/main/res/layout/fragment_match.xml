@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-    <variable
-        name="match"
-        type="com.puntogris.multiplayer.model.MatchModel" />
-    <variable
-        name="matchViewModel"
-        type="com.puntogris.multiplayer.ui.MatchViewModel" />
+        <variable
+            name="match"
+            type="com.puntogris.multiplayer.model.MatchModel" />
+        <variable
+            name="matchViewModel"
+            type="com.puntogris.multiplayer.ui.MatchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

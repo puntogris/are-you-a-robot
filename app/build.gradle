@@ -1,16 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-
         applicationId "com.puntogris.areyouarobot"
         minSdkVersion 21
         targetSdkVersion 29
@@ -19,6 +18,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -37,28 +37,25 @@ android {
     dataBinding{
         enabled = true
     }
-
-    dynamicFeatures = [":multiplayer"]
+    dynamicFeatures = [':multiplayer']
 }
 
 dependencies {
-
-    api 'androidx.appcompat:appcompat:1.1.0'
-    api 'androidx.constraintlayout:constraintlayout:1.1.3'
-    api 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api 'androidx.core:core-ktx:1.2.0'
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.2.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
+    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
 
     api 'androidx.appcompat:appcompat:1.1.0'
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
     api 'com.google.android.material:material:1.1.0'
-    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha02'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha03'
 
     def nav_version = "2.3.0-beta01"
 
@@ -75,22 +72,15 @@ dependencies {
     api 'com.google.firebase:firebase-firestore-ktx:21.4.3'
     api 'com.google.firebase:firebase-functions:19.0.2'
 
-
     //Coroutines
-    def coroutine_version = '1.3.3'
+    def coroutine_version = '1.3.4'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
-
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.2.1'
-    api "com.google.android.play:core:1.7.2"
-
-    //Room Database
-    def room_version = "2.2.5"
-    kapt 'androidx.room:room-compiler:2.2.5'
-    api "androidx.room:room-ktx:$room_version"
+    api "com.google.android.play:core:1.7.3"
 
     api "androidx.preference:preference:1.1.1"
-
+    implementation "androidx.fragment:fragment:1.3.0-alpha05"
 
 }
