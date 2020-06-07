@@ -52,7 +52,7 @@ class PostMultiplayerMatchFragment : Fragment() {
                 binding.robotPlayerText.visibility = View.GONE
                 binding.playerWinner.visibility = View.GONE
                 binding.playerLosser.visibility = View.GONE
-                binding.textView16.visibility = View.GONE
+                binding.humanPlayerText.visibility = View.GONE
                 binding.drawResult.visibility = View.VISIBLE
             }
         }

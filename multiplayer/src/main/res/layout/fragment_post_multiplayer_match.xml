@@ -78,7 +78,7 @@
             app:layout_constraintTop_toTopOf="@+id/playerOneName" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/humanPlayerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -96,10 +96,10 @@
             android:layout_marginEnd="24dp"
             android:textColor="@color/colorAccent"
             android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView16"
+            app:layout_constraintBottom_toBottomOf="@+id/humanPlayerText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/playerLosser"
-            app:layout_constraintTop_toTopOf="@+id/textView16" />
+            app:layout_constraintTop_toTopOf="@+id/humanPlayerText" />
 
         <TextView
             android:id="@+id/robotPlayerText"
@@ -111,7 +111,7 @@
             android:textColor="@android:color/white"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+            app:layout_constraintTop_toBottomOf="@+id/humanPlayerText" />
 
         <TextView
             android:id="@+id/playerLosser"
@@ -147,7 +147,7 @@
             android:gravity="center"
             android:text="@string/draw_match_message"
             android:textColor="@android:color/white"
-            android:textSize="25sp"
+            android:textSize="21sp"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/shareResults"
             app:layout_constraintEnd_toEndOf="parent"

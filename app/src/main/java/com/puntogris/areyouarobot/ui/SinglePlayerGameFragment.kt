@@ -67,7 +67,7 @@ class SinglePlayerGameFragment : Fragment() {
     }
 
     private fun navigateToPostGame() {
-        findNavController().navigate(R.id.postGameFragment)
+        findNavController().navigate(R.id.action_singlePlayerGameFragment_to_postGameFragment)
         viewModel.playerLost()
     }
 

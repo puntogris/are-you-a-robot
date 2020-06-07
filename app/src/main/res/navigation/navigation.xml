@@ -38,7 +38,9 @@
             app:argType="string" />
         <action
             android:id="@+id/action_matchFragment_to_postMultiplayerMatchFragment"
-            app:destination="@id/postMultiplayerMatchFragment" />
+            app:destination="@id/postMultiplayerMatchFragment"
+            app:popUpTo="@id/findMatchFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/findMatchFragment"
@@ -60,7 +62,13 @@
     <fragment
         android:id="@+id/singlePlayerGameFragment"
         android:name="com.puntogris.areyouarobot.ui.SinglePlayerGameFragment"
-        android:label=" " />
+        android:label=" " >
+        <action
+            android:id="@+id/action_singlePlayerGameFragment_to_postGameFragment"
+            app:destination="@id/postGameFragment"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <dialog
         android:id="@+id/customDialog"
         android:name="com.puntogris.areyouarobot.ui.CustomDialog"
