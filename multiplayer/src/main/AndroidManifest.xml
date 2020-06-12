@@ -5,7 +5,7 @@
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/title_multiplayer">
+        dist:title="@string/multiplayer">
         <dist:delivery>
             <dist:on-demand />
         </dist:delivery>

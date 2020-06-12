@@ -12,6 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/singlePlayerGameLayout"
         android:background="@color/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="@string/timer"
             android:textColor="@android:color/white"
             android:textSize="19sp"
@@ -92,8 +93,8 @@
             android:text="@{String.valueOf(gameViewModel.globalTime)}"
             android:textColor="@android:color/white"
             android:textSize="19sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintBottom_toBottomOf="@+id/singlePlayerGameFragmentTimerText"
+            app:layout_constraintStart_toEndOf="@+id/singlePlayerGameFragmentTimerText"
             app:layout_constraintTop_toTopOf="@+id/singlePlayerGameFragmentTimerText" />
 
         <ProgressBar

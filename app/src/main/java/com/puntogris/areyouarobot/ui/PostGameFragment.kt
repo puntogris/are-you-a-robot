@@ -26,7 +26,6 @@ class PostGameFragment : Fragment() {
             gameViewModel = viewModel
         }
 
-        // Inflate the layout for this fragment
         return binding.root
     }
 

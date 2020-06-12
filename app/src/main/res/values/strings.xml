@@ -8,7 +8,7 @@
     <string name="try_again">try again</string>
     <string name="you_lost">You lost</string>
     <string name="try_again_robot">Nice try robot..</string>
-    <string name="title_multiplayer">Multiplayer</string>
+    <string name="multiplayer" translatable="false">Multiplayer</string>
     <string name="scored_savec_successfully">Score saved Successfully</string>
     <string name="save">save</string>
     <string name="cancel">cancel</string>
@@ -19,6 +19,6 @@
     <string name="rankings">Rankings</string>
     <string name="menu">Menu</string>
     <string name="close">Close</string>
-    <string name="logo">logo</string>
+    <string name="logo" translatable="false">logo</string>
 
 </resources>

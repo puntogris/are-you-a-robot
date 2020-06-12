@@ -15,5 +15,5 @@
         android:id="@+id/findMatchFragment"
         android:enabled="true"
         android:icon="@drawable/ic_group_white_24dp"
-        android:title="@string/title_multiplayer"/>
+        android:title="@string/multiplayer"/>
 </menu>

@@ -17,7 +17,6 @@
     <string name="nickname">apodo</string>
     <string name="settings">Configuracion</string>
     <string name="rankings">Rankings</string>
-    <string name="title_multiplayer">Multijugador</string>
     <string name="menu">Menu</string>
     <string name="close">Cerrar</string>
 </resources>

@@ -82,7 +82,7 @@ class MatchViewModel : ViewModel(){
     private fun startTimer(): TimerTask {
         return Timer().scheduleAtFixedRate(0,1000){
             val time = _globalTime.value!!.plus(1)
-            if (time >= 10){
+            if (time >= MATCH_DURATION){
                 _gamEnded.postValue(true)
             }else{
                 _globalTime.postValue(time)
@@ -138,6 +138,7 @@ class MatchViewModel : ViewModel(){
     }
 
     companion object{
+        private const val MATCH_DURATION = 60
         private const val INITIAL_INT_VALUE = 0
         private const val MAX_PERCENTAGE = 100
         private const val DEFAULT_LETTER_DIFFICULTY = 2

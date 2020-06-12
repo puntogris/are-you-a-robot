@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
@@ -28,13 +29,13 @@ class PlayerSettingsFragment : Fragment() {
         binding.saveSettings.setOnClickListener {
             var input = binding.playerNameSettings.text.toString()
             if (input.isEmpty()) input = defaultPlayerName
+
             with (sharedPref.edit()) {
                 putString("player_name",input)
                 apply()}
             findNavController().navigate(R.id.welcomeFragment)
         }
 
-        // Inflate the layout for this fragment
         return binding.root
     }
 
