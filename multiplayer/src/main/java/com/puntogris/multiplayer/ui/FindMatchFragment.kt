@@ -31,7 +31,7 @@ class FindMatchFragment : Fragment() {
         viewModel.setPlayerName(playerName)
         searchButtonListener()
         cancelSearchButtonListener()
-        // Inflate the layout for this fragment
+
         return binding.root
     }
 
@@ -66,5 +66,10 @@ class FindMatchFragment : Fragment() {
     override fun onDestroy() {
         viewModel.unsubscribeToMatch()
         super.onDestroy()
+    }
+
+    override fun onPause() {
+        viewModel.unsubscribeToMatch()
+        super.onPause()
     }
 }

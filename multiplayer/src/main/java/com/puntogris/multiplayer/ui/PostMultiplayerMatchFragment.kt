@@ -12,6 +12,7 @@ import com.puntogris.multiplayer.databinding.FragmentPostMultiplayerMatchBinding
 class PostMultiplayerMatchFragment : Fragment() {
     private val args:PostMultiplayerMatchFragmentArgs by navArgs()
     private lateinit var binding: FragmentPostMultiplayerMatchBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,11 +35,10 @@ class PostMultiplayerMatchFragment : Fragment() {
             startActivity(shareIntent)
         }
 
-        // Inflate the layout for this fragment
         return binding.root
     }
 
-    private fun getWinner(){
+    private fun getWinner() {
         when {
             args.playerOneScore > args.playerTwoScore -> {
                 binding.playerWinner.text = args.playerOneName

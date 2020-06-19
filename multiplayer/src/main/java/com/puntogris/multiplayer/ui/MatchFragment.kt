@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.puntogris.areyouarobot.utils.Utils
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentMatchBinding
+import kotlinx.android.synthetic.main.fragment_post_multiplayer_match.*
 
 class MatchFragment : Fragment() {
     private val viewModel: MatchViewModel by activityViewModels()
@@ -28,28 +29,29 @@ class MatchFragment : Fragment() {
         binding.matchViewModel = viewModel
 
         viewModel.apply {
-            initializeGame(args.matchId,args.playerPos)
+            initializeGame(args.matchId, args.playerPos)
             listenToTextChanged()
+
             isTimeToGuess.observe(viewLifecycleOwner, Observer { guessTime ->
                 if (guessTime) {
                     guessTime()
-                    Utils.showSoftKeyboard(binding.guessEditText,requireActivity())} else showLetters()
+                    Utils.showSoftKeyboard(binding.guessEditText,requireActivity())
+                } else showLetters()
+            })
+
+            getMatchData(args.matchId).observe(viewLifecycleOwner, Observer { match ->
+                binding.match = match
+            })
+
+            isTimeToGuess.observe(viewLifecycleOwner, Observer { guessTime ->
+                if (guessTime) guessTime() else showLetters()
+            })
+
+            gameEnded.observe(viewLifecycleOwner, Observer { gameEnded ->
+                if (gameEnded) navigateToPostGameFragment()
             })
         }
 
-        viewModel.getMatchData(args.matchId).observe(viewLifecycleOwner, Observer {
-            binding.match = it
-        })
-
-        viewModel.isTimeToGuess.observe(viewLifecycleOwner, Observer { guessTime ->
-            if (guessTime) guessTime() else showLetters()
-        })
-
-        viewModel.gameEnded.observe(viewLifecycleOwner, Observer {
-            if (it) navigateToPostGameFragment()
-        })
-
-        // Inflate the layout for this fragment
         return binding.root
     }
 
@@ -81,6 +83,7 @@ class MatchFragment : Fragment() {
                 matchInfo.playerTwoScore,
                 args.playerPos
             )
+
         findNavController().navigate(action)
     }
 

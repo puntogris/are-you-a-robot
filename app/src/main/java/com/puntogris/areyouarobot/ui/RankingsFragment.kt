@@ -18,18 +18,20 @@ class RankingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentRankingsBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_rankings,container, false)
+        val binding: FragmentRankingsBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_rankings, container, false)
         val viewModel: RankingsViewModel by activityViewModels()
-        //RecyclerView
-        val manager = LinearLayoutManager(activity,  LinearLayoutManager.VERTICAL, false)
-        binding.recyclerViewRanking.layoutManager = manager
-        val adapter = RankingsRecyclerViewAdapter()
-        binding.recyclerViewRanking.adapter = adapter
-        viewModel.getRanking().observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
-        })
 
-        // Inflate the layout for this fragment
+        binding.recyclerViewRanking.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+        binding.recyclerViewRanking.adapter = RankingsRecyclerViewAdapter()
+            .apply {
+                viewModel.getRanking().observe(viewLifecycleOwner, Observer { rankingList ->
+                    submitList(rankingList)
+                })
+            }
+
         return binding.root
     }
 

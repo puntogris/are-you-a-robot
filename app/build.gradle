@@ -13,8 +13,8 @@ android {
         applicationId "com.puntogris.areyouarobot"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 4
-        versionName "4.0"
+        versionCode 7
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,7 +30,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -73,7 +73,7 @@ dependencies {
     api 'com.google.firebase:firebase-functions:19.0.2'
 
     //Coroutines
-    def coroutine_version = '1.3.4'
+    def coroutine_version = '1.3.7'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'

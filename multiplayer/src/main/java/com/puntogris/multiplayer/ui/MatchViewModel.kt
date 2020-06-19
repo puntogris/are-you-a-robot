@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.puntogris.multiplayer.data.MatchDeserializer
 import com.puntogris.multiplayer.data.MatchRepository
 import com.puntogris.multiplayer.model.MatchModel
+import com.puntogris.multiplayer.utils.plusOne
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,31 +21,29 @@ class MatchViewModel : ViewModel(){
     private var matchId = ""
     private var playerPos = ""
 
-    private var _currentLetters = MutableLiveData<String>()
+    private val _currentLetters = MutableLiveData<String>()
     val currentLetters: LiveData<String> = _currentLetters
 
-    private var _isTimeToGuess = MutableLiveData<Boolean>()
+    private val _isTimeToGuess = MutableLiveData<Boolean>()
     val isTimeToGuess: LiveData<Boolean> = _isTimeToGuess
 
-    private var _matchInfo = MutableLiveData<MatchModel>()
+    private val _matchInfo = MutableLiveData<MatchModel>()
     val matchInfo: LiveData<MatchModel> = _matchInfo
 
-    private var _score = MutableLiveData(INITIAL_INT_VALUE)
-    val score: LiveData<Int> = _score
+    private val score = MutableLiveData(INITIAL_INT_VALUE)
 
-    private var _globalTime = MutableLiveData(INITIAL_INT_VALUE)
+    private val _globalTime = MutableLiveData(INITIAL_INT_VALUE)
     val globalTime: LiveData<Int> = _globalTime
 
-    private var _progressBarStatus = MutableLiveData<Int>()
+    private val _progressBarStatus = MutableLiveData<Int>()
     val progressBarStatus: LiveData<Int> = _progressBarStatus
 
-    private var _gamEnded = MutableLiveData(false)
+    private val _gamEnded = MutableLiveData(false)
     val gameEnded: LiveData<Boolean> = _gamEnded
 
     private var timeDifficultyLetters = 1000L
     private var timeDifficultyGuess = 3000L
     private var lettersDifficulty = DEFAULT_LETTER_DIFFICULTY
-
 
     private val countDownTimer =
         object : CountDownTimer(timeDifficultyGuess, 10) {
@@ -56,13 +55,10 @@ class MatchViewModel : ViewModel(){
             }
         }
 
-
     fun getMatchData(matchId:String): LiveData<MatchModel> {
         val data = repo.getMatchDataFirstore(matchId)
-        return Transformations.map(data){
-            val match = MatchDeserializer.deserialize(it)
-            _matchInfo.postValue(match)
-            match
+        return Transformations.map(data){ snap ->
+            MatchDeserializer.deserialize(snap).also { _matchInfo.value = it }
         }
     }
 
@@ -72,7 +68,7 @@ class MatchViewModel : ViewModel(){
         this.playerPos = playerPos
         globalTimer?.cancel()
         lettersDifficulty = DEFAULT_LETTER_DIFFICULTY
-        _score.value = INITIAL_INT_VALUE
+        score.value = INITIAL_INT_VALUE
         _globalTime.value = INITIAL_INT_VALUE
         globalTimer = startTimer()
         globalTimer?.run()
@@ -81,11 +77,9 @@ class MatchViewModel : ViewModel(){
 
     private fun startTimer(): TimerTask {
         return Timer().scheduleAtFixedRate(0,1000){
-            val time = _globalTime.value!!.plus(1)
-            if (time >= MATCH_DURATION){
-                _gamEnded.postValue(true)
-            }else{
-                _globalTime.postValue(time)
+            _globalTime.apply {
+                if (value!! >= MATCH_DURATION) _gamEnded.postValue(true)
+                else plusOne()
             }
         }
     }
@@ -119,8 +113,7 @@ class MatchViewModel : ViewModel(){
         repo.incrementScorePlayerFirestore(playerPos,matchId)
         countDownTimer.cancel()
         timerJob?.cancel()
-        val score = _score.value!!.plus(1)
-        _score.value = score
+        score.plusOne()
         gameOn()
     }
 

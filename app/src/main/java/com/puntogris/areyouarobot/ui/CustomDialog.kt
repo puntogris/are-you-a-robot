@@ -1,5 +1,6 @@
 package com.puntogris.areyouarobot.ui
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.EditText
@@ -12,9 +13,10 @@ import com.puntogris.areyouarobot.data.Repository
 import com.puntogris.areyouarobot.model.RankingEntry
 import com.puntogris.areyouarobot.utils.Utils
 
-class CustomDialog(val score:Int) : DialogFragment() {
+class CustomDialog(val score: Int) : DialogFragment() {
     private val repo = Repository()
 
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -22,11 +24,17 @@ class CustomDialog(val score:Int) : DialogFragment() {
             builder.setView(inflater.inflate(R.layout.dialog_custom, null))
                 .setPositiveButton(getString(R.string.save)
                 ) { dialog, _ ->
-                    val d = dialog as Dialog
-                    val usernameView = d.findViewById<EditText>(R.id.username)
-                    var usernameText = usernameView?.text.toString()
-                    if (usernameText.isEmpty()) usernameText = Utils.createDefaultRandomName()
-                    repo.saveScoreFirestore(RankingEntry(score,usernameText))
+
+                    (dialog as Dialog)
+                        .findViewById<EditText>(R.id.username)
+                        .text
+                        .toString()
+                        .apply {
+                            val username: String = if (isEmpty()) Utils.createDefaultRandomName()
+                            else this
+                            repo.saveScoreFirestore(RankingEntry(score, username))
+                    }
+
                     findNavController().navigate(R.id.welcomeFragment)
                     Toast.makeText(context,getString(R.string.scored_savec_successfully),Toast.LENGTH_SHORT).show()
                 }

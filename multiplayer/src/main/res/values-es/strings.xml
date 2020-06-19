@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="draw_match_message">What a coincidence, seems like you are both impostors…</string>
+    <string name="share_the_results">Compartir loso resultados</string>
+    <string name="the_robot_is">Eres un robot:</string>
+    <string name="the_human_is">Eres una persona:</string>
+    <string name="postMultiplayerGameTitle">No me esperaba esto</string>
+    <string name="multiplayer_message">Batalla contra otro humano y demuestra quien es el impostor</string>
+    <string name="search_oponent">Buscar oponente</string>
+    <string name="cancel_search">cancelar busqueda</string>
+</resources>
