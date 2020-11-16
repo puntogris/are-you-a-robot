@@ -12,6 +12,7 @@ Used in this project:</br>
   * Google Cloud Firestore
   * Android Dynamic Delivery
   * Google Cloud Hosting
+  * Hilt
 
 ## Screenshots
 ![N|Solid](https://github.com/puntogris/are-you-a-robot/blob/master/screenshots/1.webp)
