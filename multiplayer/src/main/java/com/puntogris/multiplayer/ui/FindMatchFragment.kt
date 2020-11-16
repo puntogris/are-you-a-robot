@@ -10,14 +10,21 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.areyouarobot.utils.Utils
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentFindMatchBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FindMatchFragment : Fragment() {
     private val viewModel: FindMatchViewModel by activityViewModels()
     private lateinit var binding: FragmentFindMatchBinding
+    @Inject
+    lateinit var sharedPref: SharedPref
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +33,7 @@ class FindMatchFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_find_match,container,false)
 
-        val playerName = Utils.getPlayerName(requireContext())
+        val playerName = sharedPref.getPlayerName()
 
         viewModel.setPlayerName(playerName)
         searchButtonListener()

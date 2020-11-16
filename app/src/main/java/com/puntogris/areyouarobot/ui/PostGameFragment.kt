@@ -24,6 +24,7 @@ class PostGameFragment : Fragment() {
         binding.apply {
             gameFragment = this@PostGameFragment
             gameViewModel = viewModel
+
         }
 
         return binding.root

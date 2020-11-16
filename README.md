@@ -3,6 +3,8 @@ Game where it shows you a combination of letters and you have to type them back 
 
 You can also queue to get a match against another player and see who is the impostor.
 
+Multiplayer is disabled temporarily.
+
 Used in this project:</br>
   * Kotlin
   * MVVM

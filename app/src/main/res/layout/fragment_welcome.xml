@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="android.view.View"/>
+
         <variable
             name="welcomeFragment"
             type="com.puntogris.areyouarobot.ui.WelcomeFragment" />
@@ -20,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="90dp"
             android:backgroundTint="@color/colorAccent"
-            android:text="@string/prove_it"
             android:onClick="@{() -> welcomeFragment.navigateToGame()}"
+            android:text="@string/prove_it"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -30,11 +32,10 @@
             android:id="@+id/welcomeFragmentTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="144dp"
+            android:layout_marginTop="100dp"
             android:text="@string/app_name"
             android:textColor="@color/colorPrimary"
             android:textSize="34sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/robotImageView"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,13 +57,30 @@
             android:id="@+id/robotImageView"
             android:layout_width="55dp"
             android:layout_height="55dp"
+            android:visibility="@{welcomeFragment.sharedPref.showRobotAnimation() ? View.GONE : View.VISIBLE}"
+            android:contentDescription="@string/logo"
             android:src="@drawable/ic_group_15"
             app:layout_constraintBottom_toBottomOf="@+id/welcomeFragmentTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/welcomeFragmentTitle"
-            app:layout_constraintTop_toTopOf="@+id/welcomeFragmentTitle"
-            android:contentDescription="@string/logo" />
+            app:layout_constraintTop_toTopOf="@+id/welcomeFragmentTitle" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:layout_marginBottom="32dp"
+            android:visibility="@{welcomeFragment.sharedPref.showRobotAnimation() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/messageWelcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcomeFragmentTitle"
+            app:layout_constraintVertical_bias="0.57"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/robot_green" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

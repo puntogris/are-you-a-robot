@@ -8,30 +8,37 @@ import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.puntogris.areyouarobot.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        navController = findNavController(R.id.nav_host_fragment).apply {
-            bottom_navigation.setupWithNavController(this)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        appBarConfiguration = AppBarConfiguration(topLevelFragments())
 
+        navController.apply {
+            bottom_navigation.setupWithNavController(this)
             addOnDestinationChangedListener { _, destination, _ ->
                 bottomNavSelector(destination)
             }
         }
-
         main_toolbar.apply {
-            setupWithNavController(navController, AppBarConfiguration(topLevelFragments()))
             setSupportActionBar(this)
+            setupWithNavController(navController, appBarConfiguration)
         }
     }
 
@@ -44,6 +51,11 @@ class MainActivity : AppCompatActivity() {
             R.id.matchFragment,
             R.id.postMultiplayerMatchFragment
         )
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration)
+                || super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

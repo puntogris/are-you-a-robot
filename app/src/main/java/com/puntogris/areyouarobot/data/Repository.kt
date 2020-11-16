@@ -5,8 +5,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.puntogris.areyouarobot.livedata.FirestoreQueryLiveData
 import com.puntogris.areyouarobot.model.RankingEntry
+import javax.inject.Inject
 
-class Repository : IRepository{
+class Repository @Inject constructor() : IRepository{
     private val firestore = Firebase.firestore
 
     override fun saveScoreFirestore(rankingEntry: RankingEntry) {

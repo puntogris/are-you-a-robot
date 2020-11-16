@@ -6,18 +6,24 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.R
+import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.areyouarobot.databinding.FragmentWelcomeBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class WelcomeFragment : Fragment() {
+    private lateinit var binding: FragmentWelcomeBinding
+
+    @Inject
+    lateinit var sharedPref: SharedPref
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentWelcomeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_welcome,container,false)
-
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_welcome,container,false)
         binding.welcomeFragment = this
-
         return binding.root
     }
 
@@ -34,5 +40,6 @@ class WelcomeFragment : Fragment() {
     fun navigateToGame(){
         findNavController().navigate(R.id.singlePlayerGameFragment)
     }
+
 
 }

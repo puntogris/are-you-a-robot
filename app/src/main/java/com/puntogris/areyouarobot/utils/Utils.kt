@@ -22,11 +22,6 @@ object Utils {
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
     }
-    fun getPlayerName(context: Context):String{
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val defaultPlayerName = createDefaultRandomName()
-        val playerName = sharedPref!!.getString("player_name", defaultPlayerName)
-        return playerName!!
-    }
+
 
 }

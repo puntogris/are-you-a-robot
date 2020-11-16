@@ -11,9 +11,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_public_white_24dp"
         android:title="@string/rankings"/>
-    <item
-        android:id="@+id/findMatchFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_group_white_24dp"
-        android:title="@string/multiplayer"/>
+<!--    <item-->
+<!--        android:id="@+id/findMatchFragment"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_group_white_24dp"-->
+<!--        android:title="@string/multiplayer"/>-->
 </menu>

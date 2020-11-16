@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentRankingsBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class RankingsFragment : Fragment() {
+    private val viewModel: RankingsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,7 +24,6 @@ class RankingsFragment : Fragment() {
     ): View? {
         val binding: FragmentRankingsBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_rankings, container, false)
-        val viewModel: RankingsViewModel by activityViewModels()
 
         binding.recyclerViewRanking.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)

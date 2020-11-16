@@ -1,18 +1,23 @@
 package com.puntogris.areyouarobot.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.puntogris.areyouarobot.R
+import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.areyouarobot.databinding.FragmentPlayerSettingsBinding
 import com.puntogris.areyouarobot.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PlayerSettingsFragment : Fragment() {
+
+    @Inject
+    lateinit var sharedPref: SharedPref
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,17 +25,11 @@ class PlayerSettingsFragment : Fragment() {
     ): View? {
         val binding: FragmentPlayerSettingsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_player_settings, container, false)
 
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        binding.playerNameSettings.setText(Utils.getPlayerName(requireContext()))
+        binding.playerNameSettings.setText(sharedPref.getPlayerName())
 
         binding.saveSettings.setOnClickListener {
-            var input = binding.playerNameSettings.text.toString()
-            if (input.isEmpty()) input = Utils.createDefaultRandomName()
-
-            with (sharedPref.edit()) {
-                putString("player_name", input)
-                apply()
-            }
+            val input = binding.playerNameSettings.text.toString()
+            sharedPref.setPlayerName(input)
             findNavController().navigate(R.id.welcomeFragment)
         }
 
