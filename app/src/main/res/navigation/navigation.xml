@@ -10,20 +10,10 @@
         app:moduleName="multiplayer"
         android:label=" ">
         <argument
-            android:name="playerOneName"
-            app:argType="string" />
-        <argument
-            android:name="playerTwoName"
-            app:argType="string" />
-        <argument
-            android:name="playerOneScore"
-            app:argType="integer" />
-        <argument
-            android:name="playerTwoScore"
-            app:argType="integer" />
-        <argument
             android:name="playerPos"
             app:argType="string" />
+        <argument android:name="match"
+            app:argType="com.puntogris.multiplayer.model.MatchModel" />
     </fragment>
     <fragment
         android:id="@+id/matchFragment"

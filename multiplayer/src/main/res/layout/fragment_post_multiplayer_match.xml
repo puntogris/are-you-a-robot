@@ -9,7 +9,7 @@
 <!--            type="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragmentArgs" />-->
 
         <variable
-            name="postMultiplayerFragment"
+            name="fragment"
             type="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragment" />
     </data>
 
@@ -94,7 +94,7 @@
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="@+id/humanPlayerText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/playerLosser"
+            app:layout_constraintStart_toStartOf="@+id/playerLoser"
             app:layout_constraintTop_toTopOf="@+id/humanPlayerText" />
 
         <TextView
@@ -110,7 +110,7 @@
             app:layout_constraintTop_toBottomOf="@+id/humanPlayerText" />
 
         <TextView
-            android:id="@+id/playerLosser"
+            android:id="@+id/playerLoser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -128,6 +128,7 @@
             android:layout_marginBottom="92dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/share_the_results"
+            android:onClick="@{()->fragment.onShareResultsClicked()}"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/playerOneName"
             app:layout_constraintEnd_toEndOf="parent"

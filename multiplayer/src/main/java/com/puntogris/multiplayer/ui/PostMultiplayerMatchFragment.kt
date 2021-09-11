@@ -20,12 +20,43 @@ class PostMultiplayerMatchFragment :
     private val args: PostMultiplayerMatchFragmentArgs by navArgs()
 
     override fun initializeViews() {
+        binding.fragment = this
      //   binding.matchData
-        getWinner()
+        updateWinnerUi()
+    }
 
+    private fun updateWinnerUi() {
+        with(binding){
+            when(val match = args.match) {
+                match.playerOneWon() -> {
+                    playerWinner.text = match.playerOneName
+                    playerLoser.text = match.playerTwoName
+                }
+                match.playerTwoWon() -> {
+                    playerWinner.text = match.playerTwoName
+                    playerLoser.text = match.playerOneName
+                }
+                match.draw() -> {
+                    robotPlayerText.gone()
+                    playerWinner.gone()
+                    playerLoser.gone()
+                    humanPlayerText.gone()
+                    drawResult.visible()
+                }
+            }
+        }
+    }
+
+    fun onShareResultsClicked(){
         binding.shareResults.setOnClickListener {
-            val shareText = "I just played a game in Are you a robot where, ${args.playerOneName} scored a ${args.playerOneScore} and ${args.playerTwoName} scored a ${args.playerTwoScore}."
+            val shareText = getString(
+                R.string.share_match_text,
+                args.match.playerOneName,
+                args.match.playerOneScore,
+                args.match.playerTwoName,
+                args.match.playerTwoScore
 
+            )
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, shareText)
@@ -34,26 +65,6 @@ class PostMultiplayerMatchFragment :
 
             val shareIntent = Intent.createChooser(sendIntent, shareText)
             startActivity(shareIntent)
-        }
-    }
-
-    private fun getWinner() {
-        when {
-            args.playerOneScore > args.playerTwoScore -> {
-                binding.playerWinner.text = args.playerOneName
-                binding.playerLosser.text = args.playerTwoName
-            }
-            args.playerOneScore < args.playerTwoScore -> {
-                binding.playerWinner.text = args.playerTwoName
-                binding.playerLosser.text = args.playerOneName
-            }
-            else -> {
-                binding.robotPlayerText.gone()
-                binding.playerWinner.gone()
-                binding.playerLosser.gone()
-                binding.humanPlayerText.gone()
-                binding.drawResult.visible()
-            }
         }
     }
 

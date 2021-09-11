@@ -10,4 +10,8 @@ object Constants {
     const val PLAYER_FIELD = "player"
     const val START_MATCHMAKING_FUNCTION = "startMatchmaking"
     const val UNSUBSCRIBE_TO_MATCH_FUNCTION = "unsubscribeToMatch"
+
+    //Preferences
+    const val PLAYER_NAME_PREF = "player_name"
+
 }

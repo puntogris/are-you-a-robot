@@ -1,7 +1,7 @@
 package com.puntogris.multiplayer.data
 
 import com.google.firebase.firestore.DocumentSnapshot
-import com.puntogris.areyouarobot.data.DocumentSnapshotDeserializer
+import com.puntogris.areyouarobot.data.deserializer.DocumentSnapshotDeserializer
 import com.puntogris.multiplayer.model.MatchModel
 
 internal object MatchDeserializer: DocumentSnapshotDeserializer<MatchModel> {

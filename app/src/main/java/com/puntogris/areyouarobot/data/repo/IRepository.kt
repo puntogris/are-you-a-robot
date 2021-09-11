@@ -1,4 +1,4 @@
-package com.puntogris.areyouarobot.data
+package com.puntogris.areyouarobot.data.repo
 
 import com.puntogris.areyouarobot.livedata.FirestoreQueryLiveData
 import com.puntogris.areyouarobot.model.RankingEntry

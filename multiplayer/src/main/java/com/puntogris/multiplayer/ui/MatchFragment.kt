@@ -8,6 +8,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.areyouarobot.utils.Utils
+import com.puntogris.areyouarobot.utils.gone
+import com.puntogris.areyouarobot.utils.visible
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentMatchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,31 +53,26 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
     private fun guessTime(){
         binding.apply {
             guessEditText.setText("")
-            lettersTextView.visibility = View.GONE
-            progressBar.visibility = View.VISIBLE
-            guessEditText.visibility = View.VISIBLE
+            lettersTextView.gone()
+            progressBar.visible()
+            guessEditText.visible()
         }
     }
 
     private fun showLetters(){
         binding.apply {
-            lettersTextView.visibility = View.VISIBLE
-            progressBar.visibility = View.GONE
-            guessEditText.visibility = View.GONE
+            lettersTextView.visible()
+            progressBar.gone()
+            guessEditText.gone()
         }
     }
 
     private fun navigateToPostGameFragment(){
         viewModel.gameEnded()
-        val matchInfo = viewModel.matchInfo.value
         val action = MatchFragmentDirections.actionMatchFragmentToPostMultiplayerMatchFragment(
-                matchInfo!!.playerOneName,
-                matchInfo.playerTwoName,
-                matchInfo.playerOneScore,
-                matchInfo.playerTwoScore,
-                args.playerPos
-            )
-
+            args.playerPos,
+            viewModel.matchInfo.value
+        )
         findNavController().navigate(action)
     }
 

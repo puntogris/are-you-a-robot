@@ -2,7 +2,7 @@ package com.puntogris.areyouarobot.ui.game
 
 import androidx.lifecycle.ViewModel
 import com.puntogris.areyouarobot.SharedPref
-import com.puntogris.areyouarobot.data.Repository
+import com.puntogris.areyouarobot.data.repo.Repository
 import com.puntogris.areyouarobot.model.RankingEntry
 import com.puntogris.areyouarobot.utils.SimpleResult
 import dagger.hilt.android.lifecycle.HiltViewModel

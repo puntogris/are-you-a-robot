@@ -1,4 +1,4 @@
-package com.puntogris.areyouarobot.data
+package com.puntogris.areyouarobot.data.repo
 
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -13,7 +13,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class Repository @Inject constructor() : IRepository{
+class Repository @Inject constructor() : IRepository {
 
     private val firestore = Firebase.firestore
 

@@ -3,7 +3,7 @@ package com.puntogris.areyouarobot.ui.ranking
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.puntogris.areyouarobot.data.FirestoreQueryRankingEntryTransformation
-import com.puntogris.areyouarobot.data.Repository
+import com.puntogris.areyouarobot.data.repo.Repository
 import com.puntogris.areyouarobot.diffcallback.QueryItem
 import com.puntogris.areyouarobot.model.RankingEntry
 import dagger.hilt.android.lifecycle.HiltViewModel

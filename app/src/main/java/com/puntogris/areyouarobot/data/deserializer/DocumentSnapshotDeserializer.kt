@@ -1,4 +1,4 @@
-package com.puntogris.areyouarobot.data
+package com.puntogris.areyouarobot.data.deserializer
 
 import com.google.firebase.firestore.DocumentSnapshot
 

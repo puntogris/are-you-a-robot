@@ -21,6 +21,7 @@
     <string name="you_lost">You lost</string>
     <string name="try_again_robot">Nice try robot..</string>
     <string name="multiplayer" translatable="false">Multiplayer</string>
+    <string name="share_match_text">I just played a game in Are you a robot where, %1$s scored a %2$d and %3$s scored a %4$d.</string>
 
     <!-- Save score-->
     <string name="snack_save_score_success">Score saved Successfully</string>
