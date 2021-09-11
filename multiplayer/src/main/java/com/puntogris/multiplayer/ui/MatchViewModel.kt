@@ -6,13 +6,16 @@ import com.puntogris.multiplayer.data.MatchDeserializer
 import com.puntogris.multiplayer.data.MatchRepository
 import com.puntogris.multiplayer.model.MatchModel
 import com.puntogris.multiplayer.utils.plusOne
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 import kotlin.concurrent.scheduleAtFixedRate
 
-class MatchViewModel : ViewModel(){
+@HiltViewModel
+class MatchViewModel @Inject constructor(): ViewModel(){
 
     private val repo = MatchRepository()
     private var timerJob : Job? = null
@@ -56,7 +59,7 @@ class MatchViewModel : ViewModel(){
         }
 
     fun getMatchData(matchId:String): LiveData<MatchModel> {
-        val data = repo.getMatchDataFirstore(matchId)
+        val data = repo.getMatchDataFirestore(matchId)
         return Transformations.map(data){ snap ->
             MatchDeserializer.deserialize(snap).also { _matchInfo.value = it }
         }

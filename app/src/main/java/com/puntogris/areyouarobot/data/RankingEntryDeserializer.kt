@@ -2,11 +2,14 @@ package com.puntogris.areyouarobot.data
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.puntogris.areyouarobot.model.RankingEntry
+import com.puntogris.areyouarobot.utils.Constants.PLAYER_NAME_FIELD
+import com.puntogris.areyouarobot.utils.Constants.SCORE_FIELD
 
-internal object RankingEntryDeserializer: DocumentSnapshotDeserializer<RankingEntry>{
+object RankingEntryDeserializer: DocumentSnapshotDeserializer<RankingEntry>{
+
     override fun deserialize(input: DocumentSnapshot?): RankingEntry {
-        val score = input?.get("score").toString().toInt()
-        val playerName = input?.get("playerName").toString()
+        val score = input?.get(SCORE_FIELD).toString().toIntOrNull() ?: 0
+        val playerName = input?.get(PLAYER_NAME_FIELD).toString()
         return RankingEntry(score, playerName)
     }
 }

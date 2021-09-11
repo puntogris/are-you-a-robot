@@ -1,8 +1,7 @@
-package com.puntogris.areyouarobot.di
+package com.puntogris.areyouarobot
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class App: Application() {
-}
+class App: Application()

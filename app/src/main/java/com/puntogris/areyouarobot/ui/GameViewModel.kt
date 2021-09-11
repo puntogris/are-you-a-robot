@@ -5,11 +5,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import java.util.*
+import javax.inject.Inject
 import kotlin.concurrent.scheduleAtFixedRate
 
-class GameViewModel :ViewModel(){
+@HiltViewModel
+class GameViewModel @Inject constructor() :ViewModel(){
+
     private var timerJob :Job? = null
     private var globalTimer:TimerTask? = null
 

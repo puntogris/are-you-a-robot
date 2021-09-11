@@ -14,6 +14,6 @@ internal object MatchDeserializer: DocumentSnapshotDeserializer<MatchModel> {
         val playerOneScore = playerOne["score"].toString().toInt()
         val playerTwoScore = playerTwo["score"].toString().toInt()
 
-        return MatchModel(playerOneName,playerTwoName,playerOneScore,playerTwoScore)
+        return MatchModel(playerOneName, playerTwoName, playerOneScore, playerTwoScore)
     }
 }

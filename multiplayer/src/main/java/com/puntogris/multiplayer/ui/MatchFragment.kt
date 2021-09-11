@@ -9,50 +9,47 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.areyouarobot.utils.Utils
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentMatchBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_post_multiplayer_match.*
 
-class MatchFragment : Fragment() {
+@AndroidEntryPoint
+class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match) {
+
     private val viewModel: MatchViewModel by activityViewModels()
-    private val args:MatchFragmentArgs by navArgs()
-    private lateinit var binding: FragmentMatchBinding
+    private val args: MatchFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_match, container, false)
-
+    override fun initializeViews() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.matchViewModel = viewModel
 
-        viewModel.apply {
+        with(viewModel) {
+
             initializeGame(args.matchId, args.playerPos)
             listenToTextChanged()
 
-            isTimeToGuess.observe(viewLifecycleOwner, Observer { guessTime ->
+            isTimeToGuess.observe(viewLifecycleOwner) { guessTime ->
                 if (guessTime) {
                     guessTime()
                     Utils.showSoftKeyboard(binding.guessEditText,requireActivity())
                 } else showLetters()
-            })
+            }
 
-            getMatchData(args.matchId).observe(viewLifecycleOwner, Observer { match ->
+            getMatchData(args.matchId).observe(viewLifecycleOwner){ match ->
                 binding.match = match
-            })
+            }
 
-            isTimeToGuess.observe(viewLifecycleOwner, Observer { guessTime ->
+            isTimeToGuess.observe(viewLifecycleOwner) { guessTime ->
                 if (guessTime) guessTime() else showLetters()
-            })
+            }
 
-            gameEnded.observe(viewLifecycleOwner, Observer { gameEnded ->
+            gameEnded.observe(viewLifecycleOwner){ gameEnded ->
                 if (gameEnded) navigateToPostGameFragment()
-            })
+            }
         }
-
-        return binding.root
     }
 
     private fun guessTime(){

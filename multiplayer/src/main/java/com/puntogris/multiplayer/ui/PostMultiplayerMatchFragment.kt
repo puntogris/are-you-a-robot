@@ -6,20 +6,19 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentPostMultiplayerMatchBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class PostMultiplayerMatchFragment : Fragment() {
+@AndroidEntryPoint
+class PostMultiplayerMatchFragment :
+    BaseFragment<FragmentPostMultiplayerMatchBinding>(R.layout.fragment_post_multiplayer_match) {
+
     private val args:PostMultiplayerMatchFragmentArgs by navArgs()
-    private lateinit var binding: FragmentPostMultiplayerMatchBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_post_multiplayer_match, container,false)
-
-        binding.args = args
+    override fun initializeViews() {
+        binding.matchData = args
         getWinner()
 
         binding.shareResults.setOnClickListener {
@@ -34,8 +33,6 @@ class PostMultiplayerMatchFragment : Fragment() {
             val shareIntent = Intent.createChooser(sendIntent, shareText)
             startActivity(shareIntent)
         }
-
-        return binding.root
     }
 
     private fun getWinner() {

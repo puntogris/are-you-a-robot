@@ -8,7 +8,7 @@ open class ItemCallback<T> : DiffUtil.ItemCallback<QueryItem<T>>() {
         return oldItem.id == newItem.id
     }
 
-    @SuppressLint("DiffUtilEquals")  // equals() is OK for data classes
+    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: QueryItem<T>, newItem: QueryItem<T>): Boolean {
         return oldItem.item == newItem.item
     }

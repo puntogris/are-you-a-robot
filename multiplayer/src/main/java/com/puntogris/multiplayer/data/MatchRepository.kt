@@ -29,7 +29,7 @@ class MatchRepository :IMatchRepository{
             .await()
     }
 
-    override fun getMatchDataFirstore(matchId: String): FirestoreDocumentLiveData {
+    override fun getMatchDataFirestore(matchId: String): FirestoreDocumentLiveData {
         val ref = firestore.collection("matches").document(matchId)
         return FirestoreDocumentLiveData(ref)
     }

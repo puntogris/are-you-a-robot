@@ -1,20 +1,19 @@
-package com.puntogris.areyouarobot.ui
+package com.puntogris.areyouarobot.ui.ranking
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.puntogris.areyouarobot.data.FirestoreQueryRankingEntryTransformation
 import com.puntogris.areyouarobot.data.Repository
 import com.puntogris.areyouarobot.diffcallback.QueryItem
 import com.puntogris.areyouarobot.model.RankingEntry
-import dagger.hilt.EntryPoint
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-class RankingsViewModel @ViewModelInject constructor(private val repo:Repository) : ViewModel(){
+@HiltViewModel
+class RankingsViewModel @Inject constructor(private val repository: Repository) : ViewModel(){
 
-    fun getRanking(): LiveData<List<QueryItem<RankingEntry>>> {
-        val data = repo.getRankingFirestore()
+    fun getRankings(): LiveData<List<QueryItem<RankingEntry>>> {
+        val data = repository.getRankingFirestore()
         return FirestoreQueryRankingEntryTransformation.transform(data)
     }
 }

@@ -3,7 +3,6 @@ package com.puntogris.areyouarobot.livedata
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.*
 
-
 class FirestoreQueryLiveData(private val query: Query)
     : MutableLiveData<List<DocumentSnapshot?>>(), EventListener<QuerySnapshot>{
 

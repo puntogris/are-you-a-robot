@@ -10,36 +10,30 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentSinglePlayerGameBinding
+import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.areyouarobot.utils.Utils
 
-class SinglePlayerGameFragment : Fragment() {
+class SinglePlayerGameFragment :
+    BaseFragment<FragmentSinglePlayerGameBinding>(R.layout.fragment_single_player_game) {
 
-    private lateinit var binding: FragmentSinglePlayerGameBinding
     private val viewModel: GameViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_single_player_game,container,false)
-
+    override fun initializeViews() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.gameViewModel = viewModel
 
         viewModel.apply {
             initializeGame()
             listenToTextChanged()
-            isTimeToGuess.observe(viewLifecycleOwner, Observer { guessTime ->
+            isTimeToGuess.observe(viewLifecycleOwner) { guessTime ->
                 if (guessTime) {
                     guessTime()
                     Utils.showSoftKeyboard(binding.guessEditText, requireActivity())} else showLetters()
-            })
-            didPlayerLose.observe(viewLifecycleOwner, Observer { playerLost ->
+            }
+            didPlayerLose.observe(viewLifecycleOwner) { playerLost ->
                 if (playerLost) navigateToPostGame()
-            })
+            }
         }
-
-        return binding.root
     }
 
     private fun listenToTextChanged(){

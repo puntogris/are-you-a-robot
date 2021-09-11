@@ -8,23 +8,17 @@ import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.areyouarobot.databinding.FragmentWelcomeBinding
+import com.puntogris.areyouarobot.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class WelcomeFragment : Fragment() {
-    private lateinit var binding: FragmentWelcomeBinding
+class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_welcome) {
 
-    @Inject
-    lateinit var sharedPref: SharedPref
+    @Inject lateinit var sharedPref: SharedPref
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_welcome,container,false)
-        binding.welcomeFragment = this
-        return binding.root
+    override fun initializeViews() {
+        binding.fragment = this
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +34,5 @@ class WelcomeFragment : Fragment() {
     fun navigateToGame(){
         findNavController().navigate(R.id.singlePlayerGameFragment)
     }
-
-
+    
 }
