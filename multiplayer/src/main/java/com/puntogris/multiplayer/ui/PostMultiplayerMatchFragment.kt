@@ -7,6 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.puntogris.areyouarobot.ui.base.BaseFragment
+import com.puntogris.areyouarobot.utils.gone
+import com.puntogris.areyouarobot.utils.visible
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentPostMultiplayerMatchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,10 +17,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class PostMultiplayerMatchFragment :
     BaseFragment<FragmentPostMultiplayerMatchBinding>(R.layout.fragment_post_multiplayer_match) {
 
-    private val args:PostMultiplayerMatchFragmentArgs by navArgs()
+    private val args: PostMultiplayerMatchFragmentArgs by navArgs()
 
     override fun initializeViews() {
-        binding.matchData = args
+     //   binding.matchData
         getWinner()
 
         binding.shareResults.setOnClickListener {
@@ -46,11 +48,11 @@ class PostMultiplayerMatchFragment :
                 binding.playerLosser.text = args.playerOneName
             }
             else -> {
-                binding.robotPlayerText.visibility = View.GONE
-                binding.playerWinner.visibility = View.GONE
-                binding.playerLosser.visibility = View.GONE
-                binding.humanPlayerText.visibility = View.GONE
-                binding.drawResult.visibility = View.VISIBLE
+                binding.robotPlayerText.gone()
+                binding.playerWinner.gone()
+                binding.playerLosser.gone()
+                binding.humanPlayerText.gone()
+                binding.drawResult.visible()
             }
         }
     }

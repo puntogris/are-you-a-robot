@@ -16,7 +16,6 @@ import com.puntogris.areyouarobot.utils.getNavController
 import com.puntogris.areyouarobot.utils.gone
 import com.puntogris.areyouarobot.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -27,7 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun initializeViews() {
         setupNavigation()
 
-        main_toolbar.apply {
+        binding.mainToolbar.apply {
             setSupportActionBar(this)
             setupWithNavController(navController, appBarConfiguration)
         }
@@ -37,7 +36,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navController = getNavController()
         appBarConfiguration = getAppBarConfiguration()
         navController.addOnDestinationChangedListener(this@MainActivity)
-        bottom_navigation.setupWithNavController(navController)
+        binding.bottomNavigation.setupWithNavController(navController)
     }
 
     private fun getAppBarConfiguration(): AppBarConfiguration{
@@ -66,16 +65,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             R.id.singlePlayerGameFragment,
             R.id.playerSettingsFragment,
             R.id.matchFragment -> {
-                main_toolbar.visible()
-                bottom_navigation.gone()
+                binding.mainToolbar.visible()
+                binding.bottomNavigation.gone()
             }
             R.id.rankingsFragment, R.id.postGameFragment -> {
-                main_toolbar.gone()
-                bottom_navigation.visible()
+                binding.mainToolbar.gone()
+                binding.bottomNavigation.visible()
             }
             else -> {
-                main_toolbar.visible()
-                bottom_navigation.visible()
+                binding.mainToolbar.visible()
+                binding.bottomNavigation.visible()
             }
         }
     }

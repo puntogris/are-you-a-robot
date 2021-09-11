@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id "androidx.navigation.safeargs.kotlin"
     id 'com.google.gms.google-services'
@@ -10,7 +9,6 @@ plugins {
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.puntogris.areyouarobot"
@@ -106,9 +104,9 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
     //Hilt
-    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    api "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
-    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    api 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
 
 }

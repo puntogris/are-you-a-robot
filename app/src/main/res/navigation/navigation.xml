@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.puntogris.areyouarobot.ui.WelcomeFragment"
+        android:name="com.puntogris.areyouarobot.ui.main.WelcomeFragment"
         android:label=" " >
         <action
             android:id="@+id/action_welcomeFragment_to_playerSettingsFragment"
@@ -65,7 +65,7 @@
         android:label=" " />
     <fragment
         android:id="@+id/singlePlayerGameFragment"
-        android:name="com.puntogris.areyouarobot.ui.SinglePlayerGameFragment"
+        android:name="com.puntogris.areyouarobot.ui.game.SinglePlayerGameFragment"
         android:label=" " >
         <action
             android:id="@+id/action_singlePlayerGameFragment_to_postGameFragment"
@@ -74,15 +74,24 @@
             app:popUpToInclusive="false" />
     </fragment>
     <dialog
-        android:id="@+id/customDialog"
-        android:name="com.puntogris.areyouarobot.ui.CustomDialog"
-        android:label=" " />
+        android:id="@+id/saveRankingDialog"
+        android:name="com.puntogris.areyouarobot.ui.game.SaveRankingDialog"
+        android:label=" " >
+        <argument
+            android:name="score"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </dialog>
     <fragment
         android:id="@+id/postGameFragment"
-        android:name="com.puntogris.areyouarobot.ui.PostGameFragment"
-        android:label=" " />
+        android:name="com.puntogris.areyouarobot.ui.game.PostGameFragment"
+        android:label=" " >
+        <action
+            android:id="@+id/action_postGameFragment_to_saveRankingDialog"
+            app:destination="@id/saveRankingDialog" />
+    </fragment>
     <fragment
         android:id="@+id/playerSettingsFragment"
-        android:name="com.puntogris.areyouarobot.ui.PlayerSettingsFragment"
+        android:name="com.puntogris.areyouarobot.ui.settings.PlayerSettingsFragment"
         android:label=" " />
 </navigation>

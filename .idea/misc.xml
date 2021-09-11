@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/dialog_custom.xml" value="0.35052083333333334" />
+        <entry key="app/src/main/res/layout/fragment_player_settings.xml" value="0.35052083333333334" />
+        <entry key="app/src/main/res/layout/fragment_post_game.xml" value="0.35052083333333334" />
+        <entry key="app/src/main/res/layout/fragment_rankings.xml" value="0.35052083333333334" />
+        <entry key="app/src/main/res/layout/fragment_single_player_game.xml" value="0.35052083333333334" />
+        <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.35052083333333334" />
+        <entry key="app/src/main/res/layout/ranking_entry.xml" value="0.35052083333333334" />
+        <entry key="multiplayer/src/main/res/layout/fragment_post_multiplayer_match.xml" value="0.35052083333333334" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

@@ -1,4 +1,4 @@
-package com.puntogris.areyouarobot.ui
+package com.puntogris.areyouarobot.ui.game
 
 import android.os.CountDownTimer
 import androidx.lifecycle.LiveData

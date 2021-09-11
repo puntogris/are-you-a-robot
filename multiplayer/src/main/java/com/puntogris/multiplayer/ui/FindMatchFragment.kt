@@ -1,12 +1,12 @@
 package com.puntogris.multiplayer.ui
 
-import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.areyouarobot.ui.base.BaseFragment
+import com.puntogris.areyouarobot.utils.gone
+import com.puntogris.areyouarobot.utils.visible
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentFindMatchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,12 +17,13 @@ import javax.inject.Inject
 class FindMatchFragment : BaseFragment<FragmentFindMatchBinding>(R.layout.fragment_find_match) {
 
     private val viewModel: FindMatchViewModel by activityViewModels()
+
     @Inject
     lateinit var sharedPref: SharedPref
 
     override fun initializeViews() {
-        val playerName = sharedPref.getPlayerName()
-        viewModel.setPlayerName(playerName)
+
+        viewModel.setPlayerName(sharedPref.getPlayerName())
         searchButtonListener()
         cancelSearchButtonListener()
     }
@@ -31,15 +32,15 @@ class FindMatchFragment : BaseFragment<FragmentFindMatchBinding>(R.layout.fragme
         binding.apply {
             searchMatch.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    viewModel.startMatchmaking().observe(viewLifecycleOwner, Observer { matchRoom ->
+                    viewModel.startMatchmaking().observe(viewLifecycleOwner) { matchRoom ->
                         if (matchRoom.full){
-                            val action = FindMatchFragmentDirections.actionFindMatchFragmentToMatchFragment(matchRoom.id,matchRoom.playerPos)
+                            val action = FindMatchFragmentDirections.actionFindMatchFragmentToMatchFragment(matchRoom.id, matchRoom.playerPos)
                             findNavController().navigate(action)}
-                    })
+                    }
                 }
-                searchMatch.visibility = View.GONE
-                cancelSearch.visibility = View.VISIBLE
-                searchMatchProgressBar.visibility = View.VISIBLE
+                searchMatch.gone()
+                cancelSearch.visible()
+                searchMatchProgressBar.visible()
             }
         }
     }
@@ -48,9 +49,9 @@ class FindMatchFragment : BaseFragment<FragmentFindMatchBinding>(R.layout.fragme
         binding.apply {
             cancelSearch.setOnClickListener {
                 viewModel.unsubscribeToMatch()
-                searchMatch.visibility = View.VISIBLE
-                cancelSearch.visibility = View.GONE
-                searchMatchProgressBar.visibility = View.GONE
+                searchMatch.visible()
+                cancelSearch.gone()
+                searchMatchProgressBar.gone()
             }
         }
     }

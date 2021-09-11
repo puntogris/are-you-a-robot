@@ -7,16 +7,27 @@ import com.puntogris.areyouarobot.livedata.FirestoreQueryLiveData
 import com.puntogris.areyouarobot.model.RankingEntry
 import com.puntogris.areyouarobot.utils.Constants.RANKINGS_COLLECTION
 import com.puntogris.areyouarobot.utils.Constants.SCORE_FIELD
+import com.puntogris.areyouarobot.utils.SimpleResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class Repository @Inject constructor() : IRepository{
 
     private val firestore = Firebase.firestore
 
-    override fun saveScoreFirestore(rankingEntry: RankingEntry) {
-        firestore
-            .collection(RANKINGS_COLLECTION)
-            .add(rankingEntry)
+    override suspend fun saveScoreFirestore(rankingEntry: RankingEntry): SimpleResult = withContext(Dispatchers.IO){
+        try {
+            firestore
+                .collection(RANKINGS_COLLECTION)
+                .add(rankingEntry)
+                .await()
+
+            SimpleResult.Success
+        }catch (e:Exception){
+            SimpleResult.Failure
+        }
     }
 
     override fun getRankingFirestore(): FirestoreQueryLiveData {

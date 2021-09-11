@@ -4,9 +4,9 @@
 
     <data>
 
-        <variable
-            name="matchData"
-            type="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragmentArgs" />
+<!--        <variable-->
+<!--            name="matchData"-->
+<!--            type="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragmentArgs" />-->
 
         <variable
             name="postMultiplayerFragment"
@@ -36,7 +36,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="60dp"
-            android:text="@{args.playerOneName}"
             android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +47,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{String.valueOf(args.playerOneScore)}"
             android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{String.valueOf(args.playerTwoScore)}"
             android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +68,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="@{String.valueOf(args.playerTwoName)}"
             android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"

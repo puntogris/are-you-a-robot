@@ -1,18 +1,19 @@
-package com.puntogris.areyouarobot.ui
+package com.puntogris.areyouarobot.ui.game
 
 import android.os.Bundle
 import android.view.*
 import androidx.core.widget.doOnTextChanged
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentSinglePlayerGameBinding
 import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.areyouarobot.utils.Utils
+import com.puntogris.areyouarobot.utils.gone
+import com.puntogris.areyouarobot.utils.visible
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SinglePlayerGameFragment :
     BaseFragment<FragmentSinglePlayerGameBinding>(R.layout.fragment_single_player_game) {
 
@@ -20,9 +21,10 @@ class SinglePlayerGameFragment :
 
     override fun initializeViews() {
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.gameViewModel = viewModel
+        binding.viewModel = viewModel
 
-        viewModel.apply {
+        with(viewModel) {
+
             initializeGame()
             listenToTextChanged()
             isTimeToGuess.observe(viewLifecycleOwner) { guessTime ->
@@ -47,15 +49,15 @@ class SinglePlayerGameFragment :
     private fun guessTime(){
         binding.apply {
             guessEditText.setText("")
-            lettersTextView.visibility = View.GONE
-            guessEditText.visibility = View.VISIBLE
+            lettersTextView.gone()
+            guessEditText.visible()
         }
     }
 
     private fun showLetters(){
         binding.apply {
-            lettersTextView.visibility = View.VISIBLE
-            guessEditText.visibility = View.GONE
+            lettersTextView.visible()
+            guessEditText.gone()
         }
     }
 

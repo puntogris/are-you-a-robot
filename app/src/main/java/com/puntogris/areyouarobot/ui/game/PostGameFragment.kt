@@ -1,11 +1,13 @@
-package com.puntogris.areyouarobot.ui
+package com.puntogris.areyouarobot.ui.game
 
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentPostGameBinding
 import com.puntogris.areyouarobot.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PostGameFragment : BaseFragment<FragmentPostGameBinding>(R.layout.fragment_post_game) {
 
     private val viewModel: GameViewModel by activityViewModels()
@@ -18,8 +20,8 @@ class PostGameFragment : BaseFragment<FragmentPostGameBinding>(R.layout.fragment
     }
 
     fun openSaveRankingDialog(){
-        val dialog = CustomDialog(viewModel.score.value!!)
-        dialog.show(requireActivity().supportFragmentManager, "ranking dialog")
+        val action = PostGameFragmentDirections.actionPostGameFragmentToSaveRankingDialog(viewModel.score.value!!)
+        findNavController().navigate(action)
     }
 
     fun playAgain(){

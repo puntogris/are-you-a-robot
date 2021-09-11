@@ -9,7 +9,8 @@
     <string name="you_lost">You lost</string>
     <string name="try_again_robot">Nice try robot..</string>
     <string name="multiplayer" translatable="false">Multiplayer</string>
-    <string name="scored_savec_successfully">Score saved Successfully</string>
+    <string name="snack_save_score_success">Score saved Successfully</string>
+    <string name="snack_save_score_error">An error occurred saving the score</string>
     <string name="save">save</string>
     <string name="cancel">cancel</string>
     <string name="save_score">save score in the ranking</string>

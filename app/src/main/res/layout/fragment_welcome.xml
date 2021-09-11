@@ -7,14 +7,14 @@
 
         <variable
             name="fragment"
-            type="com.puntogris.areyouarobot.ui.WelcomeFragment" />
+            type="com.puntogris.areyouarobot.ui.main.WelcomeFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        tools:context=".ui.WelcomeFragment">
+        tools:context=".ui.main.WelcomeFragment">
 
         <Button
             android:id="@+id/welcomeFragmentPlayButton"

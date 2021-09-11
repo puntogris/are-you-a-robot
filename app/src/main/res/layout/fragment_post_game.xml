@@ -5,17 +5,17 @@
     <data>
         <variable
             name="gameFragment"
-            type="com.puntogris.areyouarobot.ui.PostGameFragment" />
+            type="com.puntogris.areyouarobot.ui.game.PostGameFragment" />
         <variable
             name="gameViewModel"
-            type="com.puntogris.areyouarobot.ui.GameViewModel" />
+            type="com.puntogris.areyouarobot.ui.game.GameViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        tools:context=".ui.PostGameFragment">
+        tools:context=".ui.game.PostGameFragment">
 
         <Button
             android:id="@+id/tryAgainButtonPostGame"

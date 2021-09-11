@@ -3,10 +3,7 @@ package com.puntogris.multiplayer.ui
 import android.os.Bundle
 import android.view.*
 import androidx.core.widget.doOnTextChanged
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.puntogris.areyouarobot.ui.base.BaseFragment
@@ -14,7 +11,6 @@ import com.puntogris.areyouarobot.utils.Utils
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentMatchBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_post_multiplayer_match.*
 
 @AndroidEntryPoint
 class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match) {
@@ -72,8 +68,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
     private fun navigateToPostGameFragment(){
         viewModel.gameEnded()
         val matchInfo = viewModel.matchInfo.value
-        val action = MatchFragmentDirections
-            .actionMatchFragmentToPostMultiplayerMatchFragment(
+        val action = MatchFragmentDirections.actionMatchFragmentToPostMultiplayerMatchFragment(
                 matchInfo!!.playerOneName,
                 matchInfo.playerTwoName,
                 matchInfo.playerOneScore,

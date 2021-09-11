@@ -11,7 +11,7 @@ class RankingViewHolder constructor(private val binding: RankingEntryBinding): R
 
     fun bind(item: QueryItem<RankingEntry>){
         binding.entry = item.item
-        binding.entryNumberIndex = item.id.toInt() +1
+        binding.entryNumberIndex = item.id.toInt() + 1
     }
 
     companion object{

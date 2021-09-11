@@ -1,9 +1,8 @@
-package com.puntogris.areyouarobot.ui
+package com.puntogris.areyouarobot.ui.main
 
 import android.os.Bundle
-import android.view.*
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import android.view.Menu
+import android.view.MenuInflater
 import androidx.navigation.fragment.findNavController
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.SharedPref
@@ -34,5 +33,5 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_w
     fun navigateToGame(){
         findNavController().navigate(R.id.singlePlayerGameFragment)
     }
-    
+
 }

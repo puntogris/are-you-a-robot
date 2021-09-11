@@ -9,7 +9,8 @@
     <string name="try_again">Intenta de nuevo</string>
     <string name="you_lost">Perdiste</string>
     <string name="try_again_robot">Buen intento robot..</string>
-    <string name="scored_savec_successfully">Puntaje guardado correctamente</string>
+    <string name="snack_save_score_success">Puntaje guardado correctamente</string>
+    <string name="snack_save_score_error">Error al guardar el puntaje</string>
     <string name="save">guardar</string>
     <string name="cancel">cancelar</string>
     <string name="save_score">guardar puntaje en el ranking</string>
