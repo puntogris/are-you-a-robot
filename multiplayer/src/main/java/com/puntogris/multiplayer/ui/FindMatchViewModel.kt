@@ -1,9 +1,7 @@
 package com.puntogris.multiplayer.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.multiplayer.data.MatchRepository
 import com.puntogris.multiplayer.model.JoinedMatchInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,14 +11,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FindMatchViewModel @Inject constructor(
-    private val matchRepository: MatchRepository
+    private val matchRepository: MatchRepository,
+    sharedPref: SharedPref
 ): ViewModel(){
 
-    private var playerName:String = ""
+    private val _isSearching = MutableLiveData(false)
+    val isSearching: LiveData<Boolean> = _isSearching
 
-    fun setPlayerName(name:String){
-        playerName = name
+    fun toggleQueueState(){
+        _isSearching.value = !_isSearching.value!!
     }
+
+    private val playerName = sharedPref.getPlayerName()
 
     suspend fun startMatchmaking(): LiveData<JoinedMatchInfo> {
         val data = matchRepository.getMatchFirestore(playerName)
@@ -30,25 +32,13 @@ class FindMatchViewModel @Inject constructor(
             val playerOne = it?.get("playerOne") as? HashMap<*, *>
             val playerPos = getPlayerPosition(playerOne?.get("name").toString())
             JoinedMatchInfo(matchId, full, playerPos)
-
         }
     }
 
-    fun unsubscribeToMatch(){
-        viewModelScope.launch {
-            try {
-                matchRepository.unsubscribeToMatchFirestore(playerName)
-            }catch (e: Exception){
-                //manage error
-            }
-        }
-    }
+    suspend fun unsubscribeToMatchDatabase() = matchRepository.unsubscribeToMatchFirestore(playerName)
 
-    private fun getPlayerPosition(player:String):String{
-        return if (player == playerName){
-            "playerOne"
-        }else "playerTwo"
-    }
+    private fun getPlayerPosition(player: String) =
+        if (player == playerName) "playerOne" else "playerTwo"
 
 }
 

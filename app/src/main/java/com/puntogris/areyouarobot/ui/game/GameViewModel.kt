@@ -12,7 +12,7 @@ import javax.inject.Inject
 import kotlin.concurrent.scheduleAtFixedRate
 
 @HiltViewModel
-class GameViewModel @Inject constructor() :ViewModel(){
+class GameViewModel @Inject constructor(): ViewModel(){
 
     private var timerJob :Job? = null
     private var globalTimer:TimerTask? = null

@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/layout/fragment_single_player_game.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout/ranking_entry.xml" value="0.35052083333333334" />
+        <entry key="multiplayer/src/main/res/layout/fragment_find_match.xml" value="0.35052083333333334" />
         <entry key="multiplayer/src/main/res/layout/fragment_post_multiplayer_match.xml" value="0.35052083333333334" />
       </map>
     </option>

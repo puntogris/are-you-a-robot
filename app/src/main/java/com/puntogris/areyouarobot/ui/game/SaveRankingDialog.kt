@@ -11,28 +11,27 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.puntogris.areyouarobot.R
-import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.areyouarobot.databinding.SaveRankingDialogBinding
 import com.puntogris.areyouarobot.utils.SimpleResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SaveRankingDialog: DialogFragment() {
 
     private val args: SaveRankingDialogArgs by navArgs()
     private val viewModel: SaveRankingViewModel by viewModels()
-    @Inject lateinit var sharedPref: SharedPref
     private lateinit var binding: SaveRankingDialogBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.save_ranking_dialog, null, false)
 
+        binding.username.setText(viewModel.currentUsername)
+
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
-            .setPositiveButton(R.string.save, null)
+            .setPositiveButton(R.string.action_save, null)
             .setNegativeButton(android.R.string.cancel) { _, _ -> dismiss() }
             .create()
             .also {

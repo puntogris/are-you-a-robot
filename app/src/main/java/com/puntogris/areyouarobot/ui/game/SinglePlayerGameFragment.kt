@@ -27,12 +27,12 @@ class SinglePlayerGameFragment :
 
             initializeGame()
             listenToTextChanged()
-            isTimeToGuess.observe(viewLifecycleOwner) { guessTime ->
+            isTimeToGuess.observe(viewLifecycleOwner){ guessTime ->
                 if (guessTime) {
                     guessTime()
                     Utils.showSoftKeyboard(binding.guessEditText, requireActivity())} else showLetters()
             }
-            didPlayerLose.observe(viewLifecycleOwner) { playerLost ->
+            didPlayerLose.observe(viewLifecycleOwner){ playerLost ->
                 if (playerLost) navigateToPostGame()
             }
         }

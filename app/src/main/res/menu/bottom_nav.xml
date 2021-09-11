@@ -5,12 +5,12 @@
         android:id="@+id/welcomeFragment"
         android:enabled="true"
         android:icon="@drawable/ic_menu_white_24dp"
-        android:title="@string/menu"/>
+        android:title="@string/menu_label"/>
     <item
         android:id="@+id/rankingsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_public_white_24dp"
-        android:title="@string/rankings"/>
+        android:title="@string/rankings_label"/>
 <!--    <item-->
 <!--        android:id="@+id/findMatchFragment"-->
 <!--        android:enabled="true"-->

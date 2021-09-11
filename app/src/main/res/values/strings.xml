@@ -1,7 +1,19 @@
 <resources>
+
+    <!-- App -->
     <string name="app_name">Are you a robot?</string>
+    <string name="logo" translatable="false">logo</string>
+
+    <!-- Navigation -->
+    <string name="settings_label">Settings</string>
+    <string name="rankings_label">Rankings</string>
+    <string name="menu_label">Menu</string>
+
+    <!-- Welcome -->
     <string name="message_incentive_to_play">There is only one way to find out..</string>
     <string name="prove_it">Prove it</string>
+
+    <!-- Game -->
     <string name="code">code</string>
     <string name="score">score:</string>
     <string name="timer">timer:</string>
@@ -9,17 +21,19 @@
     <string name="you_lost">You lost</string>
     <string name="try_again_robot">Nice try robot..</string>
     <string name="multiplayer" translatable="false">Multiplayer</string>
+
+    <!-- Save score-->
     <string name="snack_save_score_success">Score saved Successfully</string>
     <string name="snack_save_score_error">An error occurred saving the score</string>
-    <string name="save">save</string>
-    <string name="cancel">cancel</string>
+    <string name="action_save">save</string>
+    <string name="action_cancel">cancel</string>
     <string name="save_score">save score in the ranking</string>
     <string name="dialog_nickname_hint">Your nickname</string>
     <string name="nickname">nickname</string>
-    <string name="settings">Settings</string>
-    <string name="rankings">Rankings</string>
-    <string name="menu">Menu</string>
-    <string name="close">Close</string>
-    <string name="logo" translatable="false">logo</string>
+
+    <!-- Other-->
+    <string name="action_close">Close</string>
+    <string name="snack_search_cancelled">Queue cancelled</string>
+    <string name="snack_search_started">Searching match</string>
 
 </resources>
