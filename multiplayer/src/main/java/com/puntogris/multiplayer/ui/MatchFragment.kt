@@ -71,7 +71,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
         viewModel.gameEnded()
         val action = MatchFragmentDirections.actionMatchFragmentToPostMultiplayerMatchFragment(
             args.playerPos,
-            viewModel.matchInfo.value
+            viewModel.matchInfo.value!!
         )
         findNavController().navigate(action)
     }

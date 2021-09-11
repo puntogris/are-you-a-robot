@@ -6,7 +6,7 @@
     <data>
         <variable
             name="match"
-            type="com.puntogris.multiplayer.model.MatchModel" />
+            type="com.puntogris.areyouarobot.model.Match" />
         <variable
             name="matchViewModel"
             type="com.puntogris.multiplayer.ui.MatchViewModel" />

@@ -1,10 +1,16 @@
 <resources>
+    <!-- Game -->
+    <string name="snack_search_cancelled">Queue cancelled</string>
+    <string name="snack_search_started">Searching match</string>
+    <string name="multiplayer_message">Battle against another \'Human\' to prove which one is not an impostor</string>
+    <string name="search_opponent">Search opponent</string>
+    <string name="cancel_search">Cancel search</string>
+
+    <!-- Post game -->
     <string name="draw_match_message">What a coincidence, seems like you are both impostors…</string>
     <string name="share_the_results">Share the results</string>
     <string name="the_robot_is">The robot is:</string>
     <string name="the_human_is">The human is:</string>
     <string name="postMultiplayerGameTitle">I didn\'t expect this</string>
-    <string name="multiplayer_message">Battle against another \'Human\' to prove which one is not an impostor</string>
-    <string name="search_oponent">search opponent</string>
-    <string name="cancel_search">cancel search</string>
+    <string name="share_match_text">I just played a game in Are you a robot where, %1$s scored a %2$d and %3$s scored a %4$d.</string>
 </resources>

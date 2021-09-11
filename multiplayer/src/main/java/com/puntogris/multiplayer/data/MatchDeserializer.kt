@@ -2,11 +2,11 @@ package com.puntogris.multiplayer.data
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.puntogris.areyouarobot.data.deserializer.DocumentSnapshotDeserializer
-import com.puntogris.multiplayer.model.MatchModel
+import com.puntogris.areyouarobot.model.Match
 
-internal object MatchDeserializer: DocumentSnapshotDeserializer<MatchModel> {
+internal object MatchDeserializer: DocumentSnapshotDeserializer<Match> {
 
-    override fun deserialize(input: DocumentSnapshot?): MatchModel {
+    override fun deserialize(input: DocumentSnapshot?): Match {
         val playerOne = input?.get("playerOne") as HashMap<*,*>
         val playerTwo = input.get("playerTwo") as HashMap<*,*>
         val playerOneName = playerOne["name"].toString()
@@ -14,6 +14,6 @@ internal object MatchDeserializer: DocumentSnapshotDeserializer<MatchModel> {
         val playerOneScore = playerOne["score"].toString().toInt()
         val playerTwoScore = playerTwo["score"].toString().toInt()
 
-        return MatchModel(playerOneName, playerTwoName, playerOneScore, playerTwoScore)
+        return Match(playerOneName, playerTwoName, playerOneScore, playerTwoScore)
     }
 }

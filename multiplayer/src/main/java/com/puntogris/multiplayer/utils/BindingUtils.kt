@@ -10,10 +10,9 @@ import com.puntogris.multiplayer.R
 fun Button.setSearchButtonState(isSearching: Boolean){
     if (isSearching){
         setText(R.string.cancel_search)
-        backgroundTintList = ColorStateList.valueOf(ResourcesCompat.getColor(resources,R.color.colorPrimary, null))
+        backgroundTintList = ColorStateList.valueOf(ResourcesCompat.getColor(resources, com.puntogris.areyouarobot.R.color.colorPrimary, null))
     }else{
-        setText(R.string.search_oponent)
-        backgroundTintList = ColorStateList.valueOf(ResourcesCompat.getColor(resources,R.color.colorAccent, null))
-
+        setText(R.string.search_opponent)
+        backgroundTintList = ColorStateList.valueOf(ResourcesCompat.getColor(resources, com.puntogris.areyouarobot.R.color.colorAccent, null))
     }
 }

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Game -->
+    <string name="cancel_search">Cancelar busqueda</string>
+    <string name="snack_search_cancelled">Cola cancelada</string>
+    <string name="snack_search_started">Buscando partida</string>
+    <string name="multiplayer_message">Batalla contra otro humano y demuestra quien es el impostor</string>
+    <string name="search_opponent">Buscar oponente</string>
+
+    <!-- Post game -->
     <string name="draw_match_message">What a coincidence, seems like you are both impostors…</string>
-    <string name="share_the_results">Compartir loso resultados</string>
+    <string name="share_the_results">Compartir los resultados</string>
     <string name="the_robot_is">Eres un robot:</string>
     <string name="the_human_is">Eres una persona:</string>
     <string name="postMultiplayerGameTitle">No me esperaba esto</string>
-    <string name="multiplayer_message">Batalla contra otro humano y demuestra quien es el impostor</string>
-    <string name="search_oponent">Buscar oponente</string>
-    <string name="cancel_search">cancelar busqueda</string>
+    <string name="share_match_text">Jugue una partida en Eres un robot? donde, %1$s saco %2$d puntos and %3$s saco %4$d puntos.</string>
 </resources>

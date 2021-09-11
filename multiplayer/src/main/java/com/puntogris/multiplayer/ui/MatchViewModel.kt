@@ -4,7 +4,7 @@ import android.os.CountDownTimer
 import androidx.lifecycle.*
 import com.puntogris.multiplayer.data.MatchDeserializer
 import com.puntogris.multiplayer.data.MatchRepository
-import com.puntogris.multiplayer.model.MatchModel
+import com.puntogris.areyouarobot.model.Match
 import com.puntogris.multiplayer.utils.plusOne
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -30,8 +30,8 @@ class MatchViewModel @Inject constructor(): ViewModel(){
     private val _isTimeToGuess = MutableLiveData<Boolean>()
     val isTimeToGuess: LiveData<Boolean> = _isTimeToGuess
 
-    private val _matchInfo = MutableLiveData<MatchModel>()
-    val matchInfo: LiveData<MatchModel> = _matchInfo
+    private val _matchInfo = MutableLiveData<Match>()
+    val matchInfo: LiveData<Match> = _matchInfo
 
     private val score = MutableLiveData(INITIAL_INT_VALUE)
 
@@ -58,7 +58,7 @@ class MatchViewModel @Inject constructor(): ViewModel(){
             }
         }
 
-    fun getMatchData(matchId:String): LiveData<MatchModel> {
+    fun getMatchData(matchId:String): LiveData<Match> {
         val data = repo.getMatchDataFirestore(matchId)
         return Transformations.map(data){ snap ->
             MatchDeserializer.deserialize(snap).also { _matchInfo.value = it }

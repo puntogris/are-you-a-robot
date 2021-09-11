@@ -3,9 +3,9 @@ package com.puntogris.multiplayer.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.puntogris.areyouarobot.model.Match
+import com.puntogris.areyouarobot.model.Match.Winner
 import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.areyouarobot.utils.gone
 import com.puntogris.areyouarobot.utils.visible
@@ -21,22 +21,22 @@ class PostMultiplayerMatchFragment :
 
     override fun initializeViews() {
         binding.fragment = this
-     //   binding.matchData
-        updateWinnerUi()
+        binding.match = args.match
+        updateWinnerUi(args.match)
     }
 
-    private fun updateWinnerUi() {
+    private fun updateWinnerUi(match: Match) {
         with(binding){
-            when(val match = args.match) {
-                match.playerOneWon() -> {
+            when(match.result()) {
+                Winner.PlayerOne -> {
                     playerWinner.text = match.playerOneName
                     playerLoser.text = match.playerTwoName
                 }
-                match.playerTwoWon() -> {
+                Winner.PlayerTwo -> {
                     playerWinner.text = match.playerTwoName
                     playerLoser.text = match.playerOneName
                 }
-                match.draw() -> {
+                Winner.Draw -> {
                     robotPlayerText.gone()
                     playerWinner.gone()
                     playerLoser.gone()

@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-<!--        <variable-->
-<!--            name="matchData"-->
-<!--            type="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragmentArgs" />-->
-
         <variable
             name="fragment"
             type="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragment" />
+        <variable
+            name="match"
+            type="com.puntogris.areyouarobot.model.Match" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,6 +35,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="60dp"
             android:textColor="@android:color/secondary_text_light_nodisable"
+            android:text="@{match.playerOneName}"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -47,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:text="@{String.valueOf(match.playerOneScore)}"
             android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:text="@{String.valueOf(match.playerTwoScore)}"
             android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,6 +71,7 @@
             android:layout_marginEnd="16dp"
             android:textColor="@android:color/secondary_text_light_nodisable"
             android:textSize="17sp"
+            android:text="@{match.playerTwoName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/playerOneName" />
 

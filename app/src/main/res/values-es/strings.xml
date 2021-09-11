@@ -20,7 +20,6 @@
     <string name="you_lost">Perdiste</string>
     <string name="try_again_robot">Buen intento robot..</string>
     <string name="save_score">guardar puntaje en el ranking</string>
-    <string name="share_match_text">Jugue una partida en Eres un robot? donde, %1$s saco %2$d puntos and %3$s saco %4$d puntos.</string>
 
     <!-- Save score-->
     <string name="snack_save_score_success">Puntaje guardado correctamente</string>
@@ -31,8 +30,6 @@
     <string name="action_cancel">cancelar</string>
 
     <!-- Other -->
-    <string name="snack_search_cancelled">Cola cancelada</string>
-    <string name="snack_search_started">Buscando partida</string>
     <string name="action_close">Cerrar</string>
 
 </resources>
