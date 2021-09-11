@@ -1,19 +1,21 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs.kotlin"
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'dagger.hilt.android.plugin'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id "androidx.navigation.safeargs.kotlin"
+    id 'com.google.gms.google-services'
+    id 'dagger.hilt.android.plugin'
+}
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.puntogris.areyouarobot"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 8
         versionName "1.0.2"
 
@@ -41,22 +43,27 @@ android {
     dynamicFeatures = [':multiplayer']
 }
 
+ext {
+
+}
+
 dependencies {
-    api 'androidx.core:core-ktx:1.3.2'
+    api 'androidx.core:core-ktx:1.6.0'
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.core:core-ktx:1.6.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.annotation:annotation:1.2.0'
 
-    api 'androidx.appcompat:appcompat:1.2.0'
-    api 'androidx.constraintlayout:constraintlayout:2.0.4'
-    api 'com.google.android.material:material:1.2.1'
-    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01'
+    api 'androidx.appcompat:appcompat:1.3.1'
+    api 'androidx.constraintlayout:constraintlayout:2.1.0'
+    api 'com.google.android.material:material:1.4.0'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03'
 
     def nav_version = "2.3.1"
 
@@ -69,34 +76,34 @@ dependencies {
     api "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
     //Firebase
-    api 'com.google.firebase:firebase-analytics:18.0.0'
-    api 'com.google.firebase:firebase-firestore-ktx:22.0.0'
-    api 'com.google.firebase:firebase-functions:19.1.0'
+    api 'com.google.firebase:firebase-analytics:19.0.1'
+    api 'com.google.firebase:firebase-firestore-ktx:23.0.3'
+    api 'com.google.firebase:firebase-functions:20.0.0'
 
     //Coroutines
     def coroutine_version = '1.3.9'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
-    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.2.1'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3'
 
     //Dynamic Modules
-    api "com.google.android.play:core:1.8.3"
+    api "com.google.android.play:core:1.10.1"
 
     //Preferences
     api "androidx.preference:preference-ktx:1.1.1"
 
     //Fragments
-    implementation "androidx.fragment:fragment-ktx:1.3.0-beta01"
+    implementation "androidx.fragment:fragment-ktx:1.4.0-alpha08"
 
     //Lottie
     implementation "com.airbnb.android:lottie:3.5.0"
 
     //Hilt
-    implementation "com.google.dagger:hilt-android:2.28-alpha"
-    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
-    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
-    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    implementation "com.google.dagger:hilt-android:2.35"
+    kapt "com.google.dagger:hilt-android-compiler:2.35"
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
 
 
 }

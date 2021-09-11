@@ -23,22 +23,3 @@ class FirestoreQueryLiveData(private val query: Query)
     }
 
 }
-
-//
-//class FirestoreQueryLiveData(private val query: Query)
-//    : MutableLiveData<List<DocumentSnapshot?>>(), OnSuccessListener<QuerySnapshot>,
-//    OnFailureListener {
-//
-//    override fun onActive() {
-//        query.get().addOnSuccessListener(this)
-//    }
-//
-//    override fun onSuccess(snap: QuerySnapshot?) {
-//        postValue(snap!!.documents)
-//    }
-//
-//    override fun onFailure(p0: Exception) {
-//        throw p0
-//    }
-//
-//}

@@ -21,7 +21,7 @@ class RankingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: FragmentRankingsBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_rankings, container, false)
 
