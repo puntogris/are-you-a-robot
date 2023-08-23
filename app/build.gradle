@@ -9,12 +9,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.puntogris.areyouarobot"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 8
         versionName "1.0.2"
 
@@ -57,19 +57,19 @@ ext {
 }
 
 dependencies {
-    api 'androidx.core:core-ktx:1.6.0'
+    api 'androidx.core:core-ktx:1.10.1'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.core:core-ktx:1.6.0'
-    api 'androidx.appcompat:appcompat:1.3.1'
-    api 'androidx.constraintlayout:constraintlayout:2.1.0'
-    api 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    api 'androidx.appcompat:appcompat:1.6.1'
+    api 'androidx.constraintlayout:constraintlayout:2.1.4'
+    api 'com.google.android.material:material:1.9.0'
 
     // Testing
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation 'androidx.annotation:annotation:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.annotation:annotation:1.6.0'
 
     // Lifecycle
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
@@ -90,7 +90,7 @@ dependencies {
     //Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.0'
 
     //Dynamic Modules
     api "com.google.android.play:core:$dynamicModuleVersion"
