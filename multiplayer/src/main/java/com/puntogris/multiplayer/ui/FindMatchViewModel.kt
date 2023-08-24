@@ -26,7 +26,7 @@ class FindMatchViewModel @Inject constructor(
 
     suspend fun startMatchmaking(): LiveData<JoinedMatchInfo> {
         val data = matchRepository.getMatchFirestore(playerName)
-        return Transformations.map(data){
+        return data.map {
             val matchId = it?.id.toString()
             val full = it?.get("full").toString().toBoolean()
             val playerOne = it?.get("playerOne") as? HashMap<*, *>

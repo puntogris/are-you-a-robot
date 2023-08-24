@@ -60,7 +60,7 @@ class MatchViewModel @Inject constructor(): ViewModel(){
 
     fun getMatchData(matchId:String): LiveData<Match> {
         val data = repo.getMatchDataFirestore(matchId)
-        return Transformations.map(data){ snap ->
+        return data.map { snap ->
             MatchDeserializer.deserialize(snap).also { _matchInfo.value = it }
         }
     }
