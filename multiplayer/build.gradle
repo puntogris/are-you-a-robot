@@ -6,6 +6,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
 }
+
 android {
 
     defaultConfig {
@@ -13,7 +14,8 @@ android {
         compileSdk 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures{
+
+    buildFeatures {
         dataBinding = true
     }
 
@@ -25,10 +27,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
     android.buildTypes {
         release {
-            // You must use the following property to specify additional ProGuard
-            // rules for feature modules.
             proguardFiles 'proguard-rules-dynamic-features.pro'
         }
     }
@@ -36,13 +37,14 @@ android {
     namespace 'com.puntogris.multiplayer'
 
 }
+
 kapt {
     correctErrorTypes true
 }
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(":app")
     implementation "com.google.dagger:hilt-android:2.47"
     kapt "com.google.dagger:hilt-compiler:2.47"
-
 }

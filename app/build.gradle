@@ -1,11 +1,11 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs.kotlin'
-    id 'com.google.gms.google-services'
-    id 'dagger.hilt.android.plugin'
-    id 'kotlin-parcelize'
+    id "com.android.application"
+    id "kotlin-android"
+    id "kotlin-kapt"
+    id "androidx.navigation.safeargs.kotlin"
+    id "com.google.gms.google-services"
+    id "dagger.hilt.android.plugin"
+    id "kotlin-parcelize"
 }
 
 android {
@@ -20,7 +20,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
@@ -29,82 +28,84 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
-    buildFeatures{
+
+    buildFeatures {
         dataBinding = true
     }
-    dynamicFeatures = [':multiplayer']
-    namespace 'com.puntogris.areyouarobot'
+
+    dynamicFeatures = [":multiplayer"]
+    namespace "com.puntogris.areyouarobot"
 }
 
 ext {
-    navVersion = "2.7.1"
-    lottieVersion = "3.5.0"
-    coroutineVersion = '1.3.9'
-    preferencesVersion = "1.1.1"
-    lifecycleVersion = "2.4.0-alpha03"
-    fragmentVersion = "1.4.0-alpha08"
-    hiltVersion = "2.35"
-    analyticsVersion = "19.0.1"
-    firestoreVersion = "23.0.3"
-    functionsVersion = "20.0.0"
-    dynamicModuleVersion = "1.10.1"
+    nav_version = "2.7.1"
+    lottie_version = "5.2.0"
+    coroutine_version = "1.3.9"
+    preferences_version = "1.2.1"
+    lifecycle_version = "2.6.1"
+    fragment_version = "1.6.1"
+    hilt_version = "2.47"
+    firebase_bom_version = "32.2.2"
+    dynamic_module_version = "2.1.0"
 }
 
 dependencies {
-    api 'androidx.core:core-ktx:1.10.1'
-    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api "androidx.core:core-ktx:1.10.1"
+    api "androidx.legacy:legacy-support-v4:1.0.0"
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.core:core-ktx:1.10.1'
-    api 'androidx.appcompat:appcompat:1.6.1'
-    api 'androidx.constraintlayout:constraintlayout:2.1.4'
-    api 'com.google.android.material:material:1.9.0'
+    implementation "androidx.core:core-ktx:1.10.1"
+    api "androidx.appcompat:appcompat:1.6.1"
+    api "androidx.constraintlayout:constraintlayout:2.1.4"
+    api "com.google.android.material:material:1.9.0"
 
     // Testing
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation 'androidx.annotation:annotation:1.6.0'
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.test.ext:junit:1.1.5"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
+    androidTestImplementation "androidx.annotation:annotation:1.6.0"
 
     // Lifecycle
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     // Navigation
-    api "androidx.navigation:navigation-fragment-ktx:$navVersion"
-    api "androidx.navigation:navigation-ui-ktx:$navVersion"
-    api "androidx.navigation:navigation-dynamic-features-fragment:$navVersion"
+    api "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    api "androidx.navigation:navigation-ui-ktx:$nav_version"
+    api "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
     // Dynamic Feature Module Support
-    api "androidx.navigation:navigation-dynamic-features-fragment:$navVersion"
+    api "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
     //Firebase
-    api "com.google.firebase:firebase-analytics:$analyticsVersion"
-    api "com.google.firebase:firebase-firestore-ktx:$firestoreVersion"
-    api "com.google.firebase:firebase-functions:$functionsVersion"
+    api platform("com.google.firebase:firebase-bom:$firebase_bom_version")
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-functions'
 
     //Coroutines
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.0'
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.0"
 
     //Dynamic Modules
-    implementation("com.google.android.play:feature-delivery:2.1.0")
+    implementation("com.google.android.play:feature-delivery:$dynamic_module_version")
 
     //Preferences
-    api "androidx.preference:preference-ktx:$preferencesVersion"
+    api "androidx.preference:preference-ktx:$preferences_version"
 
     //Fragments
-    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
     //Lottie
-    implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation "com.airbnb.android:lottie:$lottie_version"
 
     //Hilt
-    implementation "com.google.dagger:hilt-android:2.47"
-    kapt "com.google.dagger:hilt-compiler:2.47"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 }
