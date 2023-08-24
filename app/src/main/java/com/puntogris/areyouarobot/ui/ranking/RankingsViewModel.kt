@@ -10,7 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RankingsViewModel @Inject constructor(private val repository: Repository) : ViewModel(){
+class RankingsViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     fun getRankings(): LiveData<List<QueryItem<RankingEntry>>> {
         val data = repository.getRankingFirestore()

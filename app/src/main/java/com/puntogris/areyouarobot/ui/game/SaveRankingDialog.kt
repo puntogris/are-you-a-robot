@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SaveRankingDialog: DialogFragment() {
+class SaveRankingDialog : DialogFragment() {
 
     private val args: SaveRankingDialogArgs by navArgs()
     private val viewModel: SaveRankingViewModel by viewModels()
@@ -43,14 +43,17 @@ class SaveRankingDialog: DialogFragment() {
             }
     }
 
-    private fun onPositiveButtonClicked(){
+    private fun onPositiveButtonClicked() {
         lifecycleScope.launch {
-            when(viewModel.savePlayerScore(args.score, binding.username.text.toString())){
+            when (viewModel.savePlayerScore(args.score, binding.username.text.toString())) {
                 SimpleResult.Failure -> {
-                    Toast.makeText(context, R.string.snack_save_score_error,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.snack_save_score_error, Toast.LENGTH_SHORT)
+                        .show()
                 }
+
                 SimpleResult.Success -> {
-                    Toast.makeText(context, R.string.snack_save_score_success,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.snack_save_score_success, Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             findNavController().navigate(R.id.welcomeFragment)

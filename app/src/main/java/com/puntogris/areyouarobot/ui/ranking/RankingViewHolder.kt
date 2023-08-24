@@ -7,14 +7,15 @@ import com.puntogris.areyouarobot.databinding.RankingEntryBinding
 import com.puntogris.areyouarobot.diffcallback.QueryItem
 import com.puntogris.areyouarobot.model.RankingEntry
 
-class RankingViewHolder constructor(private val binding: RankingEntryBinding): RecyclerView.ViewHolder(binding.root){
+class RankingViewHolder constructor(private val binding: RankingEntryBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: QueryItem<RankingEntry>){
+    fun bind(item: QueryItem<RankingEntry>) {
         binding.entry = item.item
         binding.entryNumberIndex = item.id.toInt() + 1
     }
 
-    companion object{
+    companion object {
         fun from(parent: ViewGroup): RankingViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = RankingEntryBinding.inflate(layoutInflater, parent, false)

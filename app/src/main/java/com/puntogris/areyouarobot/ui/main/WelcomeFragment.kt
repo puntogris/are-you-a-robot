@@ -14,7 +14,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_welcome) {
 
-    @Inject lateinit var sharedPref: SharedPref
+    @Inject
+    lateinit var sharedPref: SharedPref
 
     override fun initializeViews() {
         binding.fragment = this
@@ -30,7 +31,7 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_w
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    fun navigateToGame(){
+    fun navigateToGame() {
         findNavController().navigate(R.id.singlePlayerGameFragment)
     }
 

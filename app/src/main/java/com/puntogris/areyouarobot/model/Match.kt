@@ -4,14 +4,14 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Match (
-    val playerOneName:String,
-    val playerTwoName:String,
-    val playerOneScore:Int,
-    val playerTwoScore:Int
-):Parcelable{
+data class Match(
+    val playerOneName: String,
+    val playerTwoName: String,
+    val playerOneScore: Int,
+    val playerTwoScore: Int
+) : Parcelable {
 
-    fun result(): Winner{
+    fun result(): Winner {
         return when {
             playerOneScore > playerTwoScore -> Winner.PlayerOne
             playerTwoScore > playerOneScore -> Winner.PlayerTwo

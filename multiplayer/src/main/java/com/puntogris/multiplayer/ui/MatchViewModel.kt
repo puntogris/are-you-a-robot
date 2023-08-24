@@ -15,10 +15,10 @@ import javax.inject.Inject
 import kotlin.concurrent.scheduleAtFixedRate
 
 @HiltViewModel
-class MatchViewModel @Inject constructor(): ViewModel(){
+class MatchViewModel @Inject constructor() : ViewModel() {
 
     private val repo = MatchRepository()
-    private var timerJob : Job? = null
+    private var timerJob: Job? = null
     private var globalTimer: TimerTask? = null
 
     private var matchId = ""
@@ -51,21 +51,23 @@ class MatchViewModel @Inject constructor(): ViewModel(){
     private val countDownTimer =
         object : CountDownTimer(timeDifficultyGuess, 10) {
             override fun onTick(millisUntilFinished: Long) {
-                _progressBarStatus.value = MAX_PERCENTAGE - (millisUntilFinished * MAX_PERCENTAGE / timeDifficultyGuess).toInt()
+                _progressBarStatus.value =
+                    MAX_PERCENTAGE - (millisUntilFinished * MAX_PERCENTAGE / timeDifficultyGuess).toInt()
             }
+
             override fun onFinish() {
                 gameOn()
             }
         }
 
-    fun getMatchData(matchId:String): LiveData<Match> {
+    fun getMatchData(matchId: String): LiveData<Match> {
         val data = repo.getMatchDataFirestore(matchId)
         return data.map { snap ->
             MatchDeserializer.deserialize(snap).also { _matchInfo.value = it }
         }
     }
 
-    fun initializeGame(matchId: String, playerPos:String){
+    fun initializeGame(matchId: String, playerPos: String) {
         _gamEnded.value = false
         this.matchId = matchId
         this.playerPos = playerPos
@@ -79,7 +81,7 @@ class MatchViewModel @Inject constructor(): ViewModel(){
     }
 
     private fun startTimer(): TimerTask {
-        return Timer().scheduleAtFixedRate(0,1000){
+        return Timer().scheduleAtFixedRate(0, 1000) {
             _globalTime.apply {
                 if (value!! >= MATCH_DURATION) _gamEnded.postValue(true)
                 else plusOne()
@@ -87,7 +89,7 @@ class MatchViewModel @Inject constructor(): ViewModel(){
         }
     }
 
-    private fun getLetters(){
+    private fun getLetters() {
         val allowedChars = ('a'..'z')
         _currentLetters.value = (1..lettersDifficulty)
             .map { allowedChars.random() }
@@ -103,7 +105,7 @@ class MatchViewModel @Inject constructor(): ViewModel(){
         startTimerShowLetters(timeDifficultyLetters)
     }
 
-    private fun startTimerShowLetters(milliseconds:Long){
+    private fun startTimerShowLetters(milliseconds: Long) {
         viewModelScope.launch {
             timerJob = Job()
             delay(milliseconds)
@@ -112,28 +114,32 @@ class MatchViewModel @Inject constructor(): ViewModel(){
         }
     }
 
-    fun guessCorrect(){
-        repo.incrementScorePlayerFirestore(playerPos,matchId)
+    fun guessCorrect() {
+        repo.incrementScorePlayerFirestore(playerPos, matchId)
         countDownTimer.cancel()
         timerJob?.cancel()
         score.plusOne()
         gameOn()
     }
 
-    fun gameEnded(){
+    fun gameEnded() {
         _progressBarStatus.value = MAX_PERCENTAGE
         globalTimer?.cancel()
         timerJob?.cancel()
         countDownTimer.cancel()
     }
 
-    private fun updateDifficulty(){
-        if (score.value!! == 5 && lettersDifficulty <3){lettersDifficulty++}
-        else if (score.value!! == 10 && lettersDifficulty <4){lettersDifficulty++}
-        else if (score.value!! == 15 && lettersDifficulty <5){lettersDifficulty++}
+    private fun updateDifficulty() {
+        if (score.value!! == 5 && lettersDifficulty < 3) {
+            lettersDifficulty++
+        } else if (score.value!! == 10 && lettersDifficulty < 4) {
+            lettersDifficulty++
+        } else if (score.value!! == 15 && lettersDifficulty < 5) {
+            lettersDifficulty++
+        }
     }
 
-    companion object{
+    companion object {
         private const val MATCH_DURATION = 60
         private const val INITIAL_INT_VALUE = 0
         private const val MAX_PERCENTAGE = 100

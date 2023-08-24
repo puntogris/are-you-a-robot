@@ -1,6 +1,5 @@
 package com.puntogris.areyouarobot
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.preference.PreferenceManager
 import com.puntogris.areyouarobot.utils.Constants.PLAYER_NAME_PREF
@@ -12,12 +11,13 @@ class SharedPref @Inject constructor(@ApplicationContext context: Context) {
 
     private val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun getPlayerName() =
-        sharedPref.getString(PLAYER_NAME_PREF, Utils.createDefaultRandomName()) ?: Utils.createDefaultRandomName()
+    fun getPlayerName(): String {
+        val defaultName = Utils.createDefaultRandomName()
+        return sharedPref.getString(PLAYER_NAME_PREF, defaultName) ?: defaultName
+    }
 
-    @SuppressLint("CommitPrefEdits")
-    fun setPlayerName(input: String){
-        val playerName = if (input.isEmpty()) Utils.createDefaultRandomName() else input
+    fun setPlayerName(input: String) {
+        val playerName = input.ifEmpty { Utils.createDefaultRandomName() }
         sharedPref.edit().putString(PLAYER_NAME_PREF, playerName).apply()
     }
 

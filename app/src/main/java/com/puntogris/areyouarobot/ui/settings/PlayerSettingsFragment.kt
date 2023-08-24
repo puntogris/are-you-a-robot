@@ -22,6 +22,5 @@ class PlayerSettingsFragment : BaseFragment<FragmentPlayerSettingsBinding>(R.lay
             sharedPref.setPlayerName(input)
             findNavController().navigate(R.id.welcomeFragment)
         }
-
     }
 }

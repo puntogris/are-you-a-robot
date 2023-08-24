@@ -12,11 +12,11 @@ import javax.inject.Inject
 class SaveRankingViewModel @Inject constructor(
     private val repository: Repository,
     sharedPref: SharedPref
-):ViewModel() {
+) : ViewModel() {
 
     val currentUsername = sharedPref.getPlayerName()
 
-    suspend fun savePlayerScore(score:Int, playerName: String): SimpleResult{
+    suspend fun savePlayerScore(score: Int, playerName: String): SimpleResult {
         val rankingEntry = RankingEntry(score, playerName)
         return repository.saveScoreFirestore(rankingEntry)
     }

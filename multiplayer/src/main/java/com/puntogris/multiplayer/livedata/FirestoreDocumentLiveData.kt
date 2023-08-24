@@ -3,7 +3,8 @@ package com.puntogris.multiplayer.livedata
 import androidx.lifecycle.LiveData
 import com.google.firebase.firestore.*
 
-class FirestoreDocumentLiveData(private val documentReference: DocumentReference): LiveData<DocumentSnapshot?>(), EventListener<DocumentSnapshot>{
+class FirestoreDocumentLiveData(private val documentReference: DocumentReference) :
+    LiveData<DocumentSnapshot?>(), EventListener<DocumentSnapshot> {
 
     private var listenerRegistration: ListenerRegistration? = null
 

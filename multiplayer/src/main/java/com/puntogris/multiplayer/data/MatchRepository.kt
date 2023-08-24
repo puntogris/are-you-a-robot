@@ -13,12 +13,12 @@ import com.puntogris.multiplayer.livedata.FirestoreDocumentLiveData
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class MatchRepository @Inject constructor(): IMatchRepository{
+class MatchRepository @Inject constructor() : IMatchRepository {
 
     private val firestore = Firebase.firestore
     private val functions = FirebaseFunctions.getInstance()
 
-    override suspend fun getMatchFirestore(playerName:String): FirestoreDocumentLiveData {
+    override suspend fun getMatchFirestore(playerName: String): FirestoreDocumentLiveData {
         val matchId = functions
             .getHttpsCallable(START_MATCHMAKING_FUNCTION)
             .call(PLAYER_FIELD to playerName)
@@ -34,7 +34,7 @@ class MatchRepository @Inject constructor(): IMatchRepository{
                 .call(PLAYER_FIELD to playerName)
                 .await()
             SimpleResult.Success
-        }catch (e:Exception){
+        } catch (e: Exception) {
             SimpleResult.Failure
         }
     }

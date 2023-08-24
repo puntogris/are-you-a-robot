@@ -27,18 +27,19 @@ class SinglePlayerGameFragment :
 
             initializeGame()
             listenToTextChanged()
-            isTimeToGuess.observe(viewLifecycleOwner){ guessTime ->
+            isTimeToGuess.observe(viewLifecycleOwner) { guessTime ->
                 if (guessTime) {
                     guessTime()
-                    Utils.showSoftKeyboard(binding.guessEditText, requireActivity())} else showLetters()
+                    Utils.showSoftKeyboard(binding.guessEditText, requireActivity())
+                } else showLetters()
             }
-            didPlayerLose.observe(viewLifecycleOwner){ playerLost ->
+            didPlayerLose.observe(viewLifecycleOwner) { playerLost ->
                 if (playerLost) navigateToPostGame()
             }
         }
     }
 
-    private fun listenToTextChanged(){
+    private fun listenToTextChanged() {
         binding.guessEditText.doOnTextChanged { text, _, _, _ ->
             if (text.toString() == viewModel.currentLetters.value) {
                 viewModel.playerWon()
@@ -46,7 +47,7 @@ class SinglePlayerGameFragment :
         }
     }
 
-    private fun guessTime(){
+    private fun guessTime() {
         binding.apply {
             guessEditText.setText("")
             lettersTextView.gone()
@@ -54,7 +55,7 @@ class SinglePlayerGameFragment :
         }
     }
 
-    private fun showLetters(){
+    private fun showLetters() {
         binding.apply {
             lettersTextView.visible()
             guessEditText.gone()

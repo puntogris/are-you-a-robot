@@ -5,7 +5,7 @@ import com.puntogris.areyouarobot.model.RankingEntry
 import com.puntogris.areyouarobot.utils.Constants.PLAYER_NAME_FIELD
 import com.puntogris.areyouarobot.utils.Constants.SCORE_FIELD
 
-object RankingEntryDeserializer: DocumentSnapshotDeserializer<RankingEntry> {
+object RankingEntryDeserializer : DocumentSnapshotDeserializer<RankingEntry> {
 
     override fun deserialize(input: DocumentSnapshot?): RankingEntry {
         val score = input?.get(SCORE_FIELD).toString().toIntOrNull() ?: 0

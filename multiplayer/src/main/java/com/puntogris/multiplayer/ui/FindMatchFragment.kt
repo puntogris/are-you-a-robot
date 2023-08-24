@@ -26,16 +26,16 @@ class FindMatchFragment : BaseFragment<FragmentFindMatchBinding>(R.layout.fragme
         subscribeMatchState()
     }
 
-    private fun subscribeMatchState(){
-        viewModel.isSearching.observe(viewLifecycleOwner){ isSearching ->
+    private fun subscribeMatchState() {
+        viewModel.isSearching.observe(viewLifecycleOwner) { isSearching ->
             if (isSearching) startMatchSearch() else unsubscribeToMatch()
         }
     }
 
-    private fun startMatchSearch(){
+    private fun startMatchSearch() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.startMatchmaking().observe(viewLifecycleOwner) { matchRoom ->
-                if (matchRoom.full){
+                if (matchRoom.full) {
                     val action = FindMatchFragmentDirections
                         .actionFindMatchFragmentToMatchFragment(matchRoom.id, matchRoom.playerPos)
                     findNavController().navigate(action)
@@ -44,9 +44,9 @@ class FindMatchFragment : BaseFragment<FragmentFindMatchBinding>(R.layout.fragme
         }
     }
 
-    private fun unsubscribeToMatch(){
-        lifecycleScope.launch{
-            val message = when(viewModel.unsubscribeToMatchDatabase()){
+    private fun unsubscribeToMatch() {
+        lifecycleScope.launch {
+            val message = when (viewModel.unsubscribeToMatchDatabase()) {
                 SimpleResult.Failure -> R.string.snack_search_cancelled
                 SimpleResult.Success -> R.string.snack_search_started
             }

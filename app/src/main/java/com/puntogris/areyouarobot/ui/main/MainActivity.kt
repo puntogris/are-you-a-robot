@@ -32,14 +32,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
     }
 
-    private fun setupNavigation(){
+    private fun setupNavigation() {
         navController = getNavController()
         appBarConfiguration = getAppBarConfiguration()
         navController.addOnDestinationChangedListener(this@MainActivity)
         binding.bottomNavigation.setupWithNavController(navController)
     }
 
-    private fun getAppBarConfiguration(): AppBarConfiguration{
+    private fun getAppBarConfiguration(): AppBarConfiguration {
         return AppBarConfiguration(
             setOf(
                 R.id.welcomeFragment,
@@ -61,17 +61,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        when(destination.id){
+        when (destination.id) {
             R.id.singlePlayerGameFragment,
             R.id.playerSettingsFragment,
             R.id.matchFragment -> {
                 binding.mainToolbar.visible()
                 binding.bottomNavigation.gone()
             }
+
             R.id.rankingsFragment, R.id.postGameFragment -> {
                 binding.mainToolbar.gone()
                 binding.bottomNavigation.visible()
             }
+
             else -> {
                 binding.mainToolbar.visible()
                 binding.bottomNavigation.visible()
@@ -87,6 +89,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
-
 }
 

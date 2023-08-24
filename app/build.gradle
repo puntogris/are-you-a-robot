@@ -84,9 +84,9 @@ dependencies {
 
     //Firebase
     api platform("com.google.firebase:firebase-bom:$firebase_bom_version")
-    implementation 'com.google.firebase:firebase-firestore-ktx'
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-functions'
+    api 'com.google.firebase:firebase-firestore-ktx'
+    api 'com.google.firebase:firebase-analytics-ktx'
+    api 'com.google.firebase:firebase-functions'
 
     //Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"

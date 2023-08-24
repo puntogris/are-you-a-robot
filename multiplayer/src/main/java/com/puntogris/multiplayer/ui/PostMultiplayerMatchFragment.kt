@@ -26,16 +26,18 @@ class PostMultiplayerMatchFragment :
     }
 
     private fun updateWinnerUi(match: Match) {
-        with(binding){
-            when(match.result()) {
+        with(binding) {
+            when (match.result()) {
                 Winner.PlayerOne -> {
                     playerWinner.text = match.playerOneName
                     playerLoser.text = match.playerTwoName
                 }
+
                 Winner.PlayerTwo -> {
                     playerWinner.text = match.playerTwoName
                     playerLoser.text = match.playerOneName
                 }
+
                 Winner.Draw -> {
                     robotPlayerText.gone()
                     playerWinner.gone()
@@ -47,7 +49,7 @@ class PostMultiplayerMatchFragment :
         }
     }
 
-    fun onShareResultsClicked(){
+    fun onShareResultsClicked() {
         binding.shareResults.setOnClickListener {
             val shareText = getString(
                 R.string.share_match_text,

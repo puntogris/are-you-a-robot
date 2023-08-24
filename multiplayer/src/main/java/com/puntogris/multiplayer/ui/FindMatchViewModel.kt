@@ -13,12 +13,12 @@ import javax.inject.Inject
 class FindMatchViewModel @Inject constructor(
     private val matchRepository: MatchRepository,
     sharedPref: SharedPref
-): ViewModel(){
+) : ViewModel() {
 
     private val _isSearching = MutableLiveData(false)
     val isSearching: LiveData<Boolean> = _isSearching
 
-    fun toggleQueueState(){
+    fun toggleQueueState() {
         _isSearching.value = !_isSearching.value!!
     }
 
@@ -35,7 +35,8 @@ class FindMatchViewModel @Inject constructor(
         }
     }
 
-    suspend fun unsubscribeToMatchDatabase() = matchRepository.unsubscribeToMatchFirestore(playerName)
+    suspend fun unsubscribeToMatchDatabase() =
+        matchRepository.unsubscribeToMatchFirestore(playerName)
 
     private fun getPlayerPosition(player: String) =
         if (player == playerName) "playerOne" else "playerTwo"

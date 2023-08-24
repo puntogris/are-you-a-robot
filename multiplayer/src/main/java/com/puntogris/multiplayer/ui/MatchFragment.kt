@@ -32,11 +32,11 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
             isTimeToGuess.observe(viewLifecycleOwner) { guessTime ->
                 if (guessTime) {
                     guessTime()
-                    Utils.showSoftKeyboard(binding.guessEditText,requireActivity())
+                    Utils.showSoftKeyboard(binding.guessEditText, requireActivity())
                 } else showLetters()
             }
 
-            getMatchData(args.matchId).observe(viewLifecycleOwner){ match ->
+            getMatchData(args.matchId).observe(viewLifecycleOwner) { match ->
                 binding.match = match
             }
 
@@ -44,13 +44,13 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
                 if (guessTime) guessTime() else showLetters()
             }
 
-            gameEnded.observe(viewLifecycleOwner){ gameEnded ->
+            gameEnded.observe(viewLifecycleOwner) { gameEnded ->
                 if (gameEnded) navigateToPostGameFragment()
             }
         }
     }
 
-    private fun guessTime(){
+    private fun guessTime() {
         binding.apply {
             guessEditText.setText("")
             lettersTextView.gone()
@@ -59,7 +59,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
         }
     }
 
-    private fun showLetters(){
+    private fun showLetters() {
         binding.apply {
             lettersTextView.visible()
             progressBar.gone()
@@ -67,7 +67,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
         }
     }
 
-    private fun navigateToPostGameFragment(){
+    private fun navigateToPostGameFragment() {
         viewModel.gameEnded()
         val action = MatchFragmentDirections.actionMatchFragmentToPostMultiplayerMatchFragment(
             args.playerPos,
@@ -76,7 +76,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
         findNavController().navigate(action)
     }
 
-    private fun listenToTextChanged(){
+    private fun listenToTextChanged() {
         binding.guessEditText.doOnTextChanged { text, _, _, _ ->
             if (text.toString() == viewModel.currentLetters.value) {
                 viewModel.guessCorrect()

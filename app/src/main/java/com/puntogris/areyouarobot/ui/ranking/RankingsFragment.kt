@@ -18,7 +18,7 @@ class RankingsFragment : BaseFragment<FragmentRankingsBinding>(R.layout.fragment
         }
     }
 
-    private fun subscribeUi(adapter: RankingsAdapter){
+    private fun subscribeUi(adapter: RankingsAdapter) {
         viewModel.getRankings().observe(viewLifecycleOwner) { rankingList ->
             adapter.submitList(rankingList)
         }

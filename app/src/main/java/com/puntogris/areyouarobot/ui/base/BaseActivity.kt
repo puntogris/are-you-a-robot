@@ -10,8 +10,7 @@ import com.puntogris.areyouarobot.utils.getNavHostFragment
 
 abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes val layout: Int) :
     AppCompatActivity(),
-    NavController.OnDestinationChangedListener
-{
+    NavController.OnDestinationChangedListener {
     private var _binding: T? = null
     val binding get() = _binding!!
 

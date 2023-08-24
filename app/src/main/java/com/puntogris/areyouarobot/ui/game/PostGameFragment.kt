@@ -19,12 +19,14 @@ class PostGameFragment : BaseFragment<FragmentPostGameBinding>(R.layout.fragment
         }
     }
 
-    fun openSaveRankingDialog(){
-        val action = PostGameFragmentDirections.actionPostGameFragmentToSaveRankingDialog(viewModel.score.value!!)
+    fun openSaveRankingDialog() {
+        val action = PostGameFragmentDirections.actionPostGameFragmentToSaveRankingDialog(
+            viewModel.score.value!!
+        )
         findNavController().navigate(action)
     }
 
-    fun playAgain(){
+    fun playAgain() {
         findNavController().navigate(R.id.singlePlayerGameFragment)
     }
 }
