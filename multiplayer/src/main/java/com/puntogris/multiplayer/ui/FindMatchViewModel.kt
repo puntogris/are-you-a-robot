@@ -5,6 +5,8 @@ import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.multiplayer.data.MatchRepository
 import com.puntogris.multiplayer.model.JoinedMatchInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -24,14 +26,16 @@ class FindMatchViewModel @Inject constructor(
 
     private val playerName = sharedPref.getPlayerName()
 
-    suspend fun startMatchmaking(): LiveData<JoinedMatchInfo> {
-        val data = matchRepository.getMatchFirestore(playerName)
-        return data.map {
-            val matchId = it?.id.toString()
-            val full = it?.get("full").toString().toBoolean()
-            val playerOne = it?.get("playerOne") as? HashMap<*, *>
-            val playerPos = getPlayerPosition(playerOne?.get("name").toString())
-            JoinedMatchInfo(matchId, full, playerPos)
+    fun startMatchmaking(): Flow<JoinedMatchInfo> {
+        return flow {
+            val data = matchRepository.getMatchFirestore(playerName)
+            data.map {
+                val matchId = it?.id.toString()
+                val full = it?.get("full").toString().toBoolean()
+                val playerOne = it?.get("playerOne") as? HashMap<*, *>
+                val playerPos = getPlayerPosition(playerOne?.get("name").toString())
+                JoinedMatchInfo(matchId, full, playerPos)
+            }
         }
     }
 

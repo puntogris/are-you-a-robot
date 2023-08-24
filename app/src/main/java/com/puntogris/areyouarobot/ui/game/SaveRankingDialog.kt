@@ -24,8 +24,12 @@ class SaveRankingDialog : DialogFragment() {
     private lateinit var binding: SaveRankingDialogBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.save_ranking_dialog, null, false)
+        binding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.save_ranking_dialog,
+            null,
+            false
+        )
 
         binding.username.setText(viewModel.currentUsername)
 
@@ -45,19 +49,12 @@ class SaveRankingDialog : DialogFragment() {
 
     private fun onPositiveButtonClicked() {
         lifecycleScope.launch {
-            when (viewModel.savePlayerScore(args.score, binding.username.text.toString())) {
-                SimpleResult.Failure -> {
-                    Toast.makeText(context, R.string.snack_save_score_error, Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                SimpleResult.Success -> {
-                    Toast.makeText(context, R.string.snack_save_score_success, Toast.LENGTH_SHORT)
-                        .show()
-                }
+            val message = when (viewModel.savePlayerScore(args.score, binding.username.text.toString())) {
+                SimpleResult.Failure -> R.string.snack_save_score_error
+                SimpleResult.Success -> R.string.snack_save_score_success
             }
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.welcomeFragment)
         }
     }
-
 }

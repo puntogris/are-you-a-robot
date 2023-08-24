@@ -34,5 +34,4 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_w
     fun navigateToGame() {
         findNavController().navigate(R.id.singlePlayerGameFragment)
     }
-
 }

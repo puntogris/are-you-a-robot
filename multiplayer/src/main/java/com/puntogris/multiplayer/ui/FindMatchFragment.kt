@@ -6,11 +6,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.areyouarobot.utils.SimpleResult
-import com.puntogris.areyouarobot.utils.gone
-import com.puntogris.areyouarobot.utils.visible
 import com.puntogris.multiplayer.R
 import com.puntogris.multiplayer.databinding.FragmentFindMatchBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -28,13 +27,17 @@ class FindMatchFragment : BaseFragment<FragmentFindMatchBinding>(R.layout.fragme
 
     private fun subscribeMatchState() {
         viewModel.isSearching.observe(viewLifecycleOwner) { isSearching ->
-            if (isSearching) startMatchSearch() else unsubscribeToMatch()
+            if (isSearching) {
+                startMatchSearch()
+            } else {
+                unsubscribeToMatch()
+            }
         }
     }
 
     private fun startMatchSearch() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.startMatchmaking().observe(viewLifecycleOwner) { matchRoom ->
+        lifecycleScope.launch {
+            viewModel.startMatchmaking().collectLatest { matchRoom ->
                 if (matchRoom.full) {
                     val action = FindMatchFragmentDirections
                         .actionFindMatchFragmentToMatchFragment(matchRoom.id, matchRoom.playerPos)

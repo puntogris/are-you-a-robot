@@ -6,5 +6,6 @@ import com.puntogris.areyouarobot.utils.SimpleResult
 
 interface IRepository {
     suspend fun saveScoreFirestore(rankingEntry: RankingEntry): SimpleResult
+
     fun getRankingFirestore(): FirestoreQueryLiveData
 }

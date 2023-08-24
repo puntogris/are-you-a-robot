@@ -17,18 +17,19 @@ class Repository @Inject constructor() : IRepository {
 
     private val firestore = Firebase.firestore
 
-    override suspend fun saveScoreFirestore(rankingEntry: RankingEntry): SimpleResult = withContext(Dispatchers.IO){
-        try {
-            firestore
-                .collection(RANKINGS_COLLECTION)
-                .add(rankingEntry)
-                .await()
+    override suspend fun saveScoreFirestore(rankingEntry: RankingEntry): SimpleResult =
+        withContext(Dispatchers.IO) {
+            try {
+                firestore
+                    .collection(RANKINGS_COLLECTION)
+                    .add(rankingEntry)
+                    .await()
 
-            SimpleResult.Success
-        }catch (e:Exception){
-            SimpleResult.Failure
+                SimpleResult.Success
+            } catch (e: Exception) {
+                SimpleResult.Failure
+            }
         }
-    }
 
     override fun getRankingFirestore(): FirestoreQueryLiveData {
         val ref = firestore
@@ -37,5 +38,4 @@ class Repository @Inject constructor() : IRepository {
             .limit(20)
         return FirestoreQueryLiveData(ref)
     }
-
 }

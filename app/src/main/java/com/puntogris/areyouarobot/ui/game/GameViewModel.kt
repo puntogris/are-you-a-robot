@@ -23,7 +23,6 @@ class GameViewModel @Inject constructor() : ViewModel() {
     private var _isTimeToGuess = MutableLiveData<Boolean>()
     val isTimeToGuess: LiveData<Boolean> = _isTimeToGuess
 
-    //true = on, false = off
     private var _didPlayerLose = MutableLiveData<Boolean>()
     val didPlayerLose: LiveData<Boolean> = _didPlayerLose
 
@@ -39,7 +38,6 @@ class GameViewModel @Inject constructor() : ViewModel() {
     private var timeDifficultyLetters = 3000L
     private var timeDifficultyGuess = 4000L
     private var lettersDifficulty = DEFAULT_LETTER_DIFFICULTY
-
 
     private val countDownTimer =
         object : CountDownTimer(timeDifficultyGuess, 10) {
