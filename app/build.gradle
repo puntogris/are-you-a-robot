@@ -14,7 +14,7 @@ android {
         applicationId "com.puntogris.areyouarobot"
         minSdkVersion 21
         compileSdk 34
-        versionCode 9
+        versionCode 10
         versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
