@@ -13,8 +13,9 @@ android {
     defaultConfig {
         applicationId "com.puntogris.areyouarobot"
         minSdkVersion 21
-        compileSdk 34
-        versionCode 10
+        compileSdk 33
+        targetSdk 33
+        versionCode 15
         versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -45,7 +46,7 @@ android {
 }
 
 ext {
-    nav_version = "2.7.1"
+    nav_version = "2.6.0"
     lottie_version = "5.2.0"
     coroutine_version = "1.3.9"
     preferences_version = "1.2.1"

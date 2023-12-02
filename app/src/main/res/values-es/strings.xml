@@ -31,5 +31,6 @@
 
     <!-- Other -->
     <string name="action_close">Cerrar</string>
-
+    <string name="privacy_policy">Políticas de privacidad</string>
+    <string name="terms_and_conditions">Terminos y condiciones</string>
 </resources>

@@ -33,5 +33,7 @@
 
     <!-- Other-->
     <string name="action_close">Close</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="terms_and_conditions">Terms and conditions</string>
 
 </resources>
