@@ -1,3 +1,2 @@
-include ':multiplayer'
 include ':app'
 rootProject.name = "are you a robot"

@@ -4,7 +4,7 @@ import android.content.res.ColorStateList
 import android.widget.Button
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
-import com.puntogris.multiplayer.R
+import com.puntogris.areyouarobot.R
 
 @BindingAdapter("searchButtonState")
 fun Button.setSearchButtonState(isSearching: Boolean) {

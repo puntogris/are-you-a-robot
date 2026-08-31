@@ -10,8 +10,8 @@ import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.areyouarobot.utils.Utils
 import com.puntogris.areyouarobot.utils.gone
 import com.puntogris.areyouarobot.utils.visible
-import com.puntogris.multiplayer.R
-import com.puntogris.multiplayer.databinding.FragmentMatchBinding
+import com.puntogris.areyouarobot.R
+import com.puntogris.areyouarobot.databinding.FragmentMatchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -100,7 +100,4 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
     }
 
 }
-
-
-
 

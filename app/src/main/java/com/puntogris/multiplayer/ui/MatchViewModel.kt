@@ -11,13 +11,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
-import javax.inject.Inject
 import kotlin.concurrent.scheduleAtFixedRate
+import javax.inject.Inject
 
 @HiltViewModel
-class MatchViewModel @Inject constructor() : ViewModel() {
+class MatchViewModel @Inject constructor(
+    private val repo: MatchRepository
+) : ViewModel() {
 
-    private val repo = MatchRepository()
     private var timerJob: Job? = null
     private var globalTimer: TimerTask? = null
 

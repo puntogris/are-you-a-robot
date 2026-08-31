@@ -20,6 +20,17 @@
     <string name="you_lost">Perdiste</string>
     <string name="try_again_robot">Buen intento robot..</string>
     <string name="save_score">guardar puntaje en el ranking</string>
+    <string name="cancel_search">Cancelar búsqueda</string>
+    <string name="snack_search_cancelled">Cola cancelada</string>
+    <string name="snack_search_started">Buscando partida</string>
+    <string name="multiplayer_message">Batalla contra otro humano y demuestra quién es el impostor</string>
+    <string name="search_opponent">Buscar oponente</string>
+    <string name="draw_match_message">Qué coincidencia, parece que ambos son impostores…</string>
+    <string name="share_the_results">Compartir los resultados</string>
+    <string name="the_robot_is">El robot es:</string>
+    <string name="the_human_is">El humano es:</string>
+    <string name="postMultiplayerGameTitle">No me esperaba esto</string>
+    <string name="share_match_text">Jugué una partida en ¿Eres un robot?, donde %1$s obtuvo %2$d puntos y %3$s obtuvo %4$d puntos.</string>
 
     <!-- Save score-->
     <string name="snack_save_score_success">Puntaje guardado correctamente</string>

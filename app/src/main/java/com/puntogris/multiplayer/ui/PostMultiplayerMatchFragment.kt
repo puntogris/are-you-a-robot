@@ -9,8 +9,8 @@ import com.puntogris.areyouarobot.model.Match.Winner
 import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.areyouarobot.utils.gone
 import com.puntogris.areyouarobot.utils.visible
-import com.puntogris.multiplayer.R
-import com.puntogris.multiplayer.databinding.FragmentPostMultiplayerMatchBinding
+import com.puntogris.areyouarobot.R
+import com.puntogris.areyouarobot.databinding.FragmentPostMultiplayerMatchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

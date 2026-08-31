@@ -8,6 +8,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.puntogris.areyouarobot.ui.main.MainActivity
 import org.junit.Rule
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -30,6 +31,7 @@ class InstrumentedTest {
     }
 
     @Test
+    @Ignore("Multiplayer is intentionally disabled in the navigation menu")
     fun should_navigate_to_multiplayer(){
         onView(withId(R.id.findMatchFragment)).perform(click()).check(matches(isDisplayed()))
     }
@@ -40,5 +42,4 @@ class InstrumentedTest {
         onView(withId(R.id.settingsLayout)).check(matches(isDisplayed()))
     }
 }
-
 

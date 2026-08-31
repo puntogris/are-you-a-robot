@@ -6,8 +6,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.puntogris.areyouarobot.ui.base.BaseFragment
 import com.puntogris.areyouarobot.utils.SimpleResult
-import com.puntogris.multiplayer.R
-import com.puntogris.multiplayer.databinding.FragmentFindMatchBinding
+import com.puntogris.areyouarobot.R
+import com.puntogris.areyouarobot.databinding.FragmentFindMatchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

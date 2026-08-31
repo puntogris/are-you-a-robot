@@ -46,4 +46,3 @@ class FindMatchViewModel @Inject constructor(
         if (player == playerName) "playerOne" else "playerTwo"
 
 }
-

@@ -4,7 +4,7 @@ plugins {
     id "kotlin-kapt"
     id "androidx.navigation.safeargs.kotlin"
     id "com.google.gms.google-services"
-    id "dagger.hilt.android.plugin"
+    id "com.google.dagger.hilt.android"
     id "kotlin-parcelize"
 }
 
@@ -13,21 +13,21 @@ android {
     defaultConfig {
         applicationId "com.puntogris.areyouarobot"
         minSdkVersion 21
-        compileSdk 33
-        targetSdk 33
-        versionCode 15
+        compileSdk 36
+        targetSdkVersion 36
+        versionCode 17
         versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 
     buildTypes {
@@ -41,7 +41,6 @@ android {
         dataBinding = true
     }
 
-    dynamicFeatures = [":multiplayer"]
     namespace "com.puntogris.areyouarobot"
 }
 
@@ -52,7 +51,7 @@ ext {
     preferences_version = "1.2.1"
     lifecycle_version = "2.6.1"
     fragment_version = "1.6.1"
-    hilt_version = "2.47"
+    hilt_version = "2.57.1"
     firebase_bom_version = "32.2.2"
     dynamic_module_version = "2.1.0"
 }
@@ -78,10 +77,6 @@ dependencies {
     // Navigation
     api "androidx.navigation:navigation-fragment-ktx:$nav_version"
     api "androidx.navigation:navigation-ui-ktx:$nav_version"
-    api "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
-
-    // Dynamic Feature Module Support
-    api "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
     //Firebase
     api platform("com.google.firebase:firebase-bom:$firebase_bom_version")
@@ -93,9 +88,6 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.0"
-
-    //Dynamic Modules
-    implementation("com.google.android.play:feature-delivery:$dynamic_module_version")
 
     //Preferences
     api "androidx.preference:preference-ktx:$preferences_version"

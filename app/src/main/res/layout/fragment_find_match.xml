@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="90dp"
-            searchButtonState="@{viewModel.isSearching}"
+            app:searchButtonState="@{viewModel.isSearching}"
             android:textColor="@android:color/white"
             android:onClick="@{()-> viewModel.toggleQueueState()}"
             app:layout_constraintBottom_toBottomOf="parent"

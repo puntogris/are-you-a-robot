@@ -6,8 +6,7 @@
 
     <fragment
         android:id="@+id/postMultiplayerMatchFragment"
-        android:name="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragment"
-        app:moduleName="multiplayer">
+        android:name="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragment">
         <argument
             android:name="playerPos"
             app:argType="string" />
@@ -16,8 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/matchFragment"
-        android:name="com.puntogris.multiplayer.ui.MatchFragment"
-        app:moduleName="multiplayer">
+        android:name="com.puntogris.multiplayer.ui.MatchFragment">
         <argument
             android:name="matchId"
             app:argType="string" />
@@ -32,8 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/findMatchFragment"
-        android:name="com.puntogris.multiplayer.ui.FindMatchFragment"
-        app:moduleName="multiplayer">
+        android:name="com.puntogris.multiplayer.ui.FindMatchFragment">
         <action
             android:id="@+id/action_findMatchFragment_to_matchFragment"
             app:destination="@id/matchFragment" />
