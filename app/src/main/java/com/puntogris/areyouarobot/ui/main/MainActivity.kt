@@ -3,6 +3,9 @@ package com.puntogris.areyouarobot.ui.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.ui.AppBarConfiguration
@@ -24,12 +27,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun initializeViews() {
+        applySystemBarInsets()
         setupNavigation()
 
         binding.mainToolbar.apply {
             setSupportActionBar(this)
             setupWithNavController(navController, appBarConfiguration)
         }
+    }
+
+    private fun applySystemBarInsets() {
+        val root = binding.mainRoot
+        val initialLeft = root.paddingLeft
+        val initialTop = root.paddingTop
+        val initialRight = root.paddingRight
+        val initialBottom = root.paddingBottom
+
+        ViewCompat.setOnApplyWindowInsetsListener(root) { view, windowInsets ->
+            val systemBars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.updatePadding(
+                left = initialLeft + systemBars.left,
+                top = initialTop + systemBars.top,
+                right = initialRight + systemBars.right,
+                bottom = initialBottom + systemBars.bottom
+            )
+            windowInsets
+        }
+        ViewCompat.requestApplyInsets(root)
     }
 
     private fun setupNavigation() {
@@ -87,7 +111,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.welcomeFragment) {
+            if (!navController.popBackStack(R.id.welcomeFragment, false)) {
+                navController.navigate(R.id.welcomeFragment)
+            }
+            return true
+        }
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 }
-

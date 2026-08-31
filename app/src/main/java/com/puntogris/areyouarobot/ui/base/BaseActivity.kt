@@ -5,6 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import com.puntogris.areyouarobot.utils.getNavHostFragment
 
@@ -17,6 +18,7 @@ abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes val layout: Int) :
     override fun onCreate(savedInstanceState: Bundle?) {
         preInitializeViews()
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         _binding = DataBindingUtil.setContentView(this, layout)
         initializeViews()
     }

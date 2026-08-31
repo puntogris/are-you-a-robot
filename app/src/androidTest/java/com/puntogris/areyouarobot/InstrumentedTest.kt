@@ -25,6 +25,16 @@ class InstrumentedTest {
     }
 
     @Test
+    fun close_game_should_navigate_to_welcome() {
+        onView(withId(R.id.welcomeFragmentPlayButton)).perform(click())
+        onView(withId(R.id.singlePlayerGameLayout)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.welcomeFragment)).perform(click())
+
+        onView(withId(R.id.welcomeFragmentPlayButton)).check(matches(isDisplayed()))
+    }
+
+    @Test
     fun should_navigate_to_rankings(){
         onView(withId(R.id.rankingsFragment)).perform(click())
         onView(withId(R.id.rankingsLayout)).check(matches(isDisplayed()))
@@ -42,4 +52,3 @@ class InstrumentedTest {
         onView(withId(R.id.settingsLayout)).check(matches(isDisplayed()))
     }
 }
-
