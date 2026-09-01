@@ -1,8 +1,10 @@
 package com.puntogris.areyouarobot.ui.main
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -14,19 +16,24 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.ActivityMainBinding
-import com.puntogris.areyouarobot.ui.base.BaseActivity
 import com.puntogris.areyouarobot.utils.getNavController
 import com.puntogris.areyouarobot.utils.gone
+import com.puntogris.areyouarobot.utils.viewBinding
 import com.puntogris.areyouarobot.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    override fun initializeViews() {
+    private val binding by viewBinding(ActivityMainBinding::inflate)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
         applySystemBarInsets()
         setupNavigation()
 

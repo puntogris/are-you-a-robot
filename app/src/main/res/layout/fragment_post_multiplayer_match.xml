@@ -1,157 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
-    <data>
-        <variable
-            name="fragment"
-            type="com.puntogris.multiplayer.ui.PostMultiplayerMatchFragment" />
-        <variable
-            name="match"
-            type="com.puntogris.areyouarobot.model.Match" />
-    </data>
+    <TextView
+        android:id="@+id/postMultiplayerGameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/postMultiplayerGameTitle"
+        android:textColor="@color/colorPrimary"
+        android:textSize="29sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background">
+    <TextView
+        android:id="@+id/playerOneName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="60dp"
+        android:textColor="@android:color/secondary_text_light_nodisable"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/playerOneScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/secondary_text_light_nodisable"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerOneName" />
 
-        <TextView
-            android:id="@+id/postMultiplayerGameTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/postMultiplayerGameTitle"
-            android:textColor="@color/colorPrimary"
-            android:textSize="29sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/playerTwoScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/secondary_text_light_nodisable"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerTwoName" />
 
-        <TextView
-            android:id="@+id/playerOneName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="60dp"
-            android:textColor="@android:color/secondary_text_light_nodisable"
-            android:text="@{match.playerOneName}"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/playerTwoName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/secondary_text_light_nodisable"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/playerOneName" />
 
-        <TextView
-            android:id="@+id/playerOneScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@{String.valueOf(match.playerOneScore)}"
-            android:textColor="@android:color/secondary_text_light_nodisable"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerOneName" />
+    <TextView
+        android:id="@+id/humanPlayerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="120dp"
+        android:text="@string/the_human_is"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postMultiplayerGameTitle" />
 
-        <TextView
-            android:id="@+id/playerTwoScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{String.valueOf(match.playerTwoScore)}"
-            android:textColor="@android:color/secondary_text_light_nodisable"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerTwoName" />
+    <TextView
+        android:id="@+id/playerWinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/humanPlayerText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/playerLoser"
+        app:layout_constraintTop_toTopOf="@+id/humanPlayerText" />
 
-        <TextView
-            android:id="@+id/playerTwoName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:textColor="@android:color/secondary_text_light_nodisable"
-            android:textSize="17sp"
-            android:text="@{match.playerTwoName}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/playerOneName" />
+    <TextView
+        android:id="@+id/robotPlayerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/the_robot_is"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/humanPlayerText" />
 
-        <TextView
-            android:id="@+id/humanPlayerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="120dp"
-            android:text="@string/the_human_is"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postMultiplayerGameTitle" />
-
-        <TextView
-            android:id="@+id/playerWinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:textColor="@color/colorAccent"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/humanPlayerText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/playerLoser"
-            app:layout_constraintTop_toTopOf="@+id/humanPlayerText" />
-
-        <TextView
-            android:id="@+id/robotPlayerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="60dp"
-            android:text="@string/the_robot_is"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/humanPlayerText" />
-
-        <TextView
-            android:id="@+id/playerLoser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:textColor="@color/colorAccent"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/robotPlayerText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/robotPlayerText" />
+    <TextView
+        android:id="@+id/playerLoser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/robotPlayerText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/robotPlayerText" />
 
 
-        <Button
-            android:id="@+id/shareResults"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="92dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/share_the_results"
-            android:onClick="@{()->fragment.onShareResultsClicked()}"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toTopOf="@+id/playerOneName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/shareResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="92dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/share_the_results"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/playerOneName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/drawResult"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:gravity="center"
-            android:text="@string/draw_match_message"
-            android:textColor="@android:color/white"
-            android:textSize="21sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/shareResults"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postMultiplayerGameTitle" />
+    <TextView
+        android:id="@+id/drawResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:text="@string/draw_match_message"
+        android:textColor="@android:color/white"
+        android:textSize="21sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/shareResults"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postMultiplayerGameTitle" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

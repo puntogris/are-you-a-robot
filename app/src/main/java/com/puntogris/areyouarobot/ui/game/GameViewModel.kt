@@ -20,7 +20,7 @@ class GameViewModel @Inject constructor() : ViewModel() {
     private var _currentLetters = MutableLiveData<String>()
     val currentLetters: LiveData<String> = _currentLetters
 
-    private var _isTimeToGuess = MutableLiveData<Boolean>()
+    private var _isTimeToGuess = MutableLiveData<Boolean>(false)
     val isTimeToGuess: LiveData<Boolean> = _isTimeToGuess
 
     private var _didPlayerLose = MutableLiveData<Boolean>()

@@ -3,17 +3,15 @@ package com.puntogris.multiplayer.utils
 import android.content.res.ColorStateList
 import android.widget.Button
 import androidx.core.content.res.ResourcesCompat
-import androidx.databinding.BindingAdapter
 import com.puntogris.areyouarobot.R
 
-@BindingAdapter("searchButtonState")
 fun Button.setSearchButtonState(isSearching: Boolean) {
     if (isSearching) {
         setText(R.string.cancel_search)
         backgroundTintList = ColorStateList.valueOf(
             ResourcesCompat.getColor(
                 resources,
-                com.puntogris.areyouarobot.R.color.colorPrimary,
+                R.color.colorPrimary,
                 null
             )
         )
@@ -22,7 +20,7 @@ fun Button.setSearchButtonState(isSearching: Boolean) {
         backgroundTintList = ColorStateList.valueOf(
             ResourcesCompat.getColor(
                 resources,
-                com.puntogris.areyouarobot.R.color.colorAccent,
+                R.color.colorAccent,
                 null
             )
         )

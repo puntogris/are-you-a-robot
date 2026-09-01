@@ -2,27 +2,35 @@ package com.puntogris.multiplayer.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.puntogris.areyouarobot.model.Match
-import com.puntogris.areyouarobot.model.Match.Winner
-import com.puntogris.areyouarobot.ui.base.BaseFragment
-import com.puntogris.areyouarobot.utils.gone
-import com.puntogris.areyouarobot.utils.visible
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentPostMultiplayerMatchBinding
+import com.puntogris.areyouarobot.model.Match
+import com.puntogris.areyouarobot.model.Match.Winner
+import com.puntogris.areyouarobot.utils.gone
+import com.puntogris.areyouarobot.utils.viewBinding
+import com.puntogris.areyouarobot.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PostMultiplayerMatchFragment :
-    BaseFragment<FragmentPostMultiplayerMatchBinding>(R.layout.fragment_post_multiplayer_match) {
+class PostMultiplayerMatchFragment : Fragment(R.layout.fragment_post_multiplayer_match) {
 
     private val args: PostMultiplayerMatchFragmentArgs by navArgs()
+    private val binding by viewBinding(FragmentPostMultiplayerMatchBinding::bind)
 
-    override fun initializeViews() {
-        binding.fragment = this
-        binding.match = args.match
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         updateWinnerUi(args.match)
+        binding.playerOneName.text = args.match.playerOneName
+        binding.playerTwoName.text = args.match.playerTwoName
+        binding.playerOneScore.text = args.match.playerOneScore.toString()
+        binding.playerTwoScore.text = args.match.playerTwoScore.toString()
+        binding.shareResults.setOnClickListener {
+            onShareResultsClicked()
+        }
     }
 
     private fun updateWinnerUi(match: Match) {

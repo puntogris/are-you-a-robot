@@ -1,26 +1,37 @@
 package com.puntogris.multiplayer.ui
 
+import android.os.Bundle
+import android.view.View
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.puntogris.areyouarobot.ui.base.BaseFragment
-import com.puntogris.areyouarobot.utils.SimpleResult
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.databinding.FragmentFindMatchBinding
+import com.puntogris.areyouarobot.utils.SimpleResult
+import com.puntogris.areyouarobot.utils.viewBinding
+import com.puntogris.multiplayer.utils.setSearchButtonState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FindMatchFragment : BaseFragment<FragmentFindMatchBinding>(R.layout.fragment_find_match) {
+class FindMatchFragment : Fragment(R.layout.fragment_find_match) {
 
     private val viewModel: FindMatchViewModel by activityViewModels()
+    private val binding by viewBinding(FragmentFindMatchBinding::bind)
 
-    override fun initializeViews() {
-        binding.fragment = this
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.searchMatch.setOnClickListener {
+            viewModel.toggleQueueState()
+        }
+        viewModel.isSearching.observe(viewLifecycleOwner) {
+            binding.searchMatchProgressBar.isVisible = it
+            binding.searchMatch.setSearchButtonState(it)
+        }
 
         subscribeMatchState()
     }
