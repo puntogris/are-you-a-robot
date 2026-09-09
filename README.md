@@ -1,12 +1,11 @@
 # are you a robot
 Game where it shows you a combination of letters and you have to type them back to prove that you are not a robot, increasing the difficulty the more you advance.
 
-You can also queue to get a match against another player and see who is the impostor.
-
-Multiplayer is disabled temporarily.
+The single-player app uses Jetpack Compose. Multiplayer remains as a legacy Fragment flow and is not exposed by the main activity.
 
 Used in this project:</br>
   * Kotlin
+  * Jetpack Compose
   * MVVM
   * Firebase Cloud Functions
   * Google Cloud Firestore

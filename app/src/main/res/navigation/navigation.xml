@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Legacy multiplayer graph. MainActivity does not inflate or expose this graph. -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/findMatchFragment">
 
     <fragment
         android:id="@+id/postMultiplayerMatchFragment"
@@ -35,41 +36,4 @@
             android:id="@+id/action_findMatchFragment_to_matchFragment"
             app:destination="@id/matchFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="com.puntogris.areyouarobot.ui.main.WelcomeFragment">
-        <action
-            android:id="@+id/action_welcomeFragment_to_playerSettingsFragment"
-            app:destination="@id/playerSettingsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/rankingsFragment"
-        android:name="com.puntogris.areyouarobot.ui.ranking.RankingsFragment"/>
-    <fragment
-        android:id="@+id/singlePlayerGameFragment"
-        android:name="com.puntogris.areyouarobot.ui.game.SinglePlayerGameFragment">
-        <action
-            android:id="@+id/action_singlePlayerGameFragment_to_postGameFragment"
-            app:destination="@id/postGameFragment"
-            app:popUpTo="@id/welcomeFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
-    <dialog
-        android:id="@+id/saveRankingDialog"
-        android:name="com.puntogris.areyouarobot.ui.game.SaveRankingDialog">
-        <argument
-            android:name="score"
-            app:argType="integer"
-            android:defaultValue="0" />
-    </dialog>
-    <fragment
-        android:id="@+id/postGameFragment"
-        android:name="com.puntogris.areyouarobot.ui.game.PostGameFragment">
-        <action
-            android:id="@+id/action_postGameFragment_to_saveRankingDialog"
-            app:destination="@id/saveRankingDialog" />
-    </fragment>
-    <fragment
-        android:id="@+id/playerSettingsFragment"
-        android:name="com.puntogris.areyouarobot.ui.settings.PlayerSettingsFragment" />
 </navigation>

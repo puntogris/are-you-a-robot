@@ -54,7 +54,6 @@ class GameViewModel @Inject constructor() : ViewModel() {
     fun initializeGame() {
         globalTimer?.cancel()
         globalTimer = startTimer()
-        globalTimer?.run()
         lettersDifficulty = DEFAULT_LETTER_DIFFICULTY
         _score.value = INITIAL_INT_VALUE
         _globalTime.value = INITIAL_INT_VALUE
@@ -104,8 +103,18 @@ class GameViewModel @Inject constructor() : ViewModel() {
 
     fun playerLost() {
         _progressBarStatus.value = MAX_PERCENTAGE
+        stopGame()
+    }
+
+    fun stopGame() {
+        countDownTimer.cancel()
         globalTimer?.cancel()
         timerJob?.cancel()
+    }
+
+    override fun onCleared() {
+        stopGame()
+        super.onCleared()
     }
 
     private fun updateDifficulty() {
