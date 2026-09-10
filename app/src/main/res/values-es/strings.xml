@@ -44,4 +44,47 @@
     <string name="action_close">Cerrar</string>
     <string name="privacy_policy">Políticas de privacidad</string>
     <string name="terms_and_conditions">Terminos y condiciones</string>
+
+    <!-- Diseño Compose -->
+    <string name="protocol_label">UNIDAD DE VERIFICACIÓN HUMANA</string>
+    <string name="ranking_terminal_label">REGISTRO PÚBLICO // TOP 20</string>
+    <string name="game_terminal_label">PRUEBA EN VIVO // ACTIVA</string>
+    <string name="result_terminal_label">REPORTE DE SESIÓN // CERRADA</string>
+    <string name="settings_terminal_label">ARCHIVO DE IDENTIDAD // LOCAL</string>
+    <string name="status_online">EN LÍNEA</string>
+    <string name="nav_test">Prueba</string>
+    <string name="home_eyebrow">CONTROL DE IDENTIDAD // 01</string>
+    <string name="home_title">DEMUESTRA QUE ERES HUMANO</string>
+    <string name="home_body">Memoriza la señal. Escríbela antes de que el sistema te bloquee.</string>
+    <string name="system_ready">SISTEMA LISTO</string>
+    <string name="begin_test">INICIAR PRUEBA</string>
+    <string name="score_label">PUNTAJE</string>
+    <string name="time_label">TIEMPO</string>
+    <string name="survival_label">SUPERVIVENCIA</string>
+    <string name="game_input_phase">ENTRADA ABIERTA</string>
+    <string name="game_memory_phase">SEÑAL DETECTADA</string>
+    <string name="game_repeat">REPITE LA SEÑAL</string>
+    <string name="game_memorize">MEMORIZA</string>
+    <string name="game_input_hint">escribe la señal</string>
+    <string name="game_memory_hint">La señal desaparecerá. Mantenla en tu cabeza.</string>
+    <string name="response_window">TIEMPO RESTANTE</string>
+    <string name="result_eyebrow">VERIFICACIÓN FALLIDA</string>
+    <string name="result_title">CONDUCTA ROBÓTICA DETECTADA</string>
+    <string name="result_body">Resististe %1$d segundos. La máquina todavía sospecha.</string>
+    <string name="classification_label">CLASIFICACIÓN DEL SISTEMA</string>
+    <string name="classification_value">Entidad sospechosa</string>
+    <string name="run_again">REPETIR PRUEBA</string>
+    <string name="publish_score">AGREGAR AL RANKING</string>
+    <string name="save_dialog_eyebrow">REGISTRO PÚBLICO</string>
+    <string name="save_dialog_title">RECLAMA TU PUNTAJE</string>
+    <string name="save_dialog_body">Publica %1$d puntos con este alias.</string>
+    <string name="ranking_eyebrow">REGISTRO PÚBLICO</string>
+    <string name="ranking_title">RANKING DE HUMANOS</string>
+    <string name="ranking_body">Los mejores puntajes de humanos sospechosamente capaces.</string>
+    <string name="ranking_empty">Todavía nadie superó la prueba.</string>
+    <string name="settings_eyebrow">ARCHIVO DE IDENTIDAD</string>
+    <string name="settings_title">TU ALIAS</string>
+    <string name="settings_body">Este nombre aparecerá junto a tu puntaje en el ranking público.</string>
+    <string name="save_identity">GUARDAR IDENTIDAD</string>
+    <string name="legal_label">LEGAL</string>
 </resources>

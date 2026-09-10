@@ -47,4 +47,47 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="terms_and_conditions">Terms and conditions</string>
 
+    <!-- Compose design -->
+    <string name="protocol_label">HUMAN VERIFICATION UNIT</string>
+    <string name="ranking_terminal_label">PUBLIC RECORD // TOP 20</string>
+    <string name="game_terminal_label">LIVE CHALLENGE // ACTIVE</string>
+    <string name="result_terminal_label">SESSION REPORT // CLOSED</string>
+    <string name="settings_terminal_label">IDENTITY FILE // LOCAL</string>
+    <string name="status_online">ONLINE</string>
+    <string name="nav_test">Test</string>
+    <string name="home_eyebrow">IDENTITY CHECK // 01</string>
+    <string name="home_title">PROVE YOU ARE HUMAN</string>
+    <string name="home_body">Memorize the signal. Type it back before the system locks you out.</string>
+    <string name="system_ready">SYSTEM READY</string>
+    <string name="begin_test">START TEST</string>
+    <string name="score_label">SCORE</string>
+    <string name="time_label">TIME</string>
+    <string name="survival_label">SURVIVAL</string>
+    <string name="game_input_phase">INPUT OPEN</string>
+    <string name="game_memory_phase">SIGNAL FOUND</string>
+    <string name="game_repeat">REPEAT THE SIGNAL</string>
+    <string name="game_memorize">MEMORIZE</string>
+    <string name="game_input_hint">enter signal</string>
+    <string name="game_memory_hint">The signal will disappear. Keep it in your head.</string>
+    <string name="response_window">TIME LEFT</string>
+    <string name="result_eyebrow">VERIFICATION FAILED</string>
+    <string name="result_title">BOT BEHAVIOR DETECTED</string>
+    <string name="result_body">You held up for %1$d seconds. The machine is not convinced.</string>
+    <string name="classification_label">SYSTEM CLASSIFICATION</string>
+    <string name="classification_value">Suspicious entity</string>
+    <string name="run_again">RETRY TEST</string>
+    <string name="publish_score">ADD TO LEADERBOARD</string>
+    <string name="save_dialog_eyebrow">PUBLIC RECORD</string>
+    <string name="save_dialog_title">CLAIM YOUR SCORE</string>
+    <string name="save_dialog_body">Publish %1$d points under this callsign.</string>
+    <string name="ranking_eyebrow">PUBLIC RECORD</string>
+    <string name="ranking_title">HUMAN LEADERBOARD</string>
+    <string name="ranking_body">Top scores from suspiciously capable humans.</string>
+    <string name="ranking_empty">No subjects have passed the test yet.</string>
+    <string name="settings_eyebrow">IDENTITY FILE</string>
+    <string name="settings_title">YOUR CALLSIGN</string>
+    <string name="settings_body">This name appears beside your score on the public leaderboard.</string>
+    <string name="save_identity">SAVE IDENTITY</string>
+    <string name="legal_label">LEGAL</string>
+
 </resources>
