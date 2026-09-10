@@ -17,7 +17,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -54,6 +53,7 @@ private enum class Screen {
     Rankings,
     Game,
     PostGame,
+    SaveScore,
     Settings
 }
 
@@ -67,7 +67,9 @@ fun RobotApp(
     RobotTheme {
         var screen by rememberSaveable { mutableStateOf(Screen.Home) }
 
-        BackHandler(enabled = screen != Screen.Home) { screen = Screen.Home }
+        BackHandler(enabled = screen != Screen.Home) {
+            screen = if (screen == Screen.SaveScore) Screen.PostGame else Screen.Home
+        }
 
         AppFrame(screen = screen, onNavigate = { screen = it }) { modifier ->
             when (screen) {
@@ -77,9 +79,15 @@ fun RobotApp(
                 Screen.PostGame -> PostGameScreen(
                     modifier = modifier,
                     gameViewModel = gameViewModel,
-                    saveRankingViewModel = saveRankingViewModel,
                     onPlayAgain = { screen = Screen.Game },
-                    onScoreSaved = { screen = Screen.Home }
+                    onPublishScore = { screen = Screen.SaveScore }
+                )
+                Screen.SaveScore -> SaveScoreScreen(
+                    modifier = modifier,
+                    gameViewModel = gameViewModel,
+                    saveRankingViewModel = saveRankingViewModel,
+                    onSaved = { screen = Screen.Rankings },
+                    onCancel = { screen = Screen.PostGame }
                 )
                 Screen.Settings -> SettingsScreen(modifier, sharedPref) { screen = Screen.Home }
             }
@@ -98,6 +106,7 @@ private fun AppFrame(
         Screen.Rankings -> stringResource(R.string.ranking_terminal_label)
         Screen.Game -> stringResource(R.string.game_terminal_label)
         Screen.PostGame -> stringResource(R.string.result_terminal_label)
+        Screen.SaveScore -> stringResource(R.string.save_score_terminal_label)
         Screen.Settings -> stringResource(R.string.settings_terminal_label)
     }
     val showBottomBar = screen == Screen.Home || screen == Screen.Rankings
@@ -107,9 +116,11 @@ private fun AppFrame(
         topBar = {
             AppTopBar(
                 label = topLabel,
-                canClose = screen != Screen.Home,
+                canClose = !showBottomBar,
                 showSettings = screen == Screen.Home,
-                onClose = { onNavigate(Screen.Home) },
+                onClose = {
+                    onNavigate(if (screen == Screen.SaveScore) Screen.PostGame else Screen.Home)
+                },
                 onSettings = { onNavigate(Screen.Settings) }
             )
         },
@@ -156,7 +167,6 @@ private fun HomeScreen(
 
         TerminalPanel(
             modifier = Modifier.fillMaxWidth(),
-            borderColor = Brand.copy(alpha = 0.45f),
             padding = 8.dp
         ) {
             Box(
@@ -256,10 +266,12 @@ private fun GameScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.Center),
-            borderColor = if (isGuessing) Electric.copy(alpha = 0.55f) else Brand.copy(alpha = 0.55f),
             padding = 24.dp
         ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 StatusChip(
                     text = stringResource(if (isGuessing) R.string.game_input_phase else R.string.game_memory_phase),
                     color = if (isGuessing) Electric else Brand
@@ -268,7 +280,9 @@ private fun GameScreen(
                 Text(
                     text = stringResource(if (isGuessing) R.string.game_repeat else R.string.game_memorize),
                     color = Muted,
-                    style = MonoLabel
+                    style = MonoLabel,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(Modifier.height(18.dp))
 
@@ -276,8 +290,8 @@ private fun GameScreen(
                     SignalInput(
                         value = guess,
                         onValueChange = { value ->
-                            guess = value.lowercase()
-                            if (value.lowercase() == letters) viewModel.playerWon()
+                            guess = value
+                            if (value.equals(letters, ignoreCase = true)) viewModel.playerWon()
                         },
                         focusRequester = focusRequester
                     )
@@ -288,7 +302,9 @@ private fun GameScreen(
                         fontFamily = FontFamily.Monospace,
                         fontSize = 58.sp,
                         fontWeight = FontWeight.Black,
-                        letterSpacing = 8.sp
+                        letterSpacing = 8.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
                 Spacer(Modifier.height(8.dp))
@@ -326,7 +342,7 @@ private fun SignalInput(
 ) {
     OutlinedTextField(
         value = value,
-        onValueChange = onValueChange,
+        onValueChange = { onValueChange(it.uppercase()) },
         modifier = Modifier
             .fillMaxWidth()
             .focusRequester(focusRequester),
@@ -345,15 +361,9 @@ private fun SignalInput(
         ),
         singleLine = true,
         shape = RoundedCornerShape(14.dp),
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Electric,
-            unfocusedBorderColor = Stroke,
-            cursorColor = Electric,
-            focusedContainerColor = Ink.copy(alpha = 0.55f),
-            unfocusedContainerColor = Ink.copy(alpha = 0.55f)
-        ),
+        colors = terminalTextFieldColors(),
         keyboardOptions = KeyboardOptions(
-            capitalization = KeyboardCapitalization.None,
+            capitalization = KeyboardCapitalization.Characters,
             autoCorrectEnabled = false,
             imeAction = ImeAction.Done
         )

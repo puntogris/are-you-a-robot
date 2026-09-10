@@ -36,10 +36,8 @@
     <!-- Save score-->
     <string name="snack_save_score_success">Score saved Successfully</string>
     <string name="snack_save_score_error">An error occurred saving the score</string>
-    <string name="action_save">save</string>
     <string name="action_cancel">cancel</string>
     <string name="save_score">save score in the ranking</string>
-    <string name="dialog_nickname_hint">Your nickname</string>
     <string name="nickname">nickname</string>
 
     <!-- Other-->
@@ -52,6 +50,7 @@
     <string name="ranking_terminal_label">PUBLIC RECORD // TOP 20</string>
     <string name="game_terminal_label">LIVE CHALLENGE // ACTIVE</string>
     <string name="result_terminal_label">SESSION REPORT // CLOSED</string>
+    <string name="save_score_terminal_label">PUBLIC RECORD // NEW ENTRY</string>
     <string name="settings_terminal_label">IDENTITY FILE // LOCAL</string>
     <string name="status_online">ONLINE</string>
     <string name="nav_test">Test</string>
@@ -77,9 +76,12 @@
     <string name="classification_value">Suspicious entity</string>
     <string name="run_again">RETRY TEST</string>
     <string name="publish_score">ADD TO LEADERBOARD</string>
-    <string name="save_dialog_eyebrow">PUBLIC RECORD</string>
-    <string name="save_dialog_title">CLAIM YOUR SCORE</string>
-    <string name="save_dialog_body">Publish %1$d points under this callsign.</string>
+    <string name="save_ranking_eyebrow">PUBLIC RECORD</string>
+    <string name="save_ranking_title">CLAIM YOUR SCORE</string>
+    <string name="save_ranking_body">Publish %1$d points under this callsign.</string>
+    <string name="ranking_identity_label">IDENTITY FOR THIS ENTRY</string>
+    <string name="ranking_nickname_hint">Your callsign</string>
+    <string name="publish_score_action">PUBLISH SCORE</string>
     <string name="ranking_eyebrow">PUBLIC RECORD</string>
     <string name="ranking_title">HUMAN LEADERBOARD</string>
     <string name="ranking_body">Top scores from suspiciously capable humans.</string>

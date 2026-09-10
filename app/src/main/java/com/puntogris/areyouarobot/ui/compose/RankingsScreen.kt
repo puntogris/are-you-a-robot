@@ -36,13 +36,8 @@ internal fun RankingsScreen(modifier: Modifier, viewModel: RankingsViewModel) {
             rankings.orEmpty().isEmpty() -> EmptyMessage(stringResource(R.string.ranking_empty))
             else -> LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 itemsIndexed(rankings.orEmpty()) { index, entry ->
-                    val accent = when (index) {
-                        0 -> Warning
-                        1 -> Electric
-                        2 -> Brand
-                        else -> Stroke
-                    }
-                    TerminalPanel(Modifier.fillMaxWidth(), accent.copy(alpha = 0.7f), 14.dp) {
+                    val accent = if (index == 0) Brand else Muted
+                    TerminalPanel(Modifier.fillMaxWidth(), padding = 14.dp) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Surface(
                                 color = accent.copy(alpha = 0.12f),

@@ -38,7 +38,7 @@ internal fun SettingsScreen(modifier: Modifier, sharedPref: SharedPref, onSaved:
             Spacer(Modifier.height(8.dp))
             Text(stringResource(R.string.settings_body), style = MaterialTheme.typography.bodyMedium)
         }
-        TerminalPanel(Modifier.fillMaxWidth(), Electric.copy(alpha = 0.45f)) {
+        TerminalPanel(Modifier.fillMaxWidth()) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Box(
                     modifier = Modifier
@@ -60,11 +60,7 @@ internal fun SettingsScreen(modifier: Modifier, sharedPref: SharedPref, onSaved:
                     },
                     singleLine = true,
                     shape = RoundedCornerShape(14.dp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Electric,
-                        unfocusedBorderColor = Stroke,
-                        cursorColor = Electric
-                    )
+                    colors = terminalTextFieldColors()
                 )
                 Spacer(Modifier.height(14.dp))
                 PrimaryAction(

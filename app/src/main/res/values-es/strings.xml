@@ -35,9 +35,7 @@
     <!-- Save score-->
     <string name="snack_save_score_success">Puntaje guardado correctamente</string>
     <string name="snack_save_score_error">Error al guardar el puntaje</string>
-    <string name="dialog_nickname_hint">Tu apodo</string>
     <string name="nickname">apodo</string>
-    <string name="action_save">guardar</string>
     <string name="action_cancel">cancelar</string>
 
     <!-- Other -->
@@ -50,6 +48,7 @@
     <string name="ranking_terminal_label">REGISTRO PÚBLICO // TOP 20</string>
     <string name="game_terminal_label">PRUEBA EN VIVO // ACTIVA</string>
     <string name="result_terminal_label">REPORTE DE SESIÓN // CERRADA</string>
+    <string name="save_score_terminal_label">REGISTRO PÚBLICO // NUEVA ENTRADA</string>
     <string name="settings_terminal_label">ARCHIVO DE IDENTIDAD // LOCAL</string>
     <string name="status_online">EN LÍNEA</string>
     <string name="nav_test">Prueba</string>
@@ -75,9 +74,12 @@
     <string name="classification_value">Entidad sospechosa</string>
     <string name="run_again">REPETIR PRUEBA</string>
     <string name="publish_score">AGREGAR AL RANKING</string>
-    <string name="save_dialog_eyebrow">REGISTRO PÚBLICO</string>
-    <string name="save_dialog_title">RECLAMA TU PUNTAJE</string>
-    <string name="save_dialog_body">Publica %1$d puntos con este alias.</string>
+    <string name="save_ranking_eyebrow">REGISTRO PÚBLICO</string>
+    <string name="save_ranking_title">RECLAMA TU PUNTAJE</string>
+    <string name="save_ranking_body">Publica %1$d puntos con este alias.</string>
+    <string name="ranking_identity_label">IDENTIDAD PARA ESTA ENTRADA</string>
+    <string name="ranking_nickname_hint">Tu alias</string>
+    <string name="publish_score_action">PUBLICAR PUNTAJE</string>
     <string name="ranking_eyebrow">REGISTRO PÚBLICO</string>
     <string name="ranking_title">RANKING DE HUMANOS</string>
     <string name="ranking_body">Los mejores puntajes de humanos sospechosamente capaces.</string>

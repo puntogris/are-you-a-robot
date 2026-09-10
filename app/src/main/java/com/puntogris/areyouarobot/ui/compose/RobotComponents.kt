@@ -26,13 +26,16 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -93,7 +96,7 @@ internal fun AppTopBar(
         title = {
             Text(
                 text = label,
-                color = if (canClose) Muted else Brand,
+                color = Brand,
                 style = MonoLabel,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -258,23 +261,32 @@ internal fun PrimaryAction(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    loading: Boolean = false
 ) {
     Button(
         onClick = onClick,
         modifier = modifier.height(58.dp),
-        enabled = enabled,
+        enabled = enabled && !loading,
         shape = RoundedCornerShape(14.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Brand,
             contentColor = Ink,
-            disabledContainerColor = Stroke,
-            disabledContentColor = Muted
+            disabledContainerColor = if (loading) Brand else Stroke,
+            disabledContentColor = if (loading) Ink else Muted
         )
     ) {
-        Text(text = text, style = MaterialTheme.typography.labelLarge)
-        Spacer(Modifier.width(12.dp))
-        Text(text = "→", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+        if (loading) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(22.dp),
+                color = Ink,
+                strokeWidth = 2.dp
+            )
+        } else {
+            Text(text = text, style = MaterialTheme.typography.labelLarge)
+            Spacer(Modifier.width(12.dp))
+            Text(text = "→", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+        }
     }
 }
 
@@ -295,6 +307,33 @@ internal fun SecondaryAction(
         Text(text = text, style = MaterialTheme.typography.labelLarge)
     }
 }
+
+@Composable
+internal fun terminalTextFieldColors(): TextFieldColors = OutlinedTextFieldDefaults.colors(
+    focusedTextColor = Paper,
+    unfocusedTextColor = Paper,
+    disabledTextColor = Muted,
+    focusedContainerColor = Ink.copy(alpha = 0.55f),
+    unfocusedContainerColor = Ink.copy(alpha = 0.55f),
+    disabledContainerColor = Ink.copy(alpha = 0.35f),
+    cursorColor = Electric,
+    errorCursorColor = Danger,
+    focusedBorderColor = Electric,
+    unfocusedBorderColor = Stroke,
+    disabledBorderColor = Stroke.copy(alpha = 0.55f),
+    errorBorderColor = Danger,
+    focusedLabelColor = Electric,
+    unfocusedLabelColor = Muted,
+    disabledLabelColor = Muted,
+    errorLabelColor = Danger,
+    focusedPlaceholderColor = Muted,
+    unfocusedPlaceholderColor = Muted,
+    disabledPlaceholderColor = Muted.copy(alpha = 0.55f),
+    focusedSupportingTextColor = Muted,
+    unfocusedSupportingTextColor = Muted,
+    disabledSupportingTextColor = Muted.copy(alpha = 0.55f),
+    errorSupportingTextColor = Danger
+)
 
 @Composable
 internal fun MetricCard(
