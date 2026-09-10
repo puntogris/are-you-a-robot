@@ -1,16 +1,16 @@
 package com.puntogris.multiplayer.data
 
-import com.google.firebase.firestore.FieldValue
+import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.firestore
 import com.google.firebase.functions.FirebaseFunctions
-import com.google.firebase.ktx.Firebase
+import com.puntogris.areyouarobot.data.documentSnapshots
 import com.puntogris.areyouarobot.utils.Constants.MATCHES_COLLECTION
 import com.puntogris.areyouarobot.utils.Constants.PLAYER_FIELD
 import com.puntogris.areyouarobot.utils.Constants.START_MATCHMAKING_FUNCTION
 import com.puntogris.areyouarobot.utils.Constants.UNSUBSCRIBE_TO_MATCH_FUNCTION
 import com.puntogris.areyouarobot.utils.SimpleResult
-import com.puntogris.areyouarobot.data.documentSnapshots
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject

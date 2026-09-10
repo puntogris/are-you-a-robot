@@ -1,9 +1,9 @@
 package com.puntogris.areyouarobot.data.repo
 
+import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.firestore
 import com.puntogris.areyouarobot.data.documentSnapshots
 import com.puntogris.areyouarobot.model.RankingEntry
 import com.puntogris.areyouarobot.utils.Constants.RANKINGS_COLLECTION

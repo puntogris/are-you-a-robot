@@ -13,10 +13,10 @@ android {
 
     defaultConfig {
         applicationId "com.puntogris.areyouarobot"
-        minSdkVersion 21
-        compileSdk 36
-        targetSdkVersion 36
-        versionCode 19
+        minSdkVersion 23
+        compileSdk 37
+        targetSdkVersion 37
+        versionCode 20
         versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
