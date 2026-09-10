@@ -16,6 +16,7 @@
         android:fullBackupContent="true">
         <activity
             android:name=".ui.main.MainActivity"
+            android:theme="@style/AppTheme.Starting"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
             android:exported="true">

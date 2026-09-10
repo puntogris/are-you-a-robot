@@ -123,7 +123,7 @@ internal fun AppTopBar(
                         tint = Paper
                     )
                 }
-            } 
+            }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Ink.copy(alpha = 0.96f),

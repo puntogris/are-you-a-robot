@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.areyouarobot.ui.compose.RobotApp
 import com.puntogris.areyouarobot.ui.game.GameViewModel
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var sharedPref: SharedPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
             RobotApp(
