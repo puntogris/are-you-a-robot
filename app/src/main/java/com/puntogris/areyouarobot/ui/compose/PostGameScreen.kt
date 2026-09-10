@@ -63,7 +63,7 @@ private fun PostGameContent(
         Column {
             StatusChip(stringResource(R.string.result_eyebrow), Danger)
             Spacer(Modifier.height(20.dp))
-            Text(stringResource(R.string.result_title), style = MaterialTheme.typography.headlineLarge)
+            Text(stringResource(R.string.result_title), style = MaterialTheme.typography.headlineMedium)
             Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.result_body, time), style = MaterialTheme.typography.bodyLarge)
         }

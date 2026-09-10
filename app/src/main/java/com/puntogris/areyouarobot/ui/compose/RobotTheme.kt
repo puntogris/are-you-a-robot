@@ -116,8 +116,8 @@ internal fun RobotTheme(content: @Composable () -> Unit) {
                 color = Paper,
                 fontFamily = GoogleSansFlex,
                 fontWeight = FontWeight.Black,
-                fontSize = 32.sp,
-                lineHeight = 35.sp,
+                fontSize = 26.sp,
+                lineHeight = 28.sp,
                 letterSpacing = (-0.7).sp
             ),
             titleLarge = TextStyle(

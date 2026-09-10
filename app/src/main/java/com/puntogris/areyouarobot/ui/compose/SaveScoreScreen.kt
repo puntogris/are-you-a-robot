@@ -113,7 +113,7 @@ private fun SaveScoreContent(
                 Spacer(Modifier.height(12.dp))
                 Text(
                     stringResource(R.string.save_ranking_title),
-                    style = MaterialTheme.typography.headlineLarge
+                    style = MaterialTheme.typography.headlineMedium
                 )
                 Spacer(Modifier.height(14.dp))
                 Text(

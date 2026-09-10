@@ -45,9 +45,9 @@ private fun RankingsContent(
             rankings == null -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator(color = Electric)
             }
-            rankings.orEmpty().isEmpty() -> EmptyMessage(stringResource(R.string.ranking_empty))
+            rankings.isEmpty() -> EmptyMessage(stringResource(R.string.ranking_empty))
             else -> LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                itemsIndexed(rankings.orEmpty()) { index, entry ->
+                itemsIndexed(rankings) { index, entry ->
                     val accent = if (index == 0) Brand else Muted
                     TerminalPanel(Modifier.fillMaxWidth(), padding = 14.dp) {
                         Row(verticalAlignment = Alignment.CenterVertically) {

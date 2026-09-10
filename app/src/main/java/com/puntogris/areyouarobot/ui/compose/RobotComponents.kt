@@ -45,6 +45,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke as DrawStroke
 import androidx.compose.ui.res.stringResource
@@ -244,12 +245,13 @@ internal fun TerminalPanel(
     modifier: Modifier = Modifier,
     borderColor: Color = Stroke,
     padding: Dp = 20.dp,
+    shape: Shape = RoundedCornerShape(20.dp),
     content: @Composable () -> Unit
 ) {
     Surface(
         modifier = modifier,
         color = Panel.copy(alpha = 0.96f),
-        shape = RoundedCornerShape(20.dp),
+        shape = shape,
         border = BorderStroke(1.dp, borderColor)
     ) {
         Box(Modifier.padding(padding)) { content() }
