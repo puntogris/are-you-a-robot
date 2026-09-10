@@ -36,7 +36,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -309,7 +308,7 @@ private fun GameScreen(
                         Text(
                             text = letters.uppercase(),
                             color = Paper,
-                            fontFamily = FontFamily.Monospace,
+                            fontFamily = GoogleSansFlex,
                             fontSize = 58.sp,
                             fontWeight = FontWeight.Black,
                             letterSpacing = 8.sp,
@@ -362,12 +361,14 @@ private fun SignalInput(
             Text(
                 stringResource(R.string.game_input_hint),
                 color = Muted,
-                fontFamily = FontFamily.Monospace
+                fontFamily = GoogleSansFlex,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
         },
         textStyle = MaterialTheme.typography.headlineMedium.copy(
             color = Paper,
-            fontFamily = FontFamily.Monospace,
+            fontFamily = GoogleSansFlex,
             textAlign = TextAlign.Center,
             letterSpacing = 5.sp
         ),

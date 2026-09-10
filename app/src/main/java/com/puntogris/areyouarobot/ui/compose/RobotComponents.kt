@@ -48,7 +48,6 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke as DrawStroke
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -363,7 +362,7 @@ internal fun MetricCard(
             Text(
                 text = value,
                 color = color,
-                fontFamily = FontFamily.Monospace,
+                fontFamily = GoogleSansFlex,
                 fontSize = 27.sp,
                 fontWeight = FontWeight.Bold
             )

@@ -7,7 +7,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.googlefonts.Font
+import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.unit.sp
+import com.puntogris.areyouarobot.R
 
 internal val Ink = Color(0xFF070B10)
 internal val Panel = Color(0xFF0D151E)
@@ -22,15 +25,39 @@ internal val Paper = Color(0xFFF2F7F8)
 internal val Muted = Color(0xFF8A9BA6)
 internal val Stroke = Color(0xFF29404C)
 
+private val GoogleFontsProvider = GoogleFont.Provider(
+    providerAuthority = "com.google.android.gms.fonts",
+    providerPackage = "com.google.android.gms",
+    certificates = R.array.com_google_android_gms_fonts_certs
+)
+
+internal val GoogleSansFlex = FontFamily(
+    Font(
+        googleFont = GoogleFont("Google Sans Flex"),
+        fontProvider = GoogleFontsProvider,
+        weight = FontWeight.Normal
+    ),
+    Font(
+        googleFont = GoogleFont("Google Sans Flex"),
+        fontProvider = GoogleFontsProvider,
+        weight = FontWeight.Bold
+    ),
+    Font(
+        googleFont = GoogleFont("Google Sans Flex"),
+        fontProvider = GoogleFontsProvider,
+        weight = FontWeight.Black
+    )
+)
+
 internal val MonoLabel = TextStyle(
-    fontFamily = FontFamily.Monospace,
+    fontFamily = GoogleSansFlex,
     fontWeight = FontWeight.Bold,
     fontSize = 12.sp,
     letterSpacing = 1.4.sp
 )
 
 internal val MonoValue = TextStyle(
-    fontFamily = FontFamily.Monospace,
+    fontFamily = GoogleSansFlex,
     fontWeight = FontWeight.Bold,
     fontSize = 16.sp
 )
@@ -79,6 +106,7 @@ internal fun RobotTheme(content: @Composable () -> Unit) {
         typography = MaterialTheme.typography.copy(
             headlineLarge = TextStyle(
                 color = Paper,
+                fontFamily = GoogleSansFlex,
                 fontWeight = FontWeight.Black,
                 fontSize = 42.sp,
                 lineHeight = 44.sp,
@@ -86,6 +114,7 @@ internal fun RobotTheme(content: @Composable () -> Unit) {
             ),
             headlineMedium = TextStyle(
                 color = Paper,
+                fontFamily = GoogleSansFlex,
                 fontWeight = FontWeight.Black,
                 fontSize = 32.sp,
                 lineHeight = 35.sp,
@@ -93,21 +122,24 @@ internal fun RobotTheme(content: @Composable () -> Unit) {
             ),
             titleLarge = TextStyle(
                 color = Paper,
+                fontFamily = GoogleSansFlex,
                 fontWeight = FontWeight.Bold,
                 fontSize = 22.sp
             ),
             bodyLarge = TextStyle(
                 color = Muted,
+                fontFamily = GoogleSansFlex,
                 fontSize = 17.sp,
                 lineHeight = 25.sp
             ),
             bodyMedium = TextStyle(
                 color = Muted,
+                fontFamily = GoogleSansFlex,
                 fontSize = 14.sp,
                 lineHeight = 21.sp
             ),
             labelLarge = TextStyle(
-                fontFamily = FontFamily.Monospace,
+                fontFamily = GoogleSansFlex,
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp,
                 letterSpacing = 0.8.sp
