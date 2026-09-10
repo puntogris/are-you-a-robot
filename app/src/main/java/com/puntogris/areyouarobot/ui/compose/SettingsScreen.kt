@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.puntogris.areyouarobot.R
@@ -25,8 +27,35 @@ import com.puntogris.areyouarobot.SharedPref
 
 @Composable
 internal fun SettingsScreen(modifier: Modifier, sharedPref: SharedPref, onSaved: () -> Unit) {
-    var playerName by rememberSaveable { mutableStateOf(sharedPref.getPlayerName()) }
     val uriHandler = LocalUriHandler.current
+    val initialPlayerName = remember(sharedPref) { sharedPref.getPlayerName() }
+
+    SettingsContent(
+        modifier = modifier,
+        initialPlayerName = initialPlayerName,
+        onSave = { playerName ->
+            sharedPref.setPlayerName(playerName)
+            onSaved()
+        },
+        onPrivacyPolicy = {
+            runCatching { uriHandler.openUri("https://robot.puntogris.com/privacy-policy.html") }
+        },
+        onTermsAndConditions = {
+            runCatching { uriHandler.openUri("https://robot.puntogris.com/terms-and-conditions.html") }
+        }
+    )
+}
+
+@Composable
+private fun SettingsContent(
+    modifier: Modifier,
+    initialPlayerName: String,
+    onSave: (String) -> Unit,
+    onPrivacyPolicy: () -> Unit,
+    onTermsAndConditions: () -> Unit
+) {
+    var playerName by rememberSaveable { mutableStateOf(initialPlayerName) }
+
     Column(
         modifier = modifier.padding(horizontal = 24.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.SpaceBetween
@@ -65,10 +94,7 @@ internal fun SettingsScreen(modifier: Modifier, sharedPref: SharedPref, onSaved:
                 Spacer(Modifier.height(14.dp))
                 PrimaryAction(
                     stringResource(R.string.save_identity),
-                    {
-                        sharedPref.setPlayerName(playerName)
-                        onSaved()
-                    },
+                    { onSave(playerName) },
                     Modifier.fillMaxWidth()
                 )
             }
@@ -83,15 +109,29 @@ internal fun SettingsScreen(modifier: Modifier, sharedPref: SharedPref, onSaved:
                 )
                 SecondaryAction(
                     stringResource(R.string.privacy_policy),
-                    { runCatching { uriHandler.openUri("https://robot.puntogris.com/privacy-policy.html") } },
+                    onPrivacyPolicy,
                     Modifier.fillMaxWidth()
                 )
                 SecondaryAction(
                     stringResource(R.string.terms_and_conditions),
-                    { runCatching { uriHandler.openUri("https://robot.puntogris.com/terms-and-conditions.html") } },
+                    onTermsAndConditions,
                     Modifier.fillMaxWidth()
                 )
             }
         }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun SettingsScreenPreview() {
+    RobotScreenPreview(Screen.Settings) { modifier ->
+        SettingsContent(
+            modifier = modifier,
+            initialPlayerName = "PLAYER_01",
+            onSave = {},
+            onPrivacyPolicy = {},
+            onTermsAndConditions = {}
+        )
     }
 }

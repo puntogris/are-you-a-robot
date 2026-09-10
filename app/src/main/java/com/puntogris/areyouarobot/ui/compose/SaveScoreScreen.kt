@@ -29,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -47,34 +48,53 @@ internal fun SaveScoreScreen(
     onCancel: () -> Unit
 ) {
     val score by gameViewModel.score.collectAsStateWithLifecycle()
-    var playerName by rememberSaveable { mutableStateOf(saveRankingViewModel.currentUsername) }
     var isSaving by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    val publishScore: () -> Unit = {
-        scope.launch {
-            isSaving = true
-            when (saveRankingViewModel.savePlayerScore(score, playerName.trim())) {
-                SimpleResult.Success -> {
-                    Toast.makeText(
-                        context,
-                        R.string.snack_save_score_success,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    onSaved()
-                }
 
-                SimpleResult.Failure -> {
-                    Toast.makeText(
-                        context,
-                        R.string.snack_save_score_error,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    isSaving = false
+    SaveScoreContent(
+        modifier = modifier,
+        score = score,
+        initialPlayerName = saveRankingViewModel.currentUsername,
+        isSaving = isSaving,
+        onPublishScore = { playerName ->
+            scope.launch {
+                isSaving = true
+                when (saveRankingViewModel.savePlayerScore(score, playerName.trim())) {
+                    SimpleResult.Success -> {
+                        Toast.makeText(
+                            context,
+                            R.string.snack_save_score_success,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        onSaved()
+                    }
+
+                    SimpleResult.Failure -> {
+                        Toast.makeText(
+                            context,
+                            R.string.snack_save_score_error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        isSaving = false
+                    }
                 }
             }
-        }
-    }
+        },
+        onCancel = onCancel
+    )
+}
+
+@Composable
+private fun SaveScoreContent(
+    modifier: Modifier,
+    score: Int,
+    initialPlayerName: String,
+    isSaving: Boolean,
+    onPublishScore: (String) -> Unit,
+    onCancel: () -> Unit
+) {
+    var playerName by rememberSaveable { mutableStateOf(initialPlayerName) }
 
     Column(
         modifier = modifier
@@ -147,7 +167,7 @@ internal fun SaveScoreScreen(
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             PrimaryAction(
                 text = stringResource(R.string.publish_score_action),
-                onClick = publishScore,
+                onClick = { onPublishScore(playerName) },
                 modifier = Modifier.fillMaxWidth(),
                 enabled = playerName.isNotBlank(),
                 loading = isSaving
@@ -159,5 +179,20 @@ internal fun SaveScoreScreen(
                 enabled = !isSaving
             )
         }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun SaveScoreScreenPreview() {
+    RobotScreenPreview(Screen.SaveScore) { modifier ->
+        SaveScoreContent(
+            modifier = modifier,
+            score = 7,
+            initialPlayerName = "PLAYER_01",
+            isSaving = false,
+            onPublishScore = {},
+            onCancel = {}
+        )
     }
 }

@@ -39,6 +39,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -48,7 +49,7 @@ import com.puntogris.areyouarobot.ui.game.GameViewModel
 import com.puntogris.areyouarobot.ui.game.SaveRankingViewModel
 import com.puntogris.areyouarobot.ui.ranking.RankingsViewModel
 
-private enum class Screen {
+internal enum class Screen {
     Home,
     Rankings,
     Game,
@@ -96,7 +97,7 @@ fun RobotApp(
 }
 
 @Composable
-private fun AppFrame(
+internal fun AppFrame(
     screen: Screen,
     onNavigate: (Screen) -> Unit,
     content: @Composable (Modifier) -> Unit
@@ -239,6 +240,37 @@ private fun GameScreen(
         }
     }
 
+    GameScreenContent(
+        modifier = modifier,
+        letters = letters,
+        score = score,
+        time = time,
+        progress = progress,
+        isGuessing = isGuessing,
+        guess = guess,
+        onGuessChange = { value ->
+            if (isGuessing) {
+                guess = value
+                if (value.equals(letters, ignoreCase = true)) viewModel.playerWon()
+            }
+        },
+        focusRequester = focusRequester
+    )
+}
+
+@Composable
+private fun GameScreenContent(
+    modifier: Modifier,
+    letters: String,
+    score: Int,
+    time: Int,
+    progress: Int,
+    isGuessing: Boolean,
+    guess: String,
+    onGuessChange: (String) -> Unit,
+    focusRequester: FocusRequester
+) {
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -295,12 +327,7 @@ private fun GameScreen(
                 ) {
                     SignalInput(
                         value = guess,
-                        onValueChange = { value ->
-                            if (isGuessing) {
-                                guess = value
-                                if (value.equals(letters, ignoreCase = true)) viewModel.playerWon()
-                            }
-                        },
+                        onValueChange = onGuessChange,
                         focusRequester = focusRequester,
                         modifier = Modifier.alpha(if (isGuessing) 1f else 0f)
                     )
@@ -341,6 +368,42 @@ private fun GameScreen(
                     .padding(bottom = 24.dp)
             )
         }
+    }
+}
+
+@Composable
+internal fun RobotScreenPreview(
+    screen: Screen,
+    content: @Composable (Modifier) -> Unit
+) {
+    RobotTheme {
+        AppFrame(screen = screen, onNavigate = {}, content = content)
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun HomeScreenPreview() {
+    RobotScreenPreview(Screen.Home) { modifier ->
+        HomeScreen(modifier = modifier, onPlay = {})
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun GameScreenPreview() {
+    RobotScreenPreview(Screen.Game) { modifier ->
+        GameScreenContent(
+            modifier = modifier,
+            letters = "RY7",
+            score = 7,
+            time = 23,
+            progress = 38,
+            isGuessing = false,
+            guess = "",
+            onGuessChange = {},
+            focusRequester = remember { FocusRequester() }
+        )
     }
 }
 

@@ -11,14 +11,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.puntogris.areyouarobot.R
+import com.puntogris.areyouarobot.model.RankingEntry
 import com.puntogris.areyouarobot.ui.ranking.RankingsViewModel
 
 @Composable
 internal fun RankingsScreen(modifier: Modifier, viewModel: RankingsViewModel) {
     val rankings by viewModel.rankings.collectAsStateWithLifecycle()
+
+    RankingsContent(
+        modifier = modifier,
+        rankings = rankings?.map { it.item }
+    )
+}
+
+@Composable
+private fun RankingsContent(
+    modifier: Modifier,
+    rankings: List<RankingEntry>?
+) {
     Column(modifier.padding(horizontal = 20.dp)) {
         Spacer(Modifier.height(14.dp))
         Eyebrow(stringResource(R.string.ranking_eyebrow))
@@ -47,13 +61,28 @@ internal fun RankingsScreen(modifier: Modifier, viewModel: RankingsViewModel) {
                                 }
                             }
                             Spacer(Modifier.width(14.dp))
-                            Text(entry.item.playerName, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
-                            Text(entry.item.score.toString(), color = Brand, style = MonoValue)
+                            Text(entry.playerName, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                            Text(entry.score.toString(), color = Brand, style = MonoValue)
                         }
                     }
                 }
                 item { Spacer(Modifier.height(14.dp)) }
             }
         }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun RankingsScreenPreview() {
+    RobotScreenPreview(Screen.Rankings) { modifier ->
+        RankingsContent(
+            modifier = modifier,
+            rankings = listOf(
+                RankingEntry(score = 18, playerName = "NEXUS"),
+                RankingEntry(score = 14, playerName = "BYTE"),
+                RankingEntry(score = 11, playerName = "ADA")
+            )
+        )
     }
 }

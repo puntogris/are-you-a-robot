@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -38,6 +39,23 @@ internal fun PostGameScreen(
     val score by gameViewModel.score.collectAsStateWithLifecycle()
     val time by gameViewModel.globalTime.collectAsStateWithLifecycle()
 
+    PostGameContent(
+        modifier = modifier,
+        score = score,
+        time = time,
+        onPlayAgain = onPlayAgain,
+        onPublishScore = onPublishScore
+    )
+}
+
+@Composable
+private fun PostGameContent(
+    modifier: Modifier,
+    score: Int,
+    time: Int,
+    onPlayAgain: () -> Unit,
+    onPublishScore: () -> Unit
+) {
     Column(
         modifier = modifier.padding(horizontal = 24.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.SpaceBetween
@@ -109,5 +127,19 @@ internal fun PostGameScreen(
                 Modifier.fillMaxWidth()
             )
         }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun PostGameScreenPreview() {
+    RobotScreenPreview(Screen.PostGame) { modifier ->
+        PostGameContent(
+            modifier = modifier,
+            score = 7,
+            time = 23,
+            onPlayAgain = {},
+            onPublishScore = {}
+        )
     }
 }
