@@ -1,12 +1,12 @@
 plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    id "org.jetbrains.kotlin.plugin.compose"
-    id "kotlin-kapt"
-    id "androidx.navigation.safeargs.kotlin"
-    id "com.google.gms.google-services"
-    id "com.google.dagger.hilt.android"
-    id "kotlin-parcelize"
+    alias libs.plugins.android.application
+    alias libs.plugins.kotlin.android
+    alias libs.plugins.kotlin.compose
+    alias libs.plugins.kotlin.kapt
+    alias libs.plugins.androidx.navigation.safe.args
+    alias libs.plugins.google.services
+    alias libs.plugins.hilt.android
+    alias libs.plugins.kotlin.parcelize
 }
 
 android {
@@ -46,72 +46,59 @@ android {
     namespace "com.puntogris.areyouarobot"
 }
 
-ext {
-    nav_version = "2.6.0"
-    coroutine_version = "1.7.3"
-    preferences_version = "1.2.1"
-    lifecycle_version = "2.6.1"
-    fragment_version = "1.6.1"
-    hilt_version = "2.57.1"
-    firebase_bom_version = "32.2.2"
-    dynamic_module_version = "2.1.0"
-}
-
 dependencies {
-    def composeBom = platform("androidx.compose:compose-bom:2025.08.01")
-
-    api "androidx.core:core-ktx:1.10.1"
-    api "androidx.legacy:legacy-support-v4:1.0.0"
+    api libs.androidx.core.ktx
+    api libs.androidx.legacy.support.v4
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "androidx.core:core-ktx:1.10.1"
-    api "androidx.appcompat:appcompat:1.6.1"
-    api "androidx.constraintlayout:constraintlayout:2.1.4"
-    api "com.google.android.material:material:1.9.0"
+    implementation libs.androidx.core.ktx
+    api libs.androidx.appcompat
+    api libs.androidx.constraintlayout
+    api libs.google.material
 
     // Compose powers the main app. View binding remains enabled for the dormant multiplayer flow.
-    implementation composeBom
-    androidTestImplementation composeBom
-    implementation "androidx.activity:activity-compose:1.10.1"
-    implementation "androidx.core:core-splashscreen:1.2.0"
-    implementation "androidx.compose.material3:material3"
-    implementation "androidx.compose.material:material-icons-core"
-    implementation "androidx.compose.ui:ui-text-google-fonts"
-    implementation "androidx.compose.ui:ui-tooling-preview"
-    debugImplementation "androidx.compose.ui:ui-tooling"
+    implementation platform(libs.androidx.compose.bom)
+    androidTestImplementation platform(libs.androidx.compose.bom)
+    implementation libs.androidx.activity.compose
+    implementation libs.androidx.core.splashscreen
+    implementation libs.androidx.compose.material3
+    implementation libs.androidx.compose.material.icons.core
+    implementation libs.androidx.compose.ui.text.google.fonts
+    implementation libs.androidx.compose.ui.tooling.preview
+    debugImplementation libs.androidx.compose.ui.tooling
 
     // Testing
-    testImplementation "junit:junit:4.13.2"
-    androidTestImplementation "androidx.test.ext:junit:1.1.5"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
-    androidTestImplementation "androidx.annotation:annotation:1.6.0"
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.test.junit
+    androidTestImplementation libs.androidx.test.espresso.core
+    androidTestImplementation libs.androidx.annotation
 
     // Lifecycle
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version"
+    api libs.androidx.lifecycle.viewmodel.ktx
+    implementation libs.androidx.lifecycle.runtime.ktx
+    implementation libs.androidx.lifecycle.runtime.compose
 
     // Navigation
-    api "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    api "androidx.navigation:navigation-ui-ktx:$nav_version"
+    api libs.androidx.navigation.fragment.ktx
+    api libs.androidx.navigation.ui.ktx
 
     //Firebase
-    api platform("com.google.firebase:firebase-bom:$firebase_bom_version")
-    api 'com.google.firebase:firebase-firestore-ktx'
-    api 'com.google.firebase:firebase-analytics-ktx'
-    api 'com.google.firebase:firebase-functions'
+    api platform(libs.firebase.bom)
+    api libs.firebase.firestore.ktx
+    api libs.firebase.analytics.ktx
+    api libs.firebase.functions
 
     //Coroutines
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.0"
+    api libs.kotlinx.coroutines.core
+    api libs.kotlinx.coroutines.android
+    api libs.kotlinx.coroutines.play.services
 
     //Preferences
-    api "androidx.preference:preference-ktx:$preferences_version"
+    api libs.androidx.preference.ktx
 
     //Fragments
-    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    implementation libs.androidx.fragment.ktx
 
     //Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 }
