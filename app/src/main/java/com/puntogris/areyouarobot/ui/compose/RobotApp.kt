@@ -156,7 +156,7 @@ private fun HomeScreen(
 
         TerminalPanel(
             modifier = Modifier.fillMaxWidth(),
-            borderColor = Signal.copy(alpha = 0.45f),
+            borderColor = Brand.copy(alpha = 0.45f),
             padding = 8.dp
         ) {
             Box(
@@ -241,7 +241,7 @@ private fun GameScreen(
             MetricCard(
                 label = stringResource(R.string.score_label),
                 value = score.toString().padStart(2, '0'),
-                color = Signal,
+                color = Brand,
                 modifier = Modifier.weight(1f)
             )
             MetricCard(
@@ -256,13 +256,13 @@ private fun GameScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.Center),
-            borderColor = if (isGuessing) Electric.copy(alpha = 0.55f) else Signal.copy(alpha = 0.55f),
+            borderColor = if (isGuessing) Electric.copy(alpha = 0.55f) else Brand.copy(alpha = 0.55f),
             padding = 24.dp
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 StatusChip(
                     text = stringResource(if (isGuessing) R.string.game_input_phase else R.string.game_memory_phase),
-                    color = if (isGuessing) Electric else Signal
+                    color = if (isGuessing) Electric else Brand
                 )
                 Spacer(Modifier.height(24.dp))
                 Text(

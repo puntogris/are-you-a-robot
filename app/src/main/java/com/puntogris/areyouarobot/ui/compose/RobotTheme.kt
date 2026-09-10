@@ -13,9 +13,10 @@ internal val Ink = Color(0xFF070B10)
 internal val Panel = Color(0xFF0D151E)
 internal val PanelRaised = Color(0xFF121F2B)
 internal val Grid = Color(0xFF1A3440)
+internal val Brand = Color(0xFFFF9D23)
 internal val Signal = Color(0xFF66F5A5)
 internal val Electric = Color(0xFF3BD9FF)
-internal val Warning = Color(0xFFFFB45A)
+internal val Warning = Color(0xFFFFD166)
 internal val Danger = Color(0xFFFF607D)
 internal val Paper = Color(0xFFF2F7F8)
 internal val Muted = Color(0xFF8A9BA6)
@@ -38,10 +39,12 @@ internal val MonoValue = TextStyle(
 internal fun RobotTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = darkColorScheme(
-            primary = Signal,
+            primary = Brand,
             onPrimary = Ink,
             secondary = Electric,
             onSecondary = Ink,
+            tertiary = Signal,
+            onTertiary = Ink,
             background = Ink,
             onBackground = Paper,
             surface = Panel,

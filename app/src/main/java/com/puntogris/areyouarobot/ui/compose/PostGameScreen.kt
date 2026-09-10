@@ -71,7 +71,7 @@ internal fun PostGameScreen(
             MetricCard(
                 stringResource(R.string.score_label),
                 score.toString().padStart(2, '0'),
-                Signal,
+                Brand,
                 Modifier.weight(1f)
             )
             MetricCard(
@@ -181,7 +181,7 @@ private fun SaveScoreDialog(
         confirmButton = {
             TextButton(
                 enabled = !isSaving,
-                colors = ButtonDefaults.textButtonColors(contentColor = Signal),
+                colors = ButtonDefaults.textButtonColors(contentColor = Brand),
                 onClick = {
                     scope.launch {
                         isSaving = true

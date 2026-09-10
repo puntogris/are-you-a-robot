@@ -93,7 +93,7 @@ internal fun AppTopBar(
         title = {
             Text(
                 text = label,
-                color = if (canClose) Muted else Signal,
+                color = if (canClose) Muted else Brand,
                 style = MonoLabel,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -110,7 +110,7 @@ internal fun AppTopBar(
                 }
             } else {
                 Box(Modifier.size(48.dp), contentAlignment = Alignment.Center) {
-                    SignalDot()
+                    BrandDot()
                 }
             }
         },
@@ -183,8 +183,8 @@ private fun RowScope.BottomDestination(
 ) {
     Surface(
         onClick = onClick,
-        color = if (selected) Signal.copy(alpha = 0.13f) else Color.Transparent,
-        contentColor = if (selected) Signal else Muted,
+        color = if (selected) Brand.copy(alpha = 0.13f) else Color.Transparent,
+        contentColor = if (selected) Brand else Muted,
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .weight(1f)
@@ -221,13 +221,13 @@ internal fun StatusChip(text: String, color: Color) {
 }
 
 @Composable
-internal fun SignalDot() {
+internal fun BrandDot() {
     Box(
         modifier = Modifier
             .size(16.dp)
-            .border(1.dp, Signal.copy(alpha = 0.45f), CircleShape)
+            .border(1.dp, Brand.copy(alpha = 0.45f), CircleShape)
             .padding(4.dp)
-            .background(Signal, CircleShape)
+            .background(Brand, CircleShape)
     )
 }
 
@@ -266,7 +266,7 @@ internal fun PrimaryAction(
         enabled = enabled,
         shape = RoundedCornerShape(14.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Signal,
+            containerColor = Brand,
             contentColor = Ink,
             disabledContainerColor = Stroke,
             disabledContentColor = Muted
@@ -326,9 +326,9 @@ internal fun ScannerMark(modifier: Modifier = Modifier) {
         val radius = size.minDimension * 0.39f
 
         drawCircle(Grid.copy(alpha = 0.45f), radius = radius * 1.24f, style = DrawStroke(stroke))
-        drawCircle(Signal.copy(alpha = 0.16f), radius = radius)
+        drawCircle(Brand.copy(alpha = 0.16f), radius = radius)
         drawArc(
-            color = Signal,
+            color = Brand,
             startAngle = -75f,
             sweepAngle = 230f,
             useCenter = false,
@@ -360,8 +360,8 @@ internal fun ScannerMark(modifier: Modifier = Modifier) {
             cornerRadius = androidx.compose.ui.geometry.CornerRadius(14f, 14f),
             style = DrawStroke(stroke * 1.5f)
         )
-        drawCircle(Signal, radius = stroke * 2.2f, center = Offset(center.x - faceWidth * 0.2f, center.y - 4f))
-        drawCircle(Signal, radius = stroke * 2.2f, center = Offset(center.x + faceWidth * 0.2f, center.y - 4f))
+        drawCircle(Brand, radius = stroke * 2.2f, center = Offset(center.x - faceWidth * 0.2f, center.y - 4f))
+        drawCircle(Brand, radius = stroke * 2.2f, center = Offset(center.x + faceWidth * 0.2f, center.y - 4f))
         drawLine(
             Electric,
             Offset(center.x - faceWidth * 0.2f, center.y + faceHeight * 0.2f),

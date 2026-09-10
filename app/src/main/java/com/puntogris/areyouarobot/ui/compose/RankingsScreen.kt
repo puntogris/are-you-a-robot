@@ -39,7 +39,7 @@ internal fun RankingsScreen(modifier: Modifier, viewModel: RankingsViewModel) {
                     val accent = when (index) {
                         0 -> Warning
                         1 -> Electric
-                        2 -> Signal
+                        2 -> Brand
                         else -> Stroke
                     }
                     TerminalPanel(Modifier.fillMaxWidth(), accent.copy(alpha = 0.7f), 14.dp) {
@@ -55,7 +55,7 @@ internal fun RankingsScreen(modifier: Modifier, viewModel: RankingsViewModel) {
                             }
                             Spacer(Modifier.width(14.dp))
                             Text(entry.item.playerName, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
-                            Text(entry.item.score.toString(), color = Signal, style = MonoValue)
+                            Text(entry.item.score.toString(), color = Brand, style = MonoValue)
                         }
                     }
                 }
