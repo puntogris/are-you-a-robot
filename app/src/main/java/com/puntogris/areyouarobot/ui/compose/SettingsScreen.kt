@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,7 +47,7 @@ internal fun SettingsScreen(modifier: Modifier, sharedPref: SharedPref, onSaved:
                         .background(Electric.copy(alpha = 0.1f), CircleShape),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(Icons.Default.Person, null, tint = Electric, modifier = Modifier.size(34.dp))
+                    Icon(Icons.Rounded.Person, null, tint = Electric, modifier = Modifier.size(34.dp))
                 }
                 Spacer(Modifier.height(20.dp))
                 OutlinedTextField(
@@ -74,7 +74,7 @@ internal fun SettingsScreen(modifier: Modifier, sharedPref: SharedPref, onSaved:
             }
         }
         TerminalPanel(Modifier.fillMaxWidth(), padding = 10.dp) {
-            Column {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
                     stringResource(R.string.legal_label),
                     color = Muted,

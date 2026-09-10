@@ -1,6 +1,7 @@
 package com.puntogris.areyouarobot.ui.compose
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -19,10 +20,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.automirrored.rounded.ArrowForward
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -34,7 +36,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -106,7 +107,7 @@ internal fun AppTopBar(
             if (canClose) {
                 IconButton(onClick = onClose) {
                     Icon(
-                        imageVector = Icons.Default.Close,
+                        imageVector = Icons.Rounded.Close,
                         contentDescription = stringResource(R.string.action_close),
                         tint = Paper
                     )
@@ -121,7 +122,7 @@ internal fun AppTopBar(
             if (showSettings) {
                 IconButton(onClick = onSettings) {
                     Icon(
-                        imageVector = Icons.Default.Settings,
+                        imageVector = Icons.Rounded.Settings,
                         contentDescription = stringResource(R.string.settings_label),
                         tint = Paper
                     )
@@ -151,7 +152,7 @@ internal fun AppBottomBar(
         Surface(
             color = Panel,
             shape = RoundedCornerShape(22.dp),
-            border = androidx.compose.foundation.BorderStroke(1.dp, Stroke),
+            border = BorderStroke(1.dp, Stroke),
             modifier = Modifier.fillMaxWidth()
         ) {
             Row(
@@ -163,14 +164,14 @@ internal fun AppBottomBar(
                     label = stringResource(R.string.nav_test),
                     onClick = onHome
                 ) {
-                    Icon(Icons.Default.Home, contentDescription = null)
+                    Icon(Icons.Rounded.Home, contentDescription = null)
                 }
                 BottomDestination(
                     selected = !homeSelected,
                     label = stringResource(R.string.rankings_label),
                     onClick = onRankings
                 ) {
-                    Icon(Icons.Default.Star, contentDescription = null)
+                    Icon(Icons.Rounded.Star, contentDescription = null)
                 }
             }
         }
@@ -250,7 +251,7 @@ internal fun TerminalPanel(
         modifier = modifier,
         color = Panel.copy(alpha = 0.96f),
         shape = RoundedCornerShape(20.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, borderColor)
+        border = BorderStroke(1.dp, borderColor)
     ) {
         Box(Modifier.padding(padding)) { content() }
     }
@@ -283,9 +284,13 @@ internal fun PrimaryAction(
                 strokeWidth = 2.dp
             )
         } else {
-            Text(text = text, style = MaterialTheme.typography.labelLarge)
+            Text(text = text.uppercase(), style = MaterialTheme.typography.labelLarge)
             Spacer(Modifier.width(12.dp))
-            Text(text = "→", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Icon(
+                imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
+                contentDescription = null,
+                modifier = Modifier.size(20.dp)
+            )
         }
     }
 }
@@ -297,14 +302,23 @@ internal fun SecondaryAction(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
-    TextButton(
+    Button(
         onClick = onClick,
         modifier = modifier.height(54.dp),
         enabled = enabled,
         shape = RoundedCornerShape(14.dp),
-        colors = ButtonDefaults.textButtonColors(contentColor = Electric)
+        colors = ButtonDefaults.buttonColors(
+            containerColor = PanelRaised,
+            contentColor = Electric,
+            disabledContainerColor = Panel,
+            disabledContentColor = Muted.copy(alpha = 0.55f)
+        ),
+        border = BorderStroke(
+            width = 1.dp,
+            color = if (enabled) Stroke else Stroke.copy(alpha = 0.55f)
+        )
     ) {
-        Text(text = text, style = MaterialTheme.typography.labelLarge)
+        Text(text = text.uppercase(), style = MaterialTheme.typography.labelLarge)
     }
 }
 

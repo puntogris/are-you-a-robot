@@ -51,105 +51,113 @@ internal fun SaveScoreScreen(
     var isSaving by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val publishScore: () -> Unit = {
+        scope.launch {
+            isSaving = true
+            when (saveRankingViewModel.savePlayerScore(score, playerName.trim())) {
+                SimpleResult.Success -> {
+                    Toast.makeText(
+                        context,
+                        R.string.snack_save_score_success,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    onSaved()
+                }
+
+                SimpleResult.Failure -> {
+                    Toast.makeText(
+                        context,
+                        R.string.snack_save_score_error,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    isSaving = false
+                }
+            }
+        }
+    }
 
     Column(
         modifier = modifier
             .fillMaxSize()
             .imePadding()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 20.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
+            .padding(horizontal = 24.dp, vertical = 20.dp)
     ) {
-        Column {
-            Eyebrow(stringResource(R.string.save_ranking_eyebrow))
-            Spacer(Modifier.height(12.dp))
-            Text(
-                stringResource(R.string.save_ranking_title),
-                style = MaterialTheme.typography.headlineLarge
-            )
-            Spacer(Modifier.height(14.dp))
-            Text(
-                stringResource(R.string.save_ranking_body, score),
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
-
-        MetricCard(
-            label = stringResource(R.string.score_label),
-            value = score.toString().padStart(2, '0'),
-            color = Brand,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        TerminalPanel(Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
             Column {
+                Eyebrow(stringResource(R.string.save_ranking_eyebrow))
+                Spacer(Modifier.height(12.dp))
                 Text(
-                    stringResource(R.string.ranking_identity_label),
-                    color = Muted,
-                    style = MonoLabel.copy(fontSize = 10.sp)
+                    stringResource(R.string.save_ranking_title),
+                    style = MaterialTheme.typography.headlineLarge
                 )
                 Spacer(Modifier.height(14.dp))
-                OutlinedTextField(
-                    value = playerName,
-                    onValueChange = { playerName = it.take(12) },
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text(stringResource(R.string.ranking_nickname_hint)) },
-                    supportingText = {
-                        Text(
-                            "${playerName.length}/12",
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.End
-                        )
-                    },
-                    enabled = !isSaving,
-                    singleLine = true,
-                    shape = RoundedCornerShape(14.dp),
-                    colors = terminalTextFieldColors(),
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Words,
-                        autoCorrectEnabled = false,
-                        imeAction = ImeAction.Done
-                    )
+                Text(
+                    stringResource(R.string.save_ranking_body, score),
+                    style = MaterialTheme.typography.bodyLarge
                 )
-                Spacer(Modifier.height(18.dp))
-                PrimaryAction(
-                    text = stringResource(R.string.publish_score_action),
-                    onClick = {
-                        scope.launch {
-                            isSaving = true
-                            when (saveRankingViewModel.savePlayerScore(score, playerName.trim())) {
-                                SimpleResult.Success -> {
-                                    Toast.makeText(
-                                        context,
-                                        R.string.snack_save_score_success,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    onSaved()
-                                }
+            }
 
-                                SimpleResult.Failure -> {
-                                    Toast.makeText(
-                                        context,
-                                        R.string.snack_save_score_error,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    isSaving = false
-                                }
-                            }
-                        }
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    enabled = playerName.isNotBlank(),
-                    loading = isSaving
-                )
+            MetricCard(
+                label = stringResource(R.string.score_label),
+                value = score.toString().padStart(2, '0'),
+                color = Brand,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            TerminalPanel(Modifier.fillMaxWidth()) {
+                Column {
+                    Text(
+                        stringResource(R.string.ranking_identity_label),
+                        color = Muted,
+                        style = MonoLabel.copy(fontSize = 10.sp)
+                    )
+                    Spacer(Modifier.height(14.dp))
+                    OutlinedTextField(
+                        value = playerName,
+                        onValueChange = { playerName = it.take(12) },
+                        modifier = Modifier.fillMaxWidth(),
+                        label = { Text(stringResource(R.string.ranking_nickname_hint)) },
+                        supportingText = {
+                            Text(
+                                "${playerName.length}/12",
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.End
+                            )
+                        },
+                        enabled = !isSaving,
+                        singleLine = true,
+                        shape = RoundedCornerShape(14.dp),
+                        colors = terminalTextFieldColors(),
+                        keyboardOptions = KeyboardOptions(
+                            capitalization = KeyboardCapitalization.Words,
+                            autoCorrectEnabled = false,
+                            imeAction = ImeAction.Done
+                        )
+                    )
+                }
             }
         }
 
-        SecondaryAction(
-            text = stringResource(R.string.action_cancel),
-            onClick = onCancel,
-            modifier = Modifier.fillMaxWidth(),
-            enabled = !isSaving
-        )
+        Spacer(Modifier.height(16.dp))
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            PrimaryAction(
+                text = stringResource(R.string.publish_score_action),
+                onClick = publishScore,
+                modifier = Modifier.fillMaxWidth(),
+                enabled = playerName.isNotBlank(),
+                loading = isSaving
+            )
+            SecondaryAction(
+                text = stringResource(R.string.action_cancel),
+                onClick = onCancel,
+                modifier = Modifier.fillMaxWidth(),
+                enabled = !isSaving
+            )
+        }
     }
 }

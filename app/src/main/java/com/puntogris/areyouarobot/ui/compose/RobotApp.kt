@@ -30,6 +30,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -211,6 +212,7 @@ private fun GameScreen(
     val isGuessing by viewModel.isTimeToGuess.observeAsState(false)
     val didLose by viewModel.didPlayerLose.observeAsState(false)
     var guess by remember { mutableStateOf("") }
+    var keyboardWasOpened by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
     val keyboard = LocalSoftwareKeyboardController.current
 
@@ -222,15 +224,17 @@ private fun GameScreen(
     LaunchedEffect(isGuessing) {
         if (isGuessing) {
             guess = ""
+            keyboardWasOpened = true
             focusRequester.requestFocus()
             keyboard?.show()
-        } else {
+        } else if (!keyboardWasOpened) {
             keyboard?.hide()
         }
     }
 
     LaunchedEffect(didLose) {
         if (didLose) {
+            keyboard?.hide()
             viewModel.playerLost()
             onGameOver()
         }
@@ -286,26 +290,33 @@ private fun GameScreen(
                 )
                 Spacer(Modifier.height(18.dp))
 
-                if (isGuessing) {
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
                     SignalInput(
                         value = guess,
                         onValueChange = { value ->
-                            guess = value
-                            if (value.equals(letters, ignoreCase = true)) viewModel.playerWon()
+                            if (isGuessing) {
+                                guess = value
+                                if (value.equals(letters, ignoreCase = true)) viewModel.playerWon()
+                            }
                         },
-                        focusRequester = focusRequester
+                        focusRequester = focusRequester,
+                        modifier = Modifier.alpha(if (isGuessing) 1f else 0f)
                     )
-                } else {
-                    Text(
-                        text = letters.uppercase(),
-                        color = Paper,
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 58.sp,
-                        fontWeight = FontWeight.Black,
-                        letterSpacing = 8.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    if (!isGuessing) {
+                        Text(
+                            text = letters.uppercase(),
+                            color = Paper,
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 58.sp,
+                            fontWeight = FontWeight.Black,
+                            letterSpacing = 8.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                 }
                 Spacer(Modifier.height(8.dp))
             }
@@ -338,12 +349,13 @@ private fun GameScreen(
 private fun SignalInput(
     value: String,
     onValueChange: (String) -> Unit,
-    focusRequester: FocusRequester
+    focusRequester: FocusRequester,
+    modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = { onValueChange(it.uppercase()) },
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .focusRequester(focusRequester),
         placeholder = {
