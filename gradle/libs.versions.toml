@@ -1,9 +1,9 @@
 [versions]
 agp = "9.3.2"
-kotlin = "2.2.10"
-navigation-safe-args = "2.10.0"
+kotlin = "2.4.20"
+navigation-safe-args = "2.10.1"
 google-services = "4.5.0"
-hilt = "2.57.1"
+hilt = "2.60.1"
 
 core-ktx = "1.19.0"
 legacy-support = "1.0.0"
