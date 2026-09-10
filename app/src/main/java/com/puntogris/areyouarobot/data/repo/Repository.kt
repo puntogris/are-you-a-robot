@@ -1,14 +1,16 @@
 package com.puntogris.areyouarobot.data.repo
 
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.puntogris.areyouarobot.livedata.FirestoreQueryLiveData
+import com.puntogris.areyouarobot.data.documentSnapshots
 import com.puntogris.areyouarobot.model.RankingEntry
 import com.puntogris.areyouarobot.utils.Constants.RANKINGS_COLLECTION
 import com.puntogris.areyouarobot.utils.Constants.SCORE_FIELD
 import com.puntogris.areyouarobot.utils.SimpleResult
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -31,11 +33,11 @@ class Repository @Inject constructor() : IRepository {
             }
         }
 
-    override fun getRankingFirestore(): FirestoreQueryLiveData {
+    override fun getRankingFirestore(): Flow<List<DocumentSnapshot>> {
         val ref = firestore
             .collection(RANKINGS_COLLECTION)
             .orderBy(SCORE_FIELD, Query.Direction.DESCENDING)
             .limit(20)
-        return FirestoreQueryLiveData(ref)
+        return ref.documentSnapshots()
     }
 }

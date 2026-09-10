@@ -7,6 +7,9 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.puntogris.areyouarobot.R
@@ -16,6 +19,7 @@ import com.puntogris.areyouarobot.utils.gone
 import com.puntogris.areyouarobot.utils.viewBinding
 import com.puntogris.areyouarobot.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MatchFragment : Fragment(R.layout.fragment_match) {
@@ -27,42 +31,54 @@ class MatchFragment : Fragment(R.layout.fragment_match) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.globalTime.observe(viewLifecycleOwner) {
-            binding.matchTimer.text = it.toString()
-        }
-        viewModel.matchInfo.observe(viewLifecycleOwner) {
-            binding.playerName.text = it.playerOneName
-            binding.opponentPlayerName.text = it.playerTwoName
-            binding.playerScore.text = it.playerOneScore.toString()
-            binding.opponentPlayerScore.text = it.playerTwoScore.toString()
-        }
-        viewModel.currentLetters.observe(viewLifecycleOwner) {
-            binding.lettersTextView.text = it
-        }
-        viewModel.progressBarStatus.observe(viewLifecycleOwner) {
-            binding.progressBar.progress = it
-        }
+        viewModel.initializeGame(args.matchId, args.playerPos)
+        viewModel.getMatchData(args.matchId)
+        listenToTextChanged()
+        collectViewModelState()
+    }
 
-        with(viewModel) {
-
-            initializeGame(args.matchId, args.playerPos)
-            listenToTextChanged()
-
-            isTimeToGuess.observe(viewLifecycleOwner) { guessTime ->
-                if (guessTime) {
-                    guessTime()
-                    Utils.showSoftKeyboard(binding.guessEditText, requireActivity())
-                } else showLetters()
-            }
-
-            getMatchData(args.matchId)
-
-            isTimeToGuess.observe(viewLifecycleOwner) { guessTime ->
-                if (guessTime) guessTime() else showLetters()
-            }
-
-            gameEnded.observe(viewLifecycleOwner) { gameEnded ->
-                if (gameEnded) navigateToPostGameFragment()
+    private fun collectViewModelState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.globalTime.collect {
+                        binding.matchTimer.text = it.toString()
+                    }
+                }
+                launch {
+                    viewModel.matchInfo.collect { match ->
+                        match ?: return@collect
+                        binding.playerName.text = match.playerOneName
+                        binding.opponentPlayerName.text = match.playerTwoName
+                        binding.playerScore.text = match.playerOneScore.toString()
+                        binding.opponentPlayerScore.text = match.playerTwoScore.toString()
+                    }
+                }
+                launch {
+                    viewModel.currentLetters.collect {
+                        binding.lettersTextView.text = it
+                    }
+                }
+                launch {
+                    viewModel.progressBarStatus.collect {
+                        binding.progressBar.progress = it
+                    }
+                }
+                launch {
+                    viewModel.isTimeToGuess.collect { guessTime ->
+                        if (guessTime) {
+                            guessTime()
+                            Utils.showSoftKeyboard(binding.guessEditText, requireActivity())
+                        } else {
+                            showLetters()
+                        }
+                    }
+                }
+                launch {
+                    viewModel.gameEnded.collect { gameEnded ->
+                        if (gameEnded) navigateToPostGameFragment()
+                    }
+                }
             }
         }
     }
@@ -85,10 +101,11 @@ class MatchFragment : Fragment(R.layout.fragment_match) {
     }
 
     private fun navigateToPostGameFragment() {
+        val match = viewModel.matchInfo.value ?: return
         viewModel.gameEnded()
         val action = MatchFragmentDirections.actionMatchFragmentToPostMultiplayerMatchFragment(
             args.playerPos,
-            viewModel.matchInfo.value!!
+            match
         )
         findNavController().navigate(action)
     }
@@ -117,4 +134,3 @@ class MatchFragment : Fragment(R.layout.fragment_match) {
     }
 
 }
-

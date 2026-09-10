@@ -1,16 +1,24 @@
 package com.puntogris.multiplayer.ui
 
 import android.os.CountDownTimer
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.puntogris.multiplayer.data.MatchDeserializer
 import com.puntogris.multiplayer.data.MatchRepository
 import com.puntogris.areyouarobot.model.Match
-import com.puntogris.multiplayer.utils.plusOne
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Timer
+import java.util.TimerTask
 import kotlin.concurrent.scheduleAtFixedRate
 import javax.inject.Inject
 
@@ -20,36 +28,35 @@ class MatchViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var timerJob: Job? = null
+    private var matchDataJob: Job? = null
     private var globalTimer: TimerTask? = null
 
     private var matchId = ""
     private var playerPos = ""
 
-    private val _currentLetters = MutableLiveData<String>()
-    val currentLetters: LiveData<String> = _currentLetters
+    private val _currentLetters = MutableStateFlow("")
+    val currentLetters: StateFlow<String> = _currentLetters.asStateFlow()
 
-    private val _isTimeToGuess = MutableLiveData<Boolean>()
-    val isTimeToGuess: LiveData<Boolean> = _isTimeToGuess
+    private val _isTimeToGuess = MutableStateFlow(false)
+    val isTimeToGuess: StateFlow<Boolean> = _isTimeToGuess.asStateFlow()
 
-    private val _matchInfo = MutableLiveData<Match>()
-    val matchInfo: LiveData<Match> = _matchInfo
+    private val _matchInfo = MutableStateFlow<Match?>(null)
+    val matchInfo: StateFlow<Match?> = _matchInfo.asStateFlow()
 
-    private val score = MutableLiveData(INITIAL_INT_VALUE)
+    private val score = MutableStateFlow(INITIAL_INT_VALUE)
 
-    private val _globalTime = MutableLiveData(INITIAL_INT_VALUE)
-    val globalTime: LiveData<Int> = _globalTime
+    private val _globalTime = MutableStateFlow(INITIAL_INT_VALUE)
+    val globalTime: StateFlow<Int> = _globalTime.asStateFlow()
 
-    private val _progressBarStatus = MutableLiveData<Int>()
-    val progressBarStatus: LiveData<Int> = _progressBarStatus
+    private val _progressBarStatus = MutableStateFlow(INITIAL_INT_VALUE)
+    val progressBarStatus: StateFlow<Int> = _progressBarStatus.asStateFlow()
 
-    private val _gamEnded = MutableLiveData(false)
-    val gameEnded: LiveData<Boolean> = _gamEnded
+    private val _gameEnded = MutableStateFlow(false)
+    val gameEnded: StateFlow<Boolean> = _gameEnded.asStateFlow()
 
     private var timeDifficultyLetters = 1000L
     private var timeDifficultyGuess = 3000L
     private var lettersDifficulty = DEFAULT_LETTER_DIFFICULTY
-
-
 
     private val countDownTimer =
         object : CountDownTimer(timeDifficultyGuess, 10) {
@@ -63,15 +70,17 @@ class MatchViewModel @Inject constructor(
             }
         }
 
-    fun getMatchData(matchId: String): LiveData<Match> {
-        val data = repo.getMatchDataFirestore(matchId)
-        return data.map { snap ->
-            MatchDeserializer.deserialize(snap).also { _matchInfo.value = it }
-        }
+    fun getMatchData(matchId: String) {
+        matchDataJob?.cancel()
+        matchDataJob = repo.getMatchDataFirestore(matchId)
+            .filterNotNull()
+            .map(MatchDeserializer::deserialize)
+            .onEach { _matchInfo.value = it }
+            .launchIn(viewModelScope)
     }
 
     fun initializeGame(matchId: String, playerPos: String) {
-        _gamEnded.value = false
+        _gameEnded.value = false
         this.matchId = matchId
         this.playerPos = playerPos
         globalTimer?.cancel()
@@ -85,10 +94,8 @@ class MatchViewModel @Inject constructor(
 
     private fun startTimer(): TimerTask {
         return Timer().scheduleAtFixedRate(0, 1000) {
-            _globalTime.apply {
-                if (value!! >= MATCH_DURATION) _gamEnded.postValue(true)
-                else plusOne()
-            }
+            if (_globalTime.value >= MATCH_DURATION) _gameEnded.value = true
+            else _globalTime.value += 1
         }
     }
 
@@ -109,8 +116,7 @@ class MatchViewModel @Inject constructor(
     }
 
     private fun startTimerShowLetters(milliseconds: Long) {
-        viewModelScope.launch {
-            timerJob = Job()
+        timerJob = viewModelScope.launch {
             delay(milliseconds)
             _isTimeToGuess.value = true
             countDownTimer.start()
@@ -121,7 +127,7 @@ class MatchViewModel @Inject constructor(
         repo.incrementScorePlayerFirestore(playerPos, matchId)
         countDownTimer.cancel()
         timerJob?.cancel()
-        score.plusOne()
+        score.value += 1
         gameOn()
     }
 
@@ -129,15 +135,16 @@ class MatchViewModel @Inject constructor(
         _progressBarStatus.value = MAX_PERCENTAGE
         globalTimer?.cancel()
         timerJob?.cancel()
+        matchDataJob?.cancel()
         countDownTimer.cancel()
     }
 
     private fun updateDifficulty() {
-        if (score.value!! == 5 && lettersDifficulty < 3) {
+        if (score.value == 5 && lettersDifficulty < 3) {
             lettersDifficulty++
-        } else if (score.value!! == 10 && lettersDifficulty < 4) {
+        } else if (score.value == 10 && lettersDifficulty < 4) {
             lettersDifficulty++
-        } else if (score.value!! == 15 && lettersDifficulty < 5) {
+        } else if (score.value == 15 && lettersDifficulty < 5) {
             lettersDifficulty++
         }
     }

@@ -23,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -42,6 +41,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.SharedPref
 import com.puntogris.areyouarobot.ui.game.GameViewModel
@@ -204,12 +204,12 @@ private fun GameScreen(
     viewModel: GameViewModel,
     onGameOver: () -> Unit
 ) {
-    val letters by viewModel.currentLetters.observeAsState("")
-    val score by viewModel.score.observeAsState(0)
-    val time by viewModel.globalTime.observeAsState(0)
-    val progress by viewModel.progressBarStatus.observeAsState(0)
-    val isGuessing by viewModel.isTimeToGuess.observeAsState(false)
-    val didLose by viewModel.didPlayerLose.observeAsState(false)
+    val letters by viewModel.currentLetters.collectAsStateWithLifecycle()
+    val score by viewModel.score.collectAsStateWithLifecycle()
+    val time by viewModel.globalTime.collectAsStateWithLifecycle()
+    val progress by viewModel.progressBarStatus.collectAsStateWithLifecycle()
+    val isGuessing by viewModel.isTimeToGuess.collectAsStateWithLifecycle()
+    val didLose by viewModel.didPlayerLose.collectAsStateWithLifecycle()
     var guess by remember { mutableStateOf("") }
     var keyboardWasOpened by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }

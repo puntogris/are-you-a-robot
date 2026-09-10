@@ -5,7 +5,9 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.puntogris.areyouarobot.R
@@ -28,53 +30,54 @@ class FindMatchFragment : Fragment(R.layout.fragment_find_match) {
         binding.searchMatch.setOnClickListener {
             viewModel.toggleQueueState()
         }
-        viewModel.isSearching.observe(viewLifecycleOwner) {
-            binding.searchMatchProgressBar.isVisible = it
-            binding.searchMatch.setSearchButtonState(it)
-        }
 
         subscribeMatchState()
     }
 
     private fun subscribeMatchState() {
-        viewModel.isSearching.observe(viewLifecycleOwner) { isSearching ->
-            if (isSearching) {
-                startMatchSearch()
-            } else {
-                unsubscribeToMatch()
-            }
-        }
-    }
-
-    private fun startMatchSearch() {
-        lifecycleScope.launch {
-            viewModel.startMatchmaking().collectLatest { matchRoom ->
-                if (matchRoom.full) {
-                    val action = FindMatchFragmentDirections
-                        .actionFindMatchFragmentToMatchFragment(matchRoom.id, matchRoom.playerPos)
-                    findNavController().navigate(action)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.isSearching.collect { isSearching ->
+                        binding.searchMatchProgressBar.isVisible = isSearching
+                        binding.searchMatch.setSearchButtonState(isSearching)
+                    }
+                }
+                launch {
+                    viewModel.isSearching.collectLatest { isSearching ->
+                        if (isSearching) {
+                            startMatchSearch()
+                        } else {
+                            unsubscribeToMatch()
+                        }
+                    }
                 }
             }
         }
     }
 
-    private fun unsubscribeToMatch() {
-        lifecycleScope.launch {
-            val message = when (viewModel.unsubscribeToMatchDatabase()) {
-                SimpleResult.Failure -> R.string.snack_search_cancelled
-                SimpleResult.Success -> R.string.snack_search_started
+    private suspend fun startMatchSearch() {
+        viewModel.startMatchmaking().collectLatest { matchRoom ->
+            if (matchRoom.full) {
+                val action = FindMatchFragmentDirections
+                    .actionFindMatchFragmentToMatchFragment(matchRoom.id, matchRoom.playerPos)
+                findNavController().navigate(action)
             }
-            Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
         }
     }
 
-    override fun onDestroy() {
-        unsubscribeToMatch()
-        super.onDestroy()
+    private suspend fun unsubscribeToMatch() {
+        val message = when (viewModel.unsubscribeToMatchDatabase()) {
+            SimpleResult.Failure -> R.string.snack_search_cancelled
+            SimpleResult.Success -> R.string.snack_search_started
+        }
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onPause() {
-        unsubscribeToMatch()
+        lifecycleScope.launch {
+            viewModel.unsubscribeToMatchDatabase()
+        }
         super.onPause()
     }
 }

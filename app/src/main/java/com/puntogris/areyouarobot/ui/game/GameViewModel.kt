@@ -1,15 +1,20 @@
 package com.puntogris.areyouarobot.ui.game
 
 import android.os.CountDownTimer
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
-import java.util.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import java.util.Timer
+import java.util.TimerTask
 import javax.inject.Inject
 import kotlin.concurrent.scheduleAtFixedRate
+import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
 class GameViewModel @Inject constructor() : ViewModel() {
@@ -17,23 +22,23 @@ class GameViewModel @Inject constructor() : ViewModel() {
     private var timerJob: Job? = null
     private var globalTimer: TimerTask? = null
 
-    private var _currentLetters = MutableLiveData<String>()
-    val currentLetters: LiveData<String> = _currentLetters
+    private val _currentLetters = MutableStateFlow("")
+    val currentLetters: StateFlow<String> = _currentLetters.asStateFlow()
 
-    private var _isTimeToGuess = MutableLiveData<Boolean>(false)
-    val isTimeToGuess: LiveData<Boolean> = _isTimeToGuess
+    private val _isTimeToGuess = MutableStateFlow(false)
+    val isTimeToGuess: StateFlow<Boolean> = _isTimeToGuess.asStateFlow()
 
-    private var _didPlayerLose = MutableLiveData<Boolean>()
-    val didPlayerLose: LiveData<Boolean> = _didPlayerLose
+    private val _didPlayerLose = MutableStateFlow(false)
+    val didPlayerLose: StateFlow<Boolean> = _didPlayerLose.asStateFlow()
 
-    private var _score = MutableLiveData(INITIAL_INT_VALUE)
-    val score: LiveData<Int> = _score
+    private val _score = MutableStateFlow(INITIAL_INT_VALUE)
+    val score: StateFlow<Int> = _score.asStateFlow()
 
-    private var _globalTime = MutableLiveData(INITIAL_INT_VALUE)
-    val globalTime: LiveData<Int> = _globalTime
+    private val _globalTime = MutableStateFlow(INITIAL_INT_VALUE)
+    val globalTime: StateFlow<Int> = _globalTime.asStateFlow()
 
-    private var _progressBarStatus = MutableLiveData<Int>()
-    val progressBarStatus: LiveData<Int> = _progressBarStatus
+    private val _progressBarStatus = MutableStateFlow(INITIAL_INT_VALUE)
+    val progressBarStatus: StateFlow<Int> = _progressBarStatus.asStateFlow()
 
     private var timeDifficultyLetters = 3000L
     private var timeDifficultyGuess = 4000L
@@ -47,7 +52,7 @@ class GameViewModel @Inject constructor() : ViewModel() {
             }
 
             override fun onFinish() {
-                _didPlayerLose.postValue(true)
+                _didPlayerLose.value = true
             }
         }
 
@@ -62,8 +67,7 @@ class GameViewModel @Inject constructor() : ViewModel() {
 
     private fun startTimer(): TimerTask {
         return Timer().scheduleAtFixedRate(0, 1000) {
-            val time = _globalTime.value!!.plus(1)
-            _globalTime.postValue(time)
+            _globalTime.value += 1
         }
     }
 
@@ -85,9 +89,8 @@ class GameViewModel @Inject constructor() : ViewModel() {
 
     private fun startTimerShowLetters(milliseconds: Long) {
         _didPlayerLose.value = false
-        viewModelScope.launch {
-            timerJob = Job()
-            delay(milliseconds)
+        timerJob = viewModelScope.launch {
+            delay(milliseconds.milliseconds)
             _isTimeToGuess.value = true
             countDownTimer.start()
         }
@@ -96,12 +99,12 @@ class GameViewModel @Inject constructor() : ViewModel() {
     fun playerWon() {
         countDownTimer.cancel()
         timerJob?.cancel()
-        val score = _score.value!!.plus(1)
-        _score.value = score
+        _score.value += 1
         gameOn()
     }
 
     fun playerLost() {
+        _didPlayerLose.value = false
         _progressBarStatus.value = MAX_PERCENTAGE
         stopGame()
     }

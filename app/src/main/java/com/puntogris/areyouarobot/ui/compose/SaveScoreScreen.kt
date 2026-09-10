@@ -18,7 +18,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -32,6 +31,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.ui.game.GameViewModel
 import com.puntogris.areyouarobot.ui.game.SaveRankingViewModel
@@ -46,7 +46,7 @@ internal fun SaveScoreScreen(
     onSaved: () -> Unit,
     onCancel: () -> Unit
 ) {
-    val score by gameViewModel.score.observeAsState(0)
+    val score by gameViewModel.score.collectAsStateWithLifecycle()
     var playerName by rememberSaveable { mutableStateOf(saveRankingViewModel.currentUsername) }
     var isSaving by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()

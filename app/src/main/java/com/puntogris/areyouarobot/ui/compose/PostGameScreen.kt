@@ -19,12 +19,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.ui.game.GameViewModel
 
@@ -35,8 +35,8 @@ internal fun PostGameScreen(
     onPlayAgain: () -> Unit,
     onPublishScore: () -> Unit
 ) {
-    val score by gameViewModel.score.observeAsState(0)
-    val time by gameViewModel.globalTime.observeAsState(0)
+    val score by gameViewModel.score.collectAsStateWithLifecycle()
+    val time by gameViewModel.globalTime.collectAsStateWithLifecycle()
 
     Column(
         modifier = modifier.padding(horizontal = 24.dp, vertical = 20.dp),

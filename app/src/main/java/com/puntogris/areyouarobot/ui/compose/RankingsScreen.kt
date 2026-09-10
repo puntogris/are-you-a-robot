@@ -7,20 +7,18 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.puntogris.areyouarobot.R
 import com.puntogris.areyouarobot.ui.ranking.RankingsViewModel
 
 @Composable
 internal fun RankingsScreen(modifier: Modifier, viewModel: RankingsViewModel) {
-    val source = remember(viewModel) { viewModel.getRankings() }
-    val rankings by source.observeAsState()
+    val rankings by viewModel.rankings.collectAsStateWithLifecycle()
     Column(modifier.padding(horizontal = 20.dp)) {
         Spacer(Modifier.height(14.dp))
         Eyebrow(stringResource(R.string.ranking_eyebrow))
