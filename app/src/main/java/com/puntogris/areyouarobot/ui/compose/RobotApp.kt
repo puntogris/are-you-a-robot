@@ -372,42 +372,6 @@ private fun GameScreenContent(
 }
 
 @Composable
-internal fun RobotScreenPreview(
-    screen: Screen,
-    content: @Composable (Modifier) -> Unit
-) {
-    RobotTheme {
-        AppFrame(screen = screen, onNavigate = {}, content = content)
-    }
-}
-
-@PreviewLightDark
-@Composable
-private fun HomeScreenPreview() {
-    RobotScreenPreview(Screen.Home) { modifier ->
-        HomeScreen(modifier = modifier, onPlay = {})
-    }
-}
-
-@PreviewLightDark
-@Composable
-private fun GameScreenPreview() {
-    RobotScreenPreview(Screen.Game) { modifier ->
-        GameScreenContent(
-            modifier = modifier,
-            letters = "RY7",
-            score = 7,
-            time = 23,
-            progress = 38,
-            isGuessing = false,
-            guess = "",
-            onGuessChange = {},
-            focusRequester = remember { FocusRequester() }
-        )
-    }
-}
-
-@Composable
 private fun SignalInput(
     value: String,
     onValueChange: (String) -> Unit,
@@ -482,5 +446,41 @@ private fun ResponseWindow(
                 trackColor = Stroke.copy(alpha = 0.55f)
             )
         }
+    }
+}
+
+@Composable
+internal fun RobotScreenPreview(
+    screen: Screen,
+    content: @Composable (Modifier) -> Unit
+) {
+    RobotTheme {
+        AppFrame(screen = screen, onNavigate = {}, content = content)
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun HomeScreenPreview() {
+    RobotScreenPreview(Screen.Home) { modifier ->
+        HomeScreen(modifier = modifier, onPlay = {})
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun GameScreenPreview() {
+    RobotScreenPreview(Screen.Game) { modifier ->
+        GameScreenContent(
+            modifier = modifier,
+            letters = "RY7",
+            score = 7,
+            time = 23,
+            progress = 38,
+            isGuessing = false,
+            guess = "",
+            onGuessChange = {},
+            focusRequester = remember { FocusRequester() }
+        )
     }
 }
